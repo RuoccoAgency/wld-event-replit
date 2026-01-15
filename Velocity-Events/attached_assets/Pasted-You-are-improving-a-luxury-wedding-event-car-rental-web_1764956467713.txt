@@ -1,0 +1,144 @@
+You are improving a luxury wedding & event car rental website built with React + TypeScript + Tailwind CSS.
+
+All visible text must be written in Italian.
+
+1. Navbar structure and order
+
+Update the navigation bar so that it has this exact order:
+
+Logo / brand name on the left: “Luxury Wedding Cars” (I will replace this later)
+
+Menu items (center or right):
+
+Collezione
+
+Servizi
+
+Matrimoni & Eventi
+
+Contatti
+
+On the far right, a highlighted button: “Richiedi preventivo”
+
+Use an elegant, minimal layout, with hover effects and smooth transitions.
+
+2. Servizi section (connected to the navbar)
+
+When the user clicks “Servizi” in the navbar, scroll to (or navigate to) a section that lists the real services of the company.
+
+Create a section titled “I nostri servizi per eventi” and display these services as elegant cards or a grid with icons and short Italian descriptions:
+
+Eventi aziendali e conferenze
+
+Catering
+
+Coordinamento di conferenze
+
+Coordinamento di eventi di team building
+
+Eventi aziendali
+
+Eventi religiosi
+
+Eventi scolastici
+
+Each card should have:
+
+Titolo del servizio
+
+Breve descrizione in italiano
+
+Animazione in entrata su scroll (fade + slide)
+
+3. Car collection & car detail with multiple photos
+
+The site already has a Collezione of cars. Improve this part so that:
+
+The collection shows each car as a card with:
+
+Immagine principale dell’auto
+
+Nome / modello
+
+Breve descrizione in italiano
+
+Etichetta “Ideale per matrimoni / eventi aziendali / eventi religiosi / eventi scolastici” (in base ai dati)
+
+Very important:
+
+Ogni auto deve avere una sua pagina/sezione dedicata di dettaglio.
+
+Quando l’utente clicca su una card nella collezione, deve essere aperta solo la pagina di quella specifica auto (route tipo /auto/:id oppure una vista dedicata).
+
+Nella pagina di dettaglio devono essere mostrate solo le informazioni e le foto della macchina selezionata, mai foto o dati di altre auto.
+
+4. IMPORTANT – I will now send you the photos of one car
+
+Assume I will provide you with several image URLs/paths for one specific car.
+
+You must:
+
+Add these image paths into the data structure of that car (for example an array immagini), and
+
+Use them in the car detail page as a gallery solo per quella macchina.
+
+Example data structure (you can adapt it):
+
+const cars = [
+  {
+    id: "panamera-matrimonio",
+    nome: "Porsche Panamera",
+    categoria: "Matrimoni & Eventi",
+    prezzoIndicativo: "A partire da €XXX",
+    immagini: [
+      "/images/panamera/01.jpg",
+      "/images/panamera/02.jpg",
+      "/images/panamera/03.jpg",
+      // qui inserirai tutte le foto che ti mando
+    ],
+    descrizione: "Descrizione in italiano...",
+    idealePer: ["Matrimoni eleganti", "Eventi aziendali", "Eventi religiosi"],
+  },
+  // altre auto...
+];
+
+
+After I send you the actual image paths, replace the placeholder image URLs with the real ones.
+
+5. Car detail page behaviour
+
+In the car detail view for a single car:
+
+Usa l’id o un parametro di route per caricare solo i dati della macchina selezionata dall’array cars.
+
+Non mostrare mai foto o informazioni di altre auto nella stessa pagina.
+
+Layout and behaviour:
+
+Show one main large image at the top (use the first element of immagini as default).
+
+Below the main image, show a row of thumbnails for all the images in immagini (solo quelle della macchina corrente).
+
+When the user clicks on a thumbnail, update the main image to that photo with a smooth fade transition.
+
+When the user clicks on the main large image, open a modal / lightbox:
+
+Dark overlay on the background.
+
+The selected car image in grande.
+
+Controls to navigate between all photos in immagini for that car with “precedente / successiva”.
+
+Close button (X) to exit the gallery.
+
+All labels and buttons for the gallery must be in Italian (es. “Chiudi”, “Precedente”, “Successiva”).
+
+6. General style
+
+Keep the current luxury, dark, wedding-oriented design (nero, oro, bianco, font serif eleganti).
+
+Make sure the navbar links scroll or navigate correctly to Collezione, Servizi, Matrimoni & Eventi, Contatti.
+
+The layout must be fully responsive for mobile, tablet and desktop.
+
+Apply these changes and prepare the code so that, after this, I can paste the real image URLs of each car and everything (collection card, dedicated detail page per car, gallery modal) will work correctly and will always show only the photos of the selected car.

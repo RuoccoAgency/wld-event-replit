@@ -1,0 +1,61 @@
+I want to update the entire website design to match the client’s brand colors.
+
+Please replace the current dark/gold theme with a clean and elegant white + green palette based on the logo.
+
+🎨 NEW BRAND PALETTE
+- Main background: pure white (#FFFFFF)
+- Main text: very dark charcoal (#0A0A0A)
+- Primary brand color (buttons, highlights, CTAs): #8CBFAF (soft sage green from the logo)
+- Primary hover color: a slightly darker green (#6AA392)
+- Borders / outline / ring: deeper green (#5C8F80)
+- Secondary elements (small UI highlights): slightly darker/lighter variations of the same green
+
+📌 WHAT YOU NEED TO DO
+1. Update ALL CSS variables in `:root` and `.dark` inside `index.css`:
+   --background = white
+   --foreground = dark text
+   --primary = #8CBFAF (converted to HSL)
+   --primary-foreground = dark text
+   --secondary = darker green
+   --accent = brand green
+   --border / --input / --ring = darker green
+
+2. Remove the previous black/gold palette entirely and replace it with the new white + green branding.
+
+3. Ensure the entire site inherits these changes globally:
+   Any component using:
+   - bg-background
+   - text-foreground
+   - bg-primary
+   - text-primary
+   - border-border
+   - ring-primary
+   - accent
+   - muted
+   - card
+   - popover
+   …
+   should automatically reflect the new palette.
+
+4. Update all buttons:
+   - background: primary green
+   - text: dark
+   - hover: darker green
+   - smooth transitions
+
+5. Navbar, footer, cards, forms, and section headings should use:
+   - white background
+   - dark text
+   - green accents where appropriate
+
+6. Keep all layout, content, and animations exactly as they are.
+   Only the global theme and colors should change.
+
+🎯 FINAL COLOR VALUES (use these in HSL):
+- primary: hsl(160, 25%, 70%)   → #8CBFAF
+- primary-dark: hsl(160, 25%, 50%) → #6AA392
+- border: hsl(160, 20%, 35%) → #5C8F80
+- background: hsl(0, 0%, 100%) → white
+- foreground: hsl(0, 0%, 7%) → #0A0A0A
+
+Apply these changes to index.css and the Tailwind theme so the new brand palette takes effect across the entire website.

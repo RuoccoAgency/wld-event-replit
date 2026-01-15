@@ -1,0 +1,173 @@
+You are building a luxury car rental website for weddings and special events using React + TypeScript and Tailwind CSS.
+
+The company rents luxury cars for weddings, private events and corporate occasions, not only for sports/track use.
+All visible text (headings, paragraphs, buttons, labels) must be written in Italian.
+
+Use this business information in the site:
+
+Servizi principali:
+
+Noleggio auto di lusso per matrimoni
+
+Noleggio auto per eventi speciali (anniversari, feste private, shooting, eventi aziendali)
+
+Servizio con autista su richiesta
+
+Indirizzo: Piazza J. Kennedy, 25 – 80019 Qualiano (NA)
+
+Telefono: 081 1878 9724
+
+Usa un nome generico come “Luxury Wedding Cars” o “Nome Azienda” che io potrò sostituire.
+
+Design & style
+
+Mantieni uno stile molto elegante e di lusso, dark theme (nero / antracite) con accenti oro / champagne e tipografia serif raffinata.
+
+Il sito deve comunicare romanticismo + esclusività: matrimoni, momenti speciali, esperienze premium.
+
+Aggiungi bokeh lights, sfumature morbide, hover raffinati, fade-in e micro-animazioni.
+
+Deve essere 100% responsive (mobile, tablet, desktop).
+
+Sezioni / Pagine
+1. Hero (Homepage)
+
+Full-screen hero con:
+
+Grande immagine di un’auto di lusso davanti a una location elegante da matrimonio (usa un placeholder URL, io poi lo sostituisco).
+
+Titolo in italiano tipo: “Auto di Lusso per Matrimoni ed Eventi Indimenticabili”.
+
+Sottotitolo che spiega che l’azienda noleggia auto esclusive con servizio personalizzato per sposi ed eventi.
+
+Due pulsanti:
+
+“Scopri la Collezione”
+
+“Prenota per il tuo matrimonio”
+
+Piccola scritta sopra il titolo tipo: “THE ART OF CELEBRATION” tradotta in italiano (“L’arte di celebrare i momenti speciali”).
+
+2. Sezione “Perché scegliere noi”
+
+3–4 card con icone e breve testo, ad esempio:
+
+“Servizio dedicato agli sposi”
+
+“Auto di alta gamma sempre perfette”
+
+“Esperienza personalizzata per ogni evento”
+
+“Autista professionale su richiesta”
+
+Animazioni di ingresso su scroll (fade + slide).
+
+3. Collezione Auto
+
+Griglia di auto di lusso (Ferrari, Maserati, Rolls-Royce, ecc. – nomi generici).
+
+Ogni card mostra:
+
+Foto dell’auto (placeholder)
+
+Modello
+
+Breve descrizione in italiano
+
+Indicazione di prezzo o “A partire da …”
+
+Al click su una card, apri una pagina di dettaglio dedicata all’auto (vedi sezione “Dettaglio Auto”).
+
+4. Pagina / Sezione “Matrimoni ed Eventi”
+
+Testo in italiano che spiega:
+
+Noleggio auto di lusso per matrimoni (arrivo della sposa, shooting fotografico, uscita dalla chiesa, ricevimento).
+
+Noleggio per eventi speciali: anniversari, proposte di matrimonio, eventi aziendali di rappresentanza, gala.
+
+Inserisci una piccola timeline del “giorno del matrimonio” con le fasi in cui si usa l’auto (es. “Arrivo in chiesa”, “Servizio fotografico”, “Ingresso al ricevimento”).
+
+Aggiungi una call-to-action: “Richiedi un preventivo per il tuo matrimonio”.
+
+5. Dettaglio Auto (pagina dedicata a un singolo modello)
+
+Quando il cliente clicca su un’auto nella collezione, apri una pagina di dettaglio con:
+
+Immagine grande dell’auto in primo piano, con effetti di lusso:
+
+Leggera animazione di entrata (fade + slide up).
+
+Effetto di movimento/3D soft (es. su hover un leggero tilt/parallax).
+
+Prevedi uno spazio per un futuro viewer 360°: inserisci un componente che mostra un’immagine principale e un carosello di immagini sotto. Nei commenti scrivi chiaramente che io potrò sostituire le immagini con una sequenza 360° delle mie foto.
+
+Pannello informazioni in italiano:
+
+Modello, anno, colore, posti, tipo di motore.
+
+Frase descrittiva romantica (es. “Perfetta per un ingresso scenografico e foto da ricordare per sempre.”).
+
+Sezione “Ideale per:” con bullet points:
+
+Matrimoni eleganti
+
+Shooting fotografici
+
+Eventi aziendali di rappresentanza
+
+Prezzo indicativo o testo tipo “Prezzo su richiesta”.
+
+Call-to-action in evidenza:
+
+Pulsanti:
+
+“Richiedi disponibilità per la data del tuo matrimonio”
+
+“Parla con noi su WhatsApp” (usa l’icona ma nessuna integrazione reale, solo un link fittizio).
+
+Aggiungi piccole etichette animate (spec lines) che puntano a dettagli della macchina (cerchi, interni, frontale), con brevi testi in italiano.
+
+6. Sezione Contatti
+
+In fondo al sito crea una sezione contatti con:
+
+Indirizzo: Piazza J. Kennedy, 25 – 80019 Qualiano (NA)
+
+Telefono: 081 1878 9724
+
+Form contatti con campi: Nome, Email, Telefono, Data dell’evento, Tipo di evento (matrimonio, aziendale, altro), Messaggio.
+
+Testo di invito tipo: “Raccontaci il tuo evento, ti aiuteremo a scegliere l’auto perfetta.”
+
+7. Navbar e Footer
+
+Navbar minimal ed elegante con link:
+
+Home, Collezione, Matrimoni & Eventi, Brand, Contatti.
+
+Bottone in alto a destra: “Richiedi un preventivo”.
+
+Footer con:
+
+Dati azienda
+
+Telefono e indirizzo
+
+Eventuali social (usa icone generiche).
+
+Extra guidelines
+
+Usa React + TypeScript + Tailwind CSS in modo pulito.
+
+Organizza il codice in componenti (components/).
+
+Tutte le frasi, bottoni, titoli e testi visibili devono essere in italiano.
+
+Lascia commenti chiari dove io dovrò sostituire:
+
+Le immagini delle auto (userò le mie foto reali)
+
+Il nome dell’azienda, se necessario.
+
+Generate the full layout, components and styling following this specification.

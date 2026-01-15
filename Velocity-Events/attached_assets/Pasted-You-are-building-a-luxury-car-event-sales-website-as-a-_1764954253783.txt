@@ -1,0 +1,219 @@
+You are building a luxury car event & sales website as a React + TypeScript single-page app, styled with Tailwind CSS.
+The brand organizes events and experiences with high-end, luxury cars.
+
+Tech & structure
+
+Use React + TypeScript.
+
+Use Tailwind CSS for all styling.
+
+No backend, just a front-end SPA with multiple sections and a car detail “page”.
+
+Organize the code into reusable components in a components/ folder.
+
+Make the website fully responsive (mobile, tablet, desktop).
+
+Overall style
+
+Dark, cinematic look: black / very dark gray background, gold / champagne accents, and white text.
+
+Elegant, minimal, high-end style (think luxury watch / supercar brand).
+
+Use big, high-quality car images and lots of whitespace.
+
+Smooth micro-interactions: hover effects, subtle shadows, soft transitions.
+
+Pages / Sections
+1. Hero section (Home)
+
+Full-screen hero with:
+
+Background image of a luxury car event (use a placeholder image URL, I will replace it later).
+
+Main headline like: “Exclusive Luxury Car Experiences”.
+
+Subheadline explaining that the company organizes events, test drives and private viewings of supercars.
+
+Two buttons:
+
+“View Collection”
+
+“Book an Experience”
+
+Subtle animated elements (e.g. floating glow, soft gradient, light animation).
+
+2. About / Brand section
+
+Short section about the company: who they are, what they do, why their events are exclusive.
+
+3 highlight cards with icons:
+
+Private events
+
+Limited-edition cars
+
+Tailored experiences
+
+Gentle fade-in animations on scroll.
+
+3. Car Collection (Inventory)
+
+A section that displays a grid of cars.
+
+Each car card should show:
+
+Image of the car (placeholder URL, I will change it)
+
+Brand and model (e.g. Ferrari 488 Pista)
+
+Short description
+
+Price / “Starting from …”
+
+On hover:
+
+Slight zoom-in on image
+
+Gold border glow
+
+View details button / overlay
+
+When the user clicks on a car card, navigate to a dedicated car detail view (route or conditional view inside the SPA).
+
+You can represent the inventory as a TypeScript array like:
+
+const cars = [
+  {
+    id: "ferrari-488-pista",
+    name: "Ferrari 488 Pista",
+    price: "€320.000",
+    year: "2019",
+    power: "720 HP",
+    acceleration: "0–100 km/h in 2.85s",
+    mainImage: "/images/cars/ferrari-488/main.jpg",
+    images360: [
+      "/images/cars/ferrari-488/frame01.jpg",
+      "/images/cars/ferrari-488/frame02.jpg",
+      // ...
+    ],
+    description: "Short luxury description here...",
+  },
+  // more cars...
+];
+
+
+I will replace the image paths with my own photos later.
+
+4. Car Detail View (very important)
+
+When a car is clicked, open a dedicated detail view (e.g. /cars/:id or a modal/full page inside the SPA).
+
+This car detail view should include:
+
+Main 360° viewer area
+
+Large car image in the center.
+
+Implement a simple 360° rotation effect using the images360 array:
+
+When the user drags left/right (mouse or touch), the displayed frame index changes.
+
+On desktop: click/drag horizontally.
+
+On mobile: touch/drag horizontally.
+
+Smooth transition between frames.
+
+Add subtle 3D / parallax feeling (e.g. scaling, shadow, reflection under the car).
+
+Animated “spec lines” (hotspots)
+
+While the car is shown, overlay a few animated lines and labels pointing to specific areas (wheels, engine, interior, headlights).
+
+The labels should appear with a soft fade+slide animation.
+
+Example labels:
+
+“Carbon ceramic brakes”
+
+“Hand-crafted leather interior”
+
+“Twin-turbo V8 engine”
+
+On hover (or tap), the label card can slightly enlarge and show 1–2 extra spec details.
+
+Car info panel
+
+On the side (or below on mobile), show:
+
+Model name, year, power, acceleration, top speed
+
+Price or “Price on request”
+
+Short description paragraph written in a luxury tone.
+
+CTA buttons:
+
+“Request more info”
+
+“Book a private viewing”
+
+These buttons should have a premium look: pill shape, gold border, smooth hover effects.
+
+Animated entrance
+
+When the car detail view opens, animate:
+
+The 360 viewer fading in and sliding up.
+
+The spec lines appearing sequentially (staggered animation).
+
+The text panel sliding in from the side.
+
+5. Contact / Booking section
+
+Simple contact section with:
+
+Short sentence explaining how to request a private event or test drive.
+
+A basic form (name, email, phone, car of interest, message).
+
+Add a fake submit handler (no backend needed).
+
+360° implementation details
+
+Implement the 360° rotation using a series of static images in images360 (I will provide real photos later).
+
+Logic example:
+
+On drag or swipe, update the frame index:
+
+currentFrame = (currentFrame + delta) % totalFrames.
+
+Use requestAnimationFrame or simple state updates to make it feel smooth.
+
+Don’t use very heavy 3D engines unless absolutely necessary; a frame-based 360 viewer is enough for this prototype.
+
+Animations & UX
+
+Use CSS transitions and simple React animation logic (or a light library if necessary) for:
+
+Hover effects
+
+Fade-in on scroll
+
+Spec line labels appearing
+
+The site must feel fluid, luxurious and polished, not overloaded.
+
+Placeholders & comments
+
+Use placeholder image paths and clearly comment where I must:
+
+Replace car images
+
+Add real car specs
+
+Customize texts
+
+Write clean, well-structured code and include short comments explaining the main components (especially the 360° viewer).

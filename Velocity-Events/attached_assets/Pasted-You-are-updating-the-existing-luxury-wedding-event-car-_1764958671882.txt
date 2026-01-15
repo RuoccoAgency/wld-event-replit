@@ -1,0 +1,139 @@
+You are updating the existing luxury wedding & event car rental website built with React + TypeScript + Tailwind CSS.
+
+All visible text must be written in Italian.
+
+1. Keep only 2 cars in the collection
+
+Update the data structure where the cars are defined (for example cars.ts, carsData.ts or similar):
+
+Remove all other cars that are currently present.
+
+Keep only these two cars:
+
+The BMW that is already configured (do not change its images or content, just keep it).
+
+A new car: Ferrari Portofino M.
+
+Make sure that in the Collezione section and in any list/map you use, only these two cars appear.
+
+2. Add Ferrari Portofino M with my images
+
+I have already uploaded the images for the Ferrari Portofino M into the project.
+Use those image paths to create the gallery for this car, similar to how you did for the BMW.
+
+In the cars array, add an object like this (adapt the paths with the real ones you find in the project):
+
+{
+  id: "ferrari-portofino-m",
+  nome: "Ferrari Portofino M",
+  categoria: "Matrimoni & Eventi",
+  prezzoIndicativo: "Prezzo su richiesta",
+  immagini: [
+    "/images/ferrari-portofino/01.jpg",
+    "/images/ferrari-portofino/02.jpg",
+    "/images/ferrari-portofino/03.jpg",
+    // aggiungi qui TUTTE le foto che ho caricato della Ferrari
+  ],
+  descrizione: "La M sta a significare modificata, l'evoluzione della Portofino ricca di novità tecniche e design. Te ne accorgi quando premi il pulsante dell'accensione sul volante: è in quel momento che il lavoro svolto sull'impianto di scarico diventa lampante. Alla guida della Ferrari Portofino M ti immergi in un mondo di comfort e potenza contemporaneamente.",
+  idealePer: ["Matrimoni di lusso", "Eventi aziendali", "Eventi esclusivi"],
+  specifiche: {
+    motore: "3900 cc - V8",
+    cavalli: "620 CV",
+    accelerazione: '3,4" 0-100 km/h',
+    velocitaMax: "320 km/h",
+    posti: "4"
+  }
+}
+
+
+Use the real file paths of the Ferrari images already in the project instead of the placeholder /images/....
+
+3. Ferrari detail page layout
+
+For the Ferrari Portofino M detail page (route or dedicated section):
+
+Show, near the top, the Ferrari logo (use a small image or an icon) and the title:
+
+“Ferrari Portofino M”
+
+Subtitle: “L’evoluzione del lusso”
+
+On the right or below, show the description text in Italian (from the descrizione field above).
+
+Under that, add a specs strip with the technical specs:
+
+“3900 cc - V8” (label: Motore)
+
+“620” (label: CV)
+
+3,4" (label: 0–100 km/h)
+
+“320 km/h” (label: Velocità max)
+
+“4” (label: Posti)
+
+Each spec should be in its own card or column, with elegant typography.
+
+4. Gallery behaviour (only photos of that car)
+
+For both BMW and Ferrari:
+
+When the user clicks on a car in Collezione, open the dedicated page only for that car.
+
+In the detail page, use only the images from the immagini array of that specific car (never mix photos from other cars).
+
+Gallery rules (for Ferrari and BMW):
+
+Show a main large image at the top (first element of immagini).
+
+Below, show all images as thumbnails.
+
+Clicking a thumbnail updates the main image with a smooth fade/transition.
+
+Clicking on the main image opens a modal / lightbox with:
+
+Dark overlay.
+
+Large image centered.
+
+Buttons “Precedente” and “Successiva” to move between all photos in immagini for that car.
+
+Button “Chiudi” to close the modal.
+
+All labels and buttons must be in Italian.
+
+5. Add more effects and animations
+
+Enhance the visual feeling of luxury with more animations, but keep them smooth and elegant (no effetti esagerati):
+
+Collezione cards (BMW, Ferrari)
+
+Slight scale-up and soft shadow on hover.
+
+A subtle gold border/glow on hover.
+
+Fade-in / slide-up animation when cards appear on scroll.
+
+Detail pages (BMW & Ferrari)
+
+Animate the title and subtitle with a fade-in and small upward movement on load.
+
+Animate the specs cards with a staggered entrance (one after the other).
+
+Add a very soft parallax or scale effect on the main car image when scrolling.
+
+Buttons (Richiedi preventivo, Preventivo, etc.):
+
+Add hover transitions for background/outline and a slight scale (105%).
+
+Make sure all animations are smooth, performant and responsive.
+
+6. General
+
+Keep the current luxury, dark, wedding-oriented design (nero, oro, bianco, font serif eleganti).
+
+Ensure the navbar links still work correctly (Collezione, Servizi, Matrimoni & Eventi, Contatti).
+
+The site must remain fully responsive on mobile, tablet and desktop.
+
+Apply all these changes so that the project has only two cars (BMW + Ferrari Portofino M), each with its own dedicated page and gallery, with more refined animations and a very premium look.

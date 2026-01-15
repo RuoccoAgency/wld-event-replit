@@ -1,0 +1,74 @@
+You are improving a luxury wedding & event car rental website built with React + TypeScript + Tailwind CSS.
+
+The client has provided a new brand logo with a white + sage-green palette.
+You must completely restyle the entire website according to this new brand identity.
+
+New Brand Palette
+
+Background: white (#FFFFFF or very light neutral)
+
+Text: very dark gray / nearly black for perfect readability
+
+Primary accent: sage green from the logo (around hsl(160 25% 60%))
+
+Secondary accent: lighter sage-green variant for subtle backgrounds
+
+Buttons: solid sage-green with white text
+
+Borders & inputs: soft, elegant sage-grey tones
+
+Hover states: slightly darker or lighter green variants
+
+Remove all gold colors from previous theme
+
+Your Tasks
+
+Rewrite the entire TailwindCSS theme (index.css / globals.css)
+
+Background must be white
+
+All text must use dark colors for perfect readability
+
+Primary/Accent colors must use the sage-green from the logo
+
+Buttons, links, icons, highlights must use the new green
+
+Make sure labels like "Telefono, Email, Indirizzo" are visible again
+
+No component should remain white-on-white or invisible
+
+Regenerate all components (Navbar, Hero, Services, CarCollection, CarDetail, BookingForm, Footer)
+
+Update every className that uses old dark theme styling
+
+Replace text-white, text-zinc-* with text-foreground
+
+Replace dark backgrounds with bg-background (white)
+
+Replace primary colors with the new green
+
+Ensure perfect contrast across all sections
+
+Animations & style
+
+Keep the luxury feel but now adapted to a light theme
+
+Smooth fade, slide, scale animations where appropriate
+
+Maintain an elegant, clean, wedding-oriented aesthetic
+
+Fix visibility issues
+
+The section under the hero (icons) must be fully visible
+
+The BookingForm labels must be visible on white background
+
+All icons must use green or dark tones (not faint colors)
+
+Output
+
+Provide a complete updated index.css theme
+
+Provide updated JSX/TSX for all components if needed
+
+Ensure every section looks refined, modern, and consistent with the new brand identity.
