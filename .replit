@@ -35,6 +35,6 @@ localPort = 5000
 externalPort = 80
 
 [deployment]
-build = ["bash", "-c", "cd Velocity-Events && npm install && npm run build"]
-run = ["bash", "-c", "cd Velocity-Events && npm start"]
+build = ["bash", "-c", "cd /home/runner/workspace/Velocity-Events && npm install && npm run build"]
+run = ["bash", "-c", "cd /home/runner/workspace/Velocity-Events && npm start"]
 deploymentTarget = "autoscale"
