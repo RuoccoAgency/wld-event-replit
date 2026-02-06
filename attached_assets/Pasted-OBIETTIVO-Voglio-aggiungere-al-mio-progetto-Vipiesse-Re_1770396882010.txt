@@ -1,0 +1,94 @@
+OBIETTIVO
+Voglio aggiungere al mio progetto “Vipiesse” (Replit) un backend + admin panel per un sito “concessionario auto cerimonie”.
+Deve funzionare come il backend del mio ecommerce (CRUD + immagini + pagine pubbliche), ma per “Cars”.
+IMPORTANTISSIMO: le foto devono essere caricabili con drag&drop (upload file), NON solo link URL.
+
+STACK / VINCOLI
+- Usa lo stesso stack e struttura del progetto attuale (non cambiare framework).
+- DB già presente su Replit (usa le migrazioni/ORM già usate nel progetto ecommerce).
+- Crea tabelle, API, admin UI, e collegale alle pagine pubbliche.
+- Le immagini vanno salvate su storage compatibile con Replit: preferibilmente Replit Object Storage / S3-compatible (o soluzione già presente nel progetto). Se esiste già una logica di upload nel progetto, riusala.
+- Le immagini devono supportare: multiple per auto, ordinamento (drag per riordinare), cover image, eliminazione.
+
+DATI (MODELLO AUTO)
+Crea tabella cars con:
+- id (PK)
+- slug (unique)
+- brand (es. BMW, Ferrari)
+- model (es. “X6 M Competition”)
+- title (string, es. “BMW X6 M COMPETITION”)
+- price_eur (integer o numeric, es. 100000) oppure price_text (se serve)
+- power_cv (int, es. 625)
+- year (int, es. 2024)
+- engine (string, es. “V8 Twin-Turbo”)
+- color (string, es. “Brooklyn Grey”)
+- seats (int, es. 5)
+- tags (array/string, es. “Eventi aziendali, Transfer VIP, Matrimoni Moderni”)
+- description (text)
+- status (enum: available, reserved, sold)
+- created_at, updated_at
+
+Crea tabella car_images:
+- id (PK)
+- car_id (FK)
+- url (text) oppure storage_key (text) + computed url
+- alt (text nullable)
+- sort_order (int)
+- is_cover (boolean)
+
+ADMIN PANEL (BACKEND UI)
+Crea pagina admin “Auto” con:
+1) Lista auto con: cover, titolo, prezzo, stato, modifica/elimina.
+2) Form “Crea/Modifica auto” con tutti i campi sopra.
+3) Sezione FOTO:
+   - drag&drop upload multiple
+   - anteprime thumbnails
+   - riordino via drag (aggiorna sort_order)
+   - set “cover” (una sola immagine)
+   - delete immagine
+   - quando salvo l’auto, tutto persistente in DB
+
+API
+Crea endpoints:
+- GET /api/cars (con filtri: status, brand, search, pagination)
+- GET /api/cars/:slug (include car + images ordered)
+- POST /api/admin/cars
+- PUT /api/admin/cars/:id
+- DELETE /api/admin/cars/:id
+- POST /api/admin/cars/:id/images (multipart/form-data upload)
+- PUT /api/admin/cars/:id/images/reorder
+- DELETE /api/admin/cars/:id/images/:imageId
+- POST /api/admin/cars/:id/images/:imageId/set-cover
+
+SICUREZZA ADMIN
+Usa lo stesso sistema di auth/admin già presente nel progetto ecommerce.
+Se non esiste, crea protezione semplice: solo utenti admin possono accedere alle route /admin e /api/admin/*.
+
+FRONTEND (PAGINE PUBBLICHE)
+1) Pagina “Collezione” (listing) deve mostrare card come la FOTO 2:
+   - brand piccolo in alto
+   - titolo grande (X6 M COMPETITION ecc.)
+   - prezzo “1.000,00€” o formattato in EUR
+   - piccole “chip”/tag tipo: Eventi Aziendali, Transfer VIP, Matrimoni Moderni
+   - piccolo badge “CV” (es. 625 CV)
+   - pulsante/CTA “Scopri” o click su card -> dettaglio
+   - card elegante, minimal, simile alla bozza
+
+2) Pagina dettaglio auto come FOTO 3:
+   - immagine grande principale
+   - colonna thumbnails a sinistra cliccabili
+   - a destra: titolo, prezzo, info (posti, colore, motore, anno, CV), descrizione
+   - CTA “Richiedi preventivo” (porta a pagina contatti o apre modal)
+   - tutto prende i dati dal DB (slug)
+
+IMPORTANTE
+- Non rompere le pagine esistenti.
+- Aggiungi nuove route /cars e /cars/:slug (o /collezione e /collezione/:slug) in base a come è organizzato il routing attuale.
+- Se esistono già componenti UI (card, button, layout), riusali.
+- Genera almeno 2 seed cars (BMW X6 M Competition e Ferrari Portofino M) con immagini placeholder (ma le immagini reali verranno caricate via admin).
+- Fammi vedere esattamente quali file hai creato/modificato e dove trovare l’Admin “Auto”.
+
+FASE FINALE
+Alla fine:
+- Dimmi come fare test rapido: creo auto, carico 5 foto, set cover, reorder, e verifico pagina /cars/:slug.
+- Se manca una dipendenza per upload multipart, installala e configura.
