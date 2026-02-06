@@ -33,10 +33,8 @@ export function CarDetail({ car }: CarDetailProps) {
     <div className="min-h-screen bg-background text-foreground overflow-hidden pt-20">
       {/* Back Button */}
       <div className="container mx-auto px-6 py-6">
-        <Link href="/collection">
-          <a className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">
+        <Link href="/collection" className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="w-4 h-4" /> Torna alla Collezione
-          </a>
         </Link>
       </div>
 
