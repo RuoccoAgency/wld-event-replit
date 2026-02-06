@@ -6,6 +6,8 @@ import { rm, readFile } from "fs/promises";
 // which helps cold start times
 const allowlist = [
   "@google/generative-ai",
+  "@google-cloud/storage",
+  "google-auth-library",
   "axios",
   "connect-pg-simple",
   "cors",
