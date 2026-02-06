@@ -30,13 +30,17 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
 
   const galleryImages = sortedImages.map((img) => img.url);
 
+  const hasImages = galleryImages.length > 0;
+
   const nextImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
+    if (!hasImages) return;
     setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
   };
 
   const prevImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
+    if (!hasImages) return;
     setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   };
 

@@ -4,9 +4,42 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { cars as staticCars } from "@/data/cars";
 import type { Car, CarImage } from "@shared/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
+
+function staticToApi(c: typeof staticCars[number]): CarWithImages {
+  const raw = c as any;
+  return {
+    id: parseInt(c.id) || 0,
+    slug: c.id,
+    brand: c.brand,
+    model: c.name.replace(c.brand + " ", ""),
+    title: c.name.toUpperCase(),
+    priceEur: parseInt(c.price.replace(/[^\d]/g, "")) || 0,
+    priceText: c.price,
+    powerCv: raw.powerCv || (c.specifiche?.cavalli ? parseInt(c.specifiche.cavalli) : null),
+    year: parseInt(c.year) || null,
+    engine: c.engine || null,
+    color: c.color || null,
+    seats: parseInt(c.seats) || null,
+    tags: c.idealFor?.join(", ") || null,
+    description: c.description || null,
+    status: "available",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    images: c.immagini?.map((url, i) => ({
+      id: i,
+      carId: parseInt(c.id) || 0,
+      url,
+      alt: null,
+      isCover: i === 0,
+      sortOrder: i,
+      createdAt: new Date(),
+    })) || [],
+  } as CarWithImages;
+}
 
 function formatPrice(car: CarWithImages) {
   if (car.priceText) return car.priceText;
@@ -30,9 +63,14 @@ export default function CarsCollectionPage() {
 
   useEffect(() => {
     fetch("/api/cars?status=available")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("API error");
+        return res.json();
+      })
       .then((data) => setCars(data.cars || []))
-      .catch(console.error)
+      .catch(() => {
+        setCars(staticCars.map(staticToApi));
+      })
       .finally(() => setLoading(false));
   }, []);
 

@@ -4,9 +4,42 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CarDetailView } from "@/components/cars/CarDetailView";
 import NotFound from "@/pages/not-found";
+import { cars as staticCars } from "@/data/cars";
 import type { Car, CarImage } from "@shared/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
+
+function staticToApi(c: typeof staticCars[number]): CarWithImages {
+  const raw = c as any;
+  return {
+    id: parseInt(c.id) || 0,
+    slug: c.id,
+    brand: c.brand,
+    model: c.name.replace(c.brand + " ", ""),
+    title: c.name.toUpperCase(),
+    priceEur: parseInt(c.price.replace(/[^\d]/g, "")) || 0,
+    priceText: c.price,
+    powerCv: raw.powerCv || (c.specifiche?.cavalli ? parseInt(c.specifiche.cavalli) : null),
+    year: parseInt(c.year) || null,
+    engine: c.engine || null,
+    color: c.color || null,
+    seats: parseInt(c.seats) || null,
+    tags: c.idealFor?.join(", ") || null,
+    description: c.description || null,
+    status: "available",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    images: c.immagini?.map((url, i) => ({
+      id: i,
+      carId: parseInt(c.id) || 0,
+      url,
+      alt: null,
+      isCover: i === 0,
+      sortOrder: i,
+      createdAt: new Date(),
+    })) || [],
+  } as CarWithImages;
+}
 
 export default function CarDetailPage() {
   const [, params] = useRoute("/cars/:slug");
@@ -23,7 +56,14 @@ export default function CarDetailPage() {
         return res.json();
       })
       .then((data) => setCar(data))
-      .catch(() => setNotFound(true))
+      .catch(() => {
+        const fallback = staticCars.find((c) => c.id === slug);
+        if (fallback) {
+          setCar(staticToApi(fallback));
+        } else {
+          setNotFound(true);
+        }
+      })
       .finally(() => setLoading(false));
   }, [slug]);
 
