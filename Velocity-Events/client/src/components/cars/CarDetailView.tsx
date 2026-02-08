@@ -60,7 +60,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex-1"
+          className="lg:w-[55%] lg:max-w-[650px] flex-shrink-0"
         >
           {galleryImages.length > 0 ? (
             <>
@@ -127,7 +127,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="lg:w-[400px] xl:w-[500px] flex flex-col z-20"
+          className="flex-1 min-w-0 flex flex-col z-20"
         >
           <div className="mb-8 border-b border-border/20 pb-8">
             <motion.p
