@@ -67,9 +67,17 @@ export function Hero() {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <Link href="#contact" className="px-8 py-4 border border-white/30 text-white uppercase tracking-widest text-xs font-bold hover:bg-white/10 transition-colors duration-300 backdrop-blur-sm justify-center flex">
+          <a
+            href="/#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById("contact");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="px-8 py-4 border border-white/30 text-white uppercase tracking-widest text-xs font-bold hover:bg-white/10 transition-colors duration-300 backdrop-blur-sm justify-center flex"
+          >
             Prenota per il tuo matrimonio
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>
