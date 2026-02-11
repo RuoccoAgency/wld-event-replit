@@ -44,7 +44,7 @@ export function Footer() {
               <li><a href="/collection" className="hover:text-primary transition-colors">La Nostra Collezione</a></li>
               <li><a href="/events" className="hover:text-primary transition-colors">Servizi per Matrimoni</a></li>
               <li><a href="/about" className="hover:text-primary transition-colors">Chi Siamo</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors">Richiedi Preventivo</a></li>
+              <li><a href="/#contact" className="hover:text-primary transition-colors">Richiedi Preventivo</a></li>
             </ul>
           </div>
         </div>

@@ -204,7 +204,7 @@ export function CarDetail({ car }: CarDetailProps) {
              transition={{ delay: 0.9 }}
              className="flex flex-col gap-4 mt-auto"
           >
-            <a href="#contact" className="w-full">
+            <a href="/#contact" className="w-full">
                <button className="w-full py-5 bg-primary text-primary-foreground uppercase tracking-widest text-xs font-bold hover:bg-primary/90 transition-colors">
                  Richiedi Disponibilità
                </button>
