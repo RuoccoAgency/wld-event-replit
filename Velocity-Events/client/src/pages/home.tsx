@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/home/Hero";
 import { About } from "@/components/home/About";
@@ -101,6 +102,15 @@ function WeddingTimeline() {
 }
 
 export default function Home() {
+  useEffect(() => {
+    if (window.location.hash === "#contact") {
+      setTimeout(() => {
+        const el = document.getElementById("contact");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
