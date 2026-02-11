@@ -109,7 +109,7 @@ export default function EventsPage() {
             transition={{ delay: 0.4 }}
             className="text-4xl md:text-6xl font-serif text-white mb-6"
           >
-            Matrimoni & Eventi
+            I Nostri Eventi
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -117,9 +117,8 @@ export default function EventsPage() {
             transition={{ delay: 0.6 }}
             className="text-white/60 max-w-2xl mx-auto text-lg"
           >
-            Dal trasporto della sposa all'organizzazione di transfer per gli
-            ospiti VIP. Offriamo soluzioni personalizzate per rendere ogni
-            evento unico e indimenticabile.
+            Offriamo servizi di trasporto e accoglienza di lusso per matrimoni, eventi aziendali, cerimonie e transfer VIP.
+            Ogni dettaglio è curato con precisione per garantire eleganza, puntualità e un impatto memorabile.
           </motion.p>
         </div>
       </section>
@@ -139,8 +138,7 @@ export default function EventsPage() {
             Galleria
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Ogni evento è un'esperienza unica. Sfoglia i momenti che abbiamo
-            reso speciali con le nostre auto di lusso.
+            Ogni evento racconta una storia unica. Scopri alcuni dei momenti speciali che abbiamo accompagnato con le nostre auto e il nostro servizio esclusivo.
           </p>
         </motion.div>
 

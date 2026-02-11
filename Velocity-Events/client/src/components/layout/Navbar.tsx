@@ -30,8 +30,11 @@ export function Navbar() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo / Brand */}
-        <Link href="/" className={cn("text-xl md:text-2xl font-serif font-bold tracking-widest transition-colors uppercase", scrolled ? "text-foreground" : "text-white")}>
-          Wedding Luxury Drive
+        <Link href="/" className="flex items-center gap-3">
+          <img src="/logo.png" alt="Wedding Luxury Drive" className="h-10 w-auto" />
+          <span className={cn("text-sm font-serif font-medium tracking-[0.15em] transition-colors uppercase", scrolled ? "text-foreground" : "text-white")}>
+            Wedding Luxury Drive
+          </span>
         </Link>
 
         {/* Menu Items */}
@@ -52,7 +55,7 @@ export function Navbar() {
             Servizi
           </a>
           <Link href="/events" className={cn("text-xs font-medium uppercase tracking-[0.2em] hover:text-primary transition-colors", location === "/events" ? "text-primary" : (scrolled ? "text-foreground/70" : "text-white/70"))}>
-            Matrimoni & Eventi
+            I Nostri Eventi
           </Link>
           <a 
             href="/#contact" 
