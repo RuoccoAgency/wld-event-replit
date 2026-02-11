@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 
 import EventsPage from "@/pages/events";
+import AboutPage from "@/pages/about";
 
 function ScrollToTop() {
   const [pathname] = useLocation();
@@ -33,6 +34,7 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/collection" component={CarsCollectionPage} />
         <Route path="/events" component={EventsPage} />
+        <Route path="/about" component={AboutPage} />
         <Route path="/cars/:slug" component={CarDetailPage} />
         <Route path="/admin" component={AdminLogin} />
         <Route path="/admin/cars" component={AdminCarsList} />

@@ -57,6 +57,9 @@ export function Navbar() {
           <Link href="/events" className={cn("text-xs font-medium uppercase tracking-[0.2em] hover:text-primary transition-colors", location === "/events" ? "text-primary" : (scrolled ? "text-foreground/70" : "text-white/70"))}>
             I Nostri Eventi
           </Link>
+          <Link href="/about" className={cn("text-xs font-medium uppercase tracking-[0.2em] hover:text-primary transition-colors", location === "/about" ? "text-primary" : (scrolled ? "text-foreground/70" : "text-white/70"))}>
+            Chi Siamo
+          </Link>
           <a 
             href="/#contact" 
             onClick={(e) => {

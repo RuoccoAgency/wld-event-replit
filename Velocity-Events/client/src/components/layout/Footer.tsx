@@ -45,7 +45,7 @@ export function Footer() {
             <h4 className="text-xs uppercase tracking-widest text-primary mb-6">Esplora</h4>
             <ul className="space-y-4 text-sm text-muted-foreground">
               <li><a href="/collection" className="hover:text-primary transition-colors">La Nostra Collezione</a></li>
-              <li><a href="/events" className="hover:text-primary transition-colors">Servizi per Matrimoni</a></li>
+              <li><a href="/events" className="hover:text-primary transition-colors">I Nostri Eventi</a></li>
               <li><a href="/about" className="hover:text-primary transition-colors">Chi Siamo</a></li>
               <li><a href="/#contact" className="hover:text-primary transition-colors">Richiedi Preventivo</a></li>
             </ul>
@@ -53,7 +53,7 @@ export function Footer() {
         </div>
         
         <div className="pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest">
-          <p>© 2025 Luxury Wedding Cars. Tutti i diritti riservati.</p>
+          <p>© 2026 Luxury Wedding Cars. Tutti i diritti riservati.</p>
           <p>P.IVA 00000000000</p>
         </div>
       </div>

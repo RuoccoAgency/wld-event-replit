@@ -4,6 +4,9 @@
 A luxury wedding car rental website built with React/Vite frontend and Express backend, backed by PostgreSQL. Features a public-facing website for showcasing luxury cars and an admin panel for managing car inventory with image uploads.
 
 ## Recent Changes
+- 2026-02-11: Added "Chi Siamo" (About Us) page with company story, values, stats, and reasons sections
+- 2026-02-11: Added logo to navbar and footer, resized brand text
+- 2026-02-11: Added "Matrimoni & Eventi" page with 37-photo gallery and lightbox
 - 2026-02-06: Implemented full car management system with admin panel, database integration, image upload via Object Storage, and static data fallback
 - 2026-02-06: Fixed HTML nesting bug (Link wrapping anchor tags) in CarDetail component
 - 2026-02-06: Added gallery navigation guard for empty image arrays in CarDetailView
