@@ -13,26 +13,7 @@ import CarEditor from "@/pages/admin/car-editor";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { BookingForm } from "@/components/contact/BookingForm";
-
-function EventsPage() {
-  return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="pt-32 pb-20 container mx-auto px-6 text-center">
-        <h1 className="text-4xl md:text-6xl font-serif text-white mb-8">Matrimoni ed Eventi</h1>
-        <p className="text-white/60 max-w-2xl mx-auto mb-12">
-          Dal trasporto della sposa all'organizzazione di transfer per gli ospiti VIP.
-          Offriamo soluzioni personalizzate per rendere ogni evento unico.
-        </p>
-      </div>
-      <BookingForm />
-      <Footer />
-    </div>
-  );
-}
+import EventsPage from "@/pages/events";
 
 function ScrollToTop() {
   const [pathname] = useLocation();
