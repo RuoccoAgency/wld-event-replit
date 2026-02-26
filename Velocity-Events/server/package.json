@@ -1,17 +1,22 @@
 {
-  "name": "wld-events-server",
+  "name": "velocity-events-server",
+  "version": "1.0.0",
   "private": true,
-  "type": "module",
-  "main": "index.ts",
+  "type": "commonjs",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "tsx index.ts"
+    "dev": "tsx watch index.ts",
+    "build": "tsup index.ts --format cjs --platform node --target node18 --out-dir dist --sourcemap",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.30",
+    "tsup": "^8.0.2",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }
