@@ -1,7 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { createServer } from "http";
+<<<<<<< HEAD
 import { registerRoutes } from "./routes";
+=======
+import { seedProductionDatabase } from "./seed";
+>>>>>>> 5144235 (Add automatic database seeding for initial car and image data)
 
 const app = express();
 const httpServer = createServer(app);
@@ -80,7 +84,11 @@ app.use((req, res, next) => {
 app.get("/health", (_req, res) => res.status(200).send("ok"));
 
 (async () => {
+<<<<<<< HEAD
   // Registra tutte le routes API (es: /api/...)
+=======
+  await seedProductionDatabase();
+>>>>>>> 5144235 (Add automatic database seeding for initial car and image data)
   await registerRoutes(httpServer, app);
 
   // Error handler
