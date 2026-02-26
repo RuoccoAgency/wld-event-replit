@@ -3,7 +3,7 @@ import { ArrowLeft, ChevronLeft, ChevronRight, X, Maximize2, CarFront, Users, Fu
 import { Link } from "wouter";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import type { Car, CarImage } from "@shared/schema";
+import type { Car, CarImage } from "@/types/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
 

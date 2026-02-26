@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { cars as staticCars } from "@/data/cars";
-import type { Car, CarImage } from "@shared/schema";
+import type { Car, CarImage } from "@/types/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
 

@@ -4,7 +4,7 @@ import { adminFetch, isAdminLoggedIn } from "@/lib/adminAuth";
 import { useUpload } from "@/hooks/use-upload";
 import { ArrowLeft, Upload, Star, Trash2, GripVertical, Loader2 } from "lucide-react";
 import { Link } from "wouter";
-import type { Car, CarImage } from "@shared/schema";
+import type { Car, CarImage } from "@/types/schema";
 
 function slugify(text: string): string {
   return text

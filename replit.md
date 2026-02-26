@@ -4,6 +4,7 @@
 A luxury wedding car rental website built with React/Vite frontend and Express backend, backed by PostgreSQL. Features a public-facing website for showcasing luxury cars and an admin panel for managing car inventory with image uploads.
 
 ## Recent Changes
+- 2026-02-26: Made project Vercel-compatible: decoupled client from server build, created standalone client/package.json, moved shared types into client/src/types/schema.ts
 - 2026-02-11: Added "Chi Siamo" (About Us) page with company story, values, stats, and reasons sections
 - 2026-02-11: Added logo to navbar and footer, resized brand text
 - 2026-02-11: Added "Matrimoni & Eventi" page with 37-photo gallery and lightbox
@@ -24,18 +25,25 @@ A luxury wedding car rental website built with React/Vite frontend and Express b
 ### Directory Structure
 ```
 Velocity-Events/
-├── client/src/
-│   ├── components/     # Reusable UI components
-│   │   ├── cars/       # CarDetail, CarDetailView
-│   │   ├── layout/     # Navbar, Footer
-│   │   └── ui/         # shadcn components
-│   ├── data/           # Static car data (fallback)
-│   ├── pages/          # Route pages
-│   │   ├── admin/      # Admin panel (login, cars-list, car-editor)
-│   │   ├── home.tsx
-│   │   ├── car-detail.tsx
-│   │   └── cars-collection.tsx
-│   └── App.tsx
+├── client/             # Standalone frontend (Vercel-deployable)
+│   ├── package.json    # Client-only deps & scripts
+│   ├── vite.config.ts  # Standalone Vite config for Vercel
+│   ├── src/
+│   │   ├── components/ # Reusable UI components
+│   │   │   ├── cars/   # CarDetail, CarDetailView
+│   │   │   ├── layout/ # Navbar, Footer
+│   │   │   └── ui/     # shadcn components
+│   │   ├── types/      # Standalone TS types (Car, CarImage)
+│   │   ├── data/       # Static car data (fallback)
+│   │   ├── pages/      # Route pages
+│   │   │   ├── admin/  # Admin panel (login, cars-list, car-editor)
+│   │   │   ├── home.tsx
+│   │   │   ├── about.tsx
+│   │   │   ├── events.tsx
+│   │   │   ├── car-detail.tsx
+│   │   │   └── cars-collection.tsx
+│   │   └── App.tsx
+│   └── dist/           # Build output (gitignored)
 ├── server/
 │   ├── index.ts        # Express server entry
 │   ├── routes.ts       # API routes (cars CRUD + auth)
@@ -44,9 +52,16 @@ Velocity-Events/
 ├── shared/
 │   └── schema.ts       # Drizzle schema (cars + car_images tables)
 └── script/
-    ├── build.ts        # Production build
+    ├── build.ts        # Production build (Replit deploy)
     └── seed.ts         # Database seeder
 ```
+
+### Vercel Deployment
+- **Root directory**: `Velocity-Events/client`
+- **Build command**: `npm run build`
+- **Output directory**: `dist`
+- Client has its own `package.json` with all frontend deps
+- Types are self-contained in `client/src/types/schema.ts` (no server deps)
 
 ### Key Features
 - Public pages: Home, Collection, Car Detail with image gallery/lightbox

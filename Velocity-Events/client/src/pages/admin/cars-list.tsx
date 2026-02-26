@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { adminFetch, isAdminLoggedIn, clearAdminToken } from "@/lib/adminAuth";
 import { Plus, Edit, Trash2, LogOut } from "lucide-react";
-import type { Car, CarImage } from "@shared/schema";
+import type { Car, CarImage } from "@/types/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
 

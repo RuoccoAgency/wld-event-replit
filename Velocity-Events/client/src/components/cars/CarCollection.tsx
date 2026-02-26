@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cars as staticCars, type Car as StaticCar } from "@/data/cars";
-import type { Car, CarImage } from "@shared/schema";
+import type { Car, CarImage } from "@/types/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
 

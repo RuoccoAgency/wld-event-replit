@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CarDetailView } from "@/components/cars/CarDetailView";
 import NotFound from "@/pages/not-found";
 import { cars as staticCars } from "@/data/cars";
-import type { Car, CarImage } from "@shared/schema";
+import type { Car, CarImage } from "@/types/schema";
 
 type CarWithImages = Car & { images: CarImage[] };
 
