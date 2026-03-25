@@ -5,11 +5,28 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SERVIZI_LIST = [
-  "Nascita", "Battesimo", "Primo compleanno", "Compleanni", "Compleanni per adulti", 
-  "Comunione", "Cresima", "Diciottesimo", "Laurea", "Fidanzamento", "Anniversario", 
-  "Matrimonio", "Baby shower", "Gender reveal", "Eventi aziendali", "Inaugurazioni", 
-  "Feste a tema", "Allestimenti stagionali", "Pensionamento", "Addio al nubilato", 
-  "Addio al celibato", "Funerale"
+  { label: "Nascita", slug: "nascita" },
+  { label: "Battesimo", slug: "battesimo" },
+  { label: "Primo compleanno", slug: "primo-compleanno" },
+  { label: "Compleanni", slug: "compleanni" },
+  { label: "Compleanni per adulti", slug: "compleanni-per-adulti" },
+  { label: "Comunione", slug: "comunione" },
+  { label: "Cresima", slug: "cresima" },
+  { label: "Diciottesimo", slug: "diciottesimo" },
+  { label: "Laurea", slug: "laurea" },
+  { label: "Fidanzamento", slug: "fidanzamento" },
+  { label: "Anniversario", slug: "anniversario" },
+  { label: "Matrimonio", slug: "matrimonio" },
+  { label: "Baby shower", slug: "baby-shower" },
+  { label: "Gender reveal", slug: "gender-reveal" },
+  { label: "Eventi aziendali", slug: "eventi-aziendali" },
+  { label: "Inaugurazioni", slug: "inaugurazioni" },
+  { label: "Feste a tema", slug: "feste-a-tema" },
+  { label: "Allestimenti stagionali", slug: "allestimenti-stagionali" },
+  { label: "Pensionamento", slug: "pensionamento" },
+  { label: "Addio al nubilato", slug: "addio-al-nubilato" },
+  { label: "Addio al celibato", slug: "addio-al-celibato" },
+  { label: "Funerale", slug: "funerale" }
 ];
 
 export function Navbar() {
@@ -82,19 +99,13 @@ export function Navbar() {
                   <div className="grid grid-cols-3 gap-x-8 gap-y-3">
                     {SERVIZI_LIST.map((servizio) => (
                       <Link 
-                        key={servizio}
-                        href="/#services"
+                        key={servizio.slug}
+                        href={`/servizi/${servizio.slug}`}
                         className="text-[10px] uppercase tracking-wider text-slate-500 hover:text-primary transition-colors py-1 flex items-center group/link"
-                        onClick={(e) => {
-                          if (location === "/") {
-                            e.preventDefault();
-                            scrollToSection("services");
-                            setIsServiziOpen(false);
-                          }
-                        }}
+                        onClick={() => setIsServiziOpen(false)}
                       >
                         <span className="w-0 group-hover/link:w-2 h-[1px] bg-primary mr-0 group-hover/link:mr-2 transition-all"></span>
-                        {servizio}
+                        {servizio.label}
                       </Link>
                     ))}
                   </div>
@@ -169,12 +180,12 @@ export function Navbar() {
                          <div className="grid grid-cols-1 gap-y-1">
                           {SERVIZI_LIST.map((servizio) => (
                             <Link 
-                              key={servizio}
-                              href="/#services"
+                              key={servizio.slug}
+                              href={`/servizi/${servizio.slug}`}
                               className="text-xs font-light text-slate-600 hover:text-primary block py-1"
                               onClick={() => setIsMobileMenuOpen(false)}
                             >
-                              {servizio}
+                              {servizio.label}
                             </Link>
                           ))}
                          </div>

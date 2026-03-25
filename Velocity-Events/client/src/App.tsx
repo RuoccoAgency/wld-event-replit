@@ -18,6 +18,7 @@ import AboutPage from "@/pages/about";
 import LuxuryAssetRental from "@/pages/luxury-asset-rental";
 import BecomePartner from "@/pages/become-partner";
 import LimousineRental from "@/pages/limousine-rental";
+import ServiceDetail from "@/pages/service-detail";
 
 function ScrollToTop() {
   const [pathname] = useLocation();
@@ -41,6 +42,7 @@ function Router() {
         <Route path="/luxury-rental" component={LuxuryAssetRental} />
         <Route path="/become-partner" component={BecomePartner} />
         <Route path="/limousine-rental" component={LimousineRental} />
+        <Route path="/servizi/:slug" component={ServiceDetail} />
         <Route path="/cars/:slug" component={CarDetailPage} />
         <Route path="/admin" component={AdminLogin} />
         <Route path="/admin/cars" component={AdminCarsList} />
