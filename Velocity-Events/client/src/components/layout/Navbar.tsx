@@ -66,6 +66,9 @@ export function Navbar() {
           <Link href="/become-partner" className={cn("text-xs font-medium uppercase tracking-[0.2em] hover:text-primary transition-colors", location === "/become-partner" ? "text-primary" : (scrolled ? "text-foreground/70" : "text-white/70"))}>
             Diventa nostro partner
           </Link>
+          <Link href="/limousine-rental" className={cn("text-xs font-medium uppercase tracking-[0.2em] hover:text-primary transition-colors", location === "/limousine-rental" ? "text-primary" : (scrolled ? "text-foreground/70" : "text-white/70"))}>
+            Noleggio Limousine
+          </Link>
           <a 
             href="/#contact" 
             onClick={(e) => {
