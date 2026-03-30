@@ -2,7 +2,16 @@ import { db } from "./storage";
 import { cars, carImages } from "@shared/schema";
 import { sql } from "drizzle-orm";
 import { seedCars, seedImages } from "./seed-data";
-import { log } from "./index";
+
+function seedLog(message: string) {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+  console.log(`${formattedTime} [seed] ${message}`);
+}
 
 export async function seedProductionDatabase() {
   try {
@@ -13,7 +22,7 @@ export async function seedProductionDatabase() {
       return;
     }
 
-    log("Production database is empty, seeding data...", "seed");
+    seedLog("Production database is empty, seeding data...");
 
     for (const car of seedCars) {
       await db.execute(sql`
@@ -36,8 +45,8 @@ export async function seedProductionDatabase() {
     await db.execute(sql`SELECT setval(pg_get_serial_sequence('cars', 'id'), ${maxCarId})`);
     await db.execute(sql`SELECT setval(pg_get_serial_sequence('car_images', 'id'), ${maxImageId})`);
 
-    log(`Seeded ${seedCars.length} cars and ${seedImages.length} images`, "seed");
+    seedLog(`Seeded ${seedCars.length} cars and ${seedImages.length} images`);
   } catch (error) {
-    log(`Seed error: ${error}`, "seed");
+    seedLog(`Seed error: ${error}`);
   }
 }

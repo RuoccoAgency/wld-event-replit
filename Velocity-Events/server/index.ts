@@ -3,6 +3,7 @@ import cors from "cors";
 import { createServer } from "http";
 import { registerRoutes } from "./routes";
 import { seedProductionDatabase } from "./seed";
+import { serveStatic } from "./static";
 
 
 const app = express();
@@ -89,7 +90,13 @@ app.get("/health", (_req, res) => res.status(200).send("ok"));
 
   await registerRoutes(httpServer, app);
 
-  // Error handler
+  if (app.get("env") === "development") {
+    const { setupVite } = await import("./vite");
+    await setupVite(httpServer, app);
+  } else {
+    serveStatic(app);
+  }
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -97,8 +104,7 @@ app.get("/health", (_req, res) => res.status(200).send("ok"));
     console.error(err);
   });
 
-  // Railway usa sempre PORT
-  const port = parseInt(process.env.PORT || "3000", 10);
+  const port = parseInt(process.env.PORT || "5000", 10);
 
   httpServer.listen({ port, host: "0.0.0.0" }, () => {
     log(`API serving on port ${port}`);
