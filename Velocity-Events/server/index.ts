@@ -1,11 +1,9 @@
 import express, { type Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { createServer } from "http";
-<<<<<<< HEAD
 import { registerRoutes } from "./routes";
-=======
 import { seedProductionDatabase } from "./seed";
->>>>>>> 5144235 (Add automatic database seeding for initial car and image data)
+
 
 const app = express();
 const httpServer = createServer(app);
@@ -52,7 +50,8 @@ function log(message: string, source = "express") {
     second: "2-digit",
     hour12: true,
   });
-  console.log(${formattedTime} [${source}] ${message});
+  console.log(`${formattedTime} [${source}] ${message}`);
+
 }
 
 // Log solo per /api
@@ -71,7 +70,8 @@ app.use((req, res, next) => {
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
-      let logLine = ${req.method} ${path} ${res.statusCode} in ${duration}ms;
+      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+
       if (capturedJsonResponse) logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       log(logLine);
     }
@@ -84,11 +84,9 @@ app.use((req, res, next) => {
 app.get("/health", (_req, res) => res.status(200).send("ok"));
 
 (async () => {
-<<<<<<< HEAD
   // Registra tutte le routes API (es: /api/...)
-=======
   await seedProductionDatabase();
->>>>>>> 5144235 (Add automatic database seeding for initial car and image data)
+
   await registerRoutes(httpServer, app);
 
   // Error handler
@@ -103,6 +101,7 @@ app.get("/health", (_req, res) => res.status(200).send("ok"));
   const port = parseInt(process.env.PORT || "3000", 10);
 
   httpServer.listen({ port, host: "0.0.0.0" }, () => {
-    log(API serving on port ${port});
+    log(`API serving on port ${port}`);
+
   });
 })();
