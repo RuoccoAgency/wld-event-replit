@@ -13,6 +13,9 @@ import CarEditor from "@/pages/admin/car-editor";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 
+import { AnimatePresence } from "framer-motion";
+import { PageTransition } from "@/components/layout/PageTransition";
+
 import EventsPage from "@/pages/events";
 import AboutPage from "@/pages/about";
 import LuxuryAssetRental from "@/pages/luxury-asset-rental";
@@ -30,37 +33,82 @@ function ScrollToTop() {
   return null;
 }
 
-function Router() {
-  return (
-    <>
-      <ScrollToTop />
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/collection" component={CarsCollectionPage} />
-        <Route path="/events" component={EventsPage} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/luxury-rental" component={LuxuryAssetRental} />
-        <Route path="/become-partner" component={BecomePartner} />
-        <Route path="/limousine-rental" component={LimousineRental} />
-        <Route path="/servizi/:slug" component={ServiceDetail} />
-        <Route path="/cars/:slug" component={CarDetailPage} />
-        <Route path="/admin" component={AdminLogin} />
-        <Route path="/admin/cars" component={AdminCarsList} />
-        <Route path="/admin/cars/:id" component={CarEditor} />
-        <Route component={NotFound} />
-      </Switch>
-    </>
-  );
-}
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
+        <CustomCursor />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
+  );
+}
+
+function Router() {
+  const [location] = useLocation();
+  
+  return (
+    <>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
+        <Switch key={location}>
+          <Route path="/">
+            <PageTransition><Home /></PageTransition>
+          </Route>
+          <Route path="/collection">
+            <PageTransition><CarsCollectionPage /></PageTransition>
+          </Route>
+          <Route path="/events">
+            <PageTransition><EventsPage /></PageTransition>
+          </Route>
+          <Route path="/about">
+            <PageTransition><AboutPage /></PageTransition>
+          </Route>
+          <Route path="/luxury-rental">
+            <PageTransition><LuxuryAssetRental /></PageTransition>
+          </Route>
+          <Route path="/become-partner">
+            <PageTransition><BecomePartner /></PageTransition>
+          </Route>
+          <Route path="/limousine-rental">
+            <PageTransition><LimousineRental /></PageTransition>
+          </Route>
+          <Route path="/servizi/:slug">
+            {(params: any) => (
+              <PageTransition>
+                <ServiceDetail params={params} />
+              </PageTransition>
+            )}
+          </Route>
+          <Route path="/cars/:slug">
+            {(params: any) => (
+              <PageTransition>
+                <CarDetailPage params={params} />
+              </PageTransition>
+            )}
+          </Route>
+          <Route path="/admin">
+            <PageTransition><AdminLogin /></PageTransition>
+          </Route>
+          <Route path="/admin/cars">
+            <PageTransition><AdminCarsList /></PageTransition>
+          </Route>
+          <Route path="/admin/cars/:id">
+            {(params: any) => (
+              <PageTransition>
+                <CarEditor params={params} />
+              </PageTransition>
+            )}
+          </Route>
+          <Route>
+            <PageTransition><NotFound /></PageTransition>
+          </Route>
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }
 

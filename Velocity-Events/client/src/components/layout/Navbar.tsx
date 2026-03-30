@@ -64,13 +64,19 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
-        scrolled ? "bg-white/95 backdrop-blur-md border-border/20 py-4 shadow-xl" : "bg-transparent py-6"
+        scrolled ? "glass py-4 shadow-xl" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between relative">
         {/* Logo / Brand */}
-        <Link href="/" className="flex items-center gap-3 z-50">
-          <img src="/logo.png" alt="Wedding Luxury Drive" className="h-12 md:h-14 w-auto" />
+        <Link href="/" className="flex items-center gap-3 z-50 group/logo">
+          <motion.img 
+            src="/logo.png" 
+            alt="Wedding Luxury Drive" 
+            className="h-12 md:h-14 w-auto"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          />
           <span className={cn("text-[10px] md:text-xs font-serif font-medium tracking-[0.2em] transition-colors uppercase whitespace-nowrap", scrolled ? "text-foreground" : "text-white")}>
             Wedding Luxury Drive
           </span>
@@ -101,16 +107,22 @@ export function Navbar() {
                   className="absolute top-full left-1/2 -translate-x-1/2 bg-white shadow-2xl border border-slate-100 p-8 w-[650px] z-50 rounded-sm"
                 >
                   <div className="grid grid-cols-3 gap-x-8 gap-y-3">
-                    {SERVIZI_LIST.map((servizio) => (
-                      <Link 
+                    {SERVIZI_LIST.map((servizio, idx) => (
+                      <motion.div
                         key={servizio.slug}
-                        href={`/servizi/${servizio.slug}`}
-                        className="text-[10px] uppercase tracking-wider text-slate-500 hover:text-primary transition-colors py-1 flex items-center group/link"
-                        onClick={() => setIsServiziOpen(false)}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.02 }}
                       >
-                        <span className="w-0 group-hover/link:w-2 h-[1px] bg-primary mr-0 group-hover/link:mr-2 transition-all"></span>
-                        {servizio.label}
-                      </Link>
+                        <Link 
+                          href={`/servizi/${servizio.slug}`}
+                          className="text-[10px] uppercase tracking-wider text-slate-500 hover:text-primary transition-colors py-1 flex items-center group/link"
+                          onClick={() => setIsServiziOpen(false)}
+                        >
+                          <span className="w-0 group-hover/link:w-2 h-[1px] bg-primary mr-0 group-hover/link:mr-2 transition-all"></span>
+                          {servizio.label}
+                        </Link>
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>

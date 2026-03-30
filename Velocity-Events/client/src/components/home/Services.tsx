@@ -70,8 +70,13 @@ export function Services() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group p-8 border border-border/20 hover:border-primary/30 bg-secondary hover:bg-secondary/80 transition-all duration-500 flex flex-col items-start text-left"
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ 
+                delay: index * 0.1,
+                y: { type: "spring", stiffness: 300, damping: 20 },
+                scale: { duration: 0.2 }
+              }}
+              className="group p-8 border border-border/20 hover:border-primary/30 bg-secondary hover:bg-secondary/80 transition-all duration-500 flex flex-col items-start text-left cursor-pointer"
             >
               <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                 <service.icon className="w-5 h-5" />
