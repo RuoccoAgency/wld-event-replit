@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SERVIZI_DATA } from "@/data/servizi";
 import { CheckCircle2, ChevronRight, Info, Star } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -126,71 +127,78 @@ export default function ServiceDetail() {
               <div className="w-20 h-1 bg-primary/20 mx-auto" />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <div className={cn(
+              "grid grid-cols-1 gap-10 max-w-6xl mx-auto",
+              !data.packages.base && !data.packages.premium ? "md:grid-cols-1 max-w-2xl" : "md:grid-cols-2 lg:grid-cols-3"
+            )}>
               {/* BASE PACKAGE */}
-              <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <Card className="h-full border-none shadow-sm rounded-none hover:shadow-2xl transition-all duration-500 overflow-hidden group">
-                  <div className="h-2 bg-slate-200" />
-                  <CardHeader className="text-center pb-8 pt-12">
-                    <h3 className="text-2xl font-serif mb-2">{data.packages.base.name}</h3>
-                    <p className="text-sm text-muted-foreground font-light italic">{data.packages.base.description}</p>
-                  </CardHeader>
-                  <CardContent className="px-8 pb-12">
-                    <ul className="space-y-4">
-                      {data.packages.base.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-                          <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                  <CardFooter className="px-8 pb-12">
-                    <Button 
-                      onClick={scrollToContact}
-                      variant="outline" 
-                      className="w-full rounded-none border-slate-200 hover:border-primary hover:bg-primary/5 py-6 group"
-                    >
-                      Richiedi base <ChevronRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </motion.div>
+              {data.packages.base && (
+                <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <Card className="h-full border-none shadow-sm rounded-none hover:shadow-2xl transition-all duration-500 overflow-hidden group">
+                    <div className="h-2 bg-slate-200" />
+                    <CardHeader className="text-center pb-8 pt-12">
+                      <h3 className="text-2xl font-serif mb-2">{data.packages.base.name}</h3>
+                      <p className="text-sm text-muted-foreground font-light italic">{data.packages.base.description}</p>
+                    </CardHeader>
+                    <CardContent className="px-8 pb-12">
+                      <ul className="space-y-4">
+                        {data.packages.base.features.map((f, i) => (
+                          <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                            <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                    <CardFooter className="px-8 pb-12">
+                      <Button 
+                        onClick={scrollToContact}
+                        variant="outline" 
+                        className="w-full rounded-none border-slate-200 hover:border-primary hover:bg-primary/5 py-6 group"
+                      >
+                        Richiedi base <ChevronRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              )}
 
               {/* PREMIUM PACKAGE */}
-              <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                <Card className="h-full border-none shadow-xl rounded-none hover:shadow-2xl transition-all duration-500 overflow-hidden relative group">
-                  <div className="h-2 bg-primary" />
-                  <div className="absolute top-6 right-6">
-                    <Star size={24} className="text-primary fill-primary/20" />
-                  </div>
-                  <CardHeader className="text-center pb-8 pt-12">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary mb-2 block">Il più scelto</span>
-                    <h3 className="text-2xl font-serif mb-2">{data.packages.premium.name}</h3>
-                    <p className="text-sm text-muted-foreground font-light italic">{data.packages.premium.description}</p>
-                  </CardHeader>
-                  <CardContent className="px-8 pb-12">
-                    <ul className="space-y-4">
-                      {data.packages.premium.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-slate-800 font-medium">
-                          <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                  <CardFooter className="px-8 pb-12">
-                    <Button 
-                      onClick={scrollToContact}
-                      className="w-full rounded-none bg-primary text-primary-foreground hover:bg-primary/90 py-6 group shadow-lg shadow-primary/20"
-                    >
-                      Richiedi premium <ChevronRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </motion.div>
+              {data.packages.premium && (
+                <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.2 }}>
+                  <Card className="h-full border-none shadow-xl rounded-none hover:shadow-2xl transition-all duration-500 overflow-hidden relative group">
+                    <div className="h-2 bg-primary" />
+                    <div className="absolute top-6 right-6">
+                      <Star size={24} className="text-primary fill-primary/20" />
+                    </div>
+                    <CardHeader className="text-center pb-8 pt-12">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-primary mb-2 block">Il più scelto</span>
+                      <h3 className="text-2xl font-serif mb-2">{data.packages.premium.name}</h3>
+                      <p className="text-sm text-muted-foreground font-light italic">{data.packages.premium.description}</p>
+                    </CardHeader>
+                    <CardContent className="px-8 pb-12">
+                      <ul className="space-y-4">
+                        {data.packages.premium.features.map((f, i) => (
+                          <li key={i} className="flex items-start gap-3 text-sm text-slate-800 font-medium">
+                            <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                    <CardFooter className="px-8 pb-12">
+                      <Button 
+                        onClick={scrollToContact}
+                        className="w-full rounded-none bg-primary text-primary-foreground hover:bg-primary/90 py-6 group shadow-lg shadow-primary/20"
+                      >
+                        Richiedi premium <ChevronRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              )}
 
-              {/* EXCLUSIVE PACKAGE */}
+              {/* EXCLUSIVE / CUSTOM PACKAGE */}
               <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ delay: 0.4 }}>
                 <Card className="h-full border-none shadow-sm rounded-none hover:shadow-2xl transition-all duration-500 overflow-hidden group">
                   <div className="h-2 bg-slate-900" />
@@ -220,6 +228,7 @@ export default function ServiceDetail() {
                 </Card>
               </motion.div>
             </div>
+
           </div>
         </section>
 
