@@ -36,9 +36,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Arco di palloncini personalizzato", "Confettata tematica", "Gadget ricordo per gli ospiti", "Allestimento completo sala"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Il massimo del lusso e dell'attenzione per un benvenuto indimenticabile.",
-        features: ["Video e foto professionali", "Torta monumentale a tema", "Regali personalizzati premium", "Servizio limousine per la famiglia"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -84,9 +84,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Animatore dedicato", "Candy bar a tema", "Inviti digitali personalizzati", "Backdrop fotografico"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un evento spettacolare per tutta la famiglia.",
-        features: ["Spettacolo bolle di sapone", "Regali personalizzati", "Buffet catering completo", "Video ricordo dell'anno"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -108,9 +108,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Festa a tema", "Dj set o animatore", "Buffet finger food", "Area selfie accessoriata"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un compleanno da star.",
-        features: ["Effetti speciali (fumo/spark)","Open bar analcolico","Catering personalizzato","Trasporto in limousine"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -132,9 +132,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Catering a buffet", "Dj set professionista", "Allestimento luci architetturali", "Servizio Barman"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Il massimo dell'esclusività.",
-        features: ["Private Chef", "Open Bar Premium", "Cantante o band live", "Security e accoglienza VIP"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -180,9 +180,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Angolo foto/social", "Dj set", "Menu personalizzato per ragazzi", "Segnatavolo di design"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un evento prestigioso.",
-        features: ["Viaggio premio (consulenza)", "Party privato esclusivo", "Specialità gastronomiche regionali", "Allestimento luxury completo"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -228,9 +228,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Cena servita", "Dj set celebrativo", "Bomboniere a tema laurea", "Backdrop laureato"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Trionfo totale.",
-        features: ["Private Lounge", "Catering gourmet stellato", "Hostess di accoglienza", "Video celebrativo del percorso"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -252,9 +252,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Allestimento floreale completo", "Foto della proposta", "Torta celebrativa", "Live music (Arpa o Violino)"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un annuncio regale.",
-        features: ["Location castello o villa", "Anello (consulenza orafa)", "Viaggio prepagata (voucher)", "Servizio video cinematografico"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -276,9 +276,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Rinnovo voti (officiante)", "Foto professionali", "Allestimento oro o argento", "Inviti personalizzati"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un omaggio alla vostra storia.",
-        features: ["Viaggio di nozze (bis)", "Documentario biografico", "Private party di lusso", "Gioielli commemorativi"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -300,9 +300,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Limousine o auto d'epoca", "Allestimento location", "Tableau de mariage luxury", "Assistente coordinamento"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Regalità senza compromessi.",
-        features: ["Flotta auto per ospiti VIP", "Jet o Elicottero (opzioni)", "Luxury Wedding Planner", "Servizio h24 dedicato"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -324,9 +324,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Torta di pannolini artistica", "Catering a tema", "Gadget per le amiche", "Arco di palloncini soft"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un evento indimenticabile.",
-        features: ["Soggiorno SPA per la mamma", "Fotografo di maternità", "Party gourmet privato", "Regali neonato premium"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -348,9 +348,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Fumogeni colorati (pro)", "Catering tematico", "Servizio video reazione", "Allestimento luci"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Uno spettacolo mozzafiato.",
-        features: ["Reveal con fuochi d'artificio", "Drone light show (area)", "Event manager dedicato", "Luxury buffet"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -372,9 +372,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Personalizzazioni auto (brand)", "Catering per meeting", "Hostess e Steward", "Sistema audio-video"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Eccellenza corporate.",
-        features: ["Security e Private Driver", "Charter aereo privato", "Location di altissimo profilo", "Regali aziendali di lusso"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -396,9 +396,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Fasci di luce laser", "Dj set energico", "Servizio barman acrobatico", "Pubbliche relazioni locale"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Inaugurazione stellare.",
-        features: ["Testimonial o Influencer", "Copertura stampa dedicata", "Party celebrativo di lusso", "Allestimento scenografico premium"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -420,9 +420,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Attori e figuranti tematici", "Catering scenografico", "Photobooth attrezzato", "Illuminazione tematica"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un mondo a tua scelta.",
-        features: ["Costumi sartoriali privati", "Scenografie cinematografiche", "Artisti circensi o pro", "Luxury menu tematico"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -444,36 +444,109 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Illuminazioni artistiche", "Albero o centrotavola pro", "Sostituzione periodica", "Montaggio e smontaggio inclusi"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Design d'eccellenza stagionale.",
-        features: ["Progettazione architetto d'interni", "Materiali luxury e rari", "Installazioni artistiche", "Manutenzione quotidiana"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
-  "pensionamento": {
-    slug: "pensionamento",
-    title: "Pensionamento",
-    subtitle: "Onorare una carriera, iniziare una nuova libertà.",
-    description: "L'ultimo giorno di lavoro merita un ringraziamento speciale. Celebriamo anni di impegno con gioia.",
-    presentation: "Dalle cerimonie aziendali alle cene private, sottolineiamo l'importanza del percorso lavorativo concluso.",
+  "pool-party": {
+    slug: "pool-party",
+    title: "Pool Party",
+    subtitle: "Divertimento e freschezza a bordo vasca.",
+    description: "L'essenza dell'estate in un party esclusivo. Musica, cocktail e un'atmosfera vibrante per i tuoi momenti migliori.",
+    presentation: "Trasformiamo ogni piscina in una location da sogno, con DJ set, allestimenti galleggianti e servizio bar d'eccellenza.",
     packages: {
       base: {
         name: "Pacchetto Base",
-        description: "Saluto cordiale e affettuoso.",
-        features: ["Rinfresco aziendale", "Targa o regalo simbolico", "Discorso commemorativo", "Libro delle firme"]
+        description: "Party pomeridiano tra amici.",
+        features: ["Allestimento area piscina", "Musica lounge", "Drink di benvenuto", "Aperitivo finger food"]
       },
       premium: {
         name: "Pacchetto Premium",
-        description: "Festa per l'inizio del tempo libero.",
-        features: ["Cena con colleghi e familiari", "Video 'Story of my career'", "Musica e intrattenimento", "Torta celebrativa"]
+        description: "Serata completa con DJ set.",
+        features: ["DJ professionista", "Open bar analcolico & cocktail", "Gonfiabili scenografici", "Buffet cena completo"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Un addio memorabile.",
-        features: ["Voucher vacanza lusso", "Auto con conducente per h-fine", "Private event VIP", "Gadget personalizzati hitech"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
+  "funeral-party": {
+    slug: "funeral-party",
+    title: "Funeral Party",
+    subtitle: "Onorare la vita con un sorriso e tanti ricordi.",
+    description: "Una celebrazione della vita per ricordare con gioia chi ha lasciato un segno indelebile nel nostro cuore.",
+    presentation: "Organizziamo eventi commemorativi che celebrano la storia e le passioni della persona cara in un clima di serena condivisione.",
+    packages: {
+      base: {
+        name: "Pacchetto Base",
+        description: "Incontro intimo e delicato.",
+        features: ["Allestimento sobrio", "Musica soffusa", "Catering leggero", "Angolo dei ricordi"]
+      },
+      premium: {
+        name: "Pacchetto Premium",
+        description: "Cerimonia commemorativa completa.",
+        features: ["Presentazione video biografica", "Buffet commemorativo", "Accompagnamento musicale live", "Servizio cerimoniale"]
+      },
+      exclusive: {
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
+      }
+    }
+  },
+  "feste-private": {
+    slug: "feste-private",
+    title: "Feste Private",
+    subtitle: "L'esclusività di un evento pensato solo per te.",
+    description: "Qualunque sia l'occasione, rendiamo la tua festa privata un evento unico, riservato e curato in ogni dettaglio.",
+    presentation: "Dalle cene intime ai grandi party a sorpresa, mettiamo a disposizione la nostra esperienza per creare l'atmosfera perfetta.",
+    packages: {
+      base: {
+        name: "Pacchetto Base",
+        description: "Festa privata essenziale.",
+        features: ["Allestimento sala privata", "Sottofondo musicale", "Torta personalizzata", "Drink card"]
+      },
+      premium: {
+        name: "Pacchetto Premium",
+        description: "Evento completo e dinamico.",
+        features: ["DJ Set o band", "Catering a buffet", "Allestimento a tema", "Servizio barman"]
+      },
+      exclusive: {
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
+      }
+    }
+  },
+  "party-su-imbarcazioni": {
+    slug: "party-su-imbarcazioni",
+    title: "Party su Imbarcazioni",
+    subtitle: "L'eleganza del mare per i tuoi eventi più chic.",
+    description: "Festeggia in mezzo alle onde. Un'esperienza indimenticabile tra charter di lusso e panorami mozzafiato.",
+    presentation: "Coordiniamo party su yacht o imbarcazioni d'epoca, garantendo sicurezza, stile e un servizio di bordo impeccabile.",
+    packages: {
+      base: {
+        name: "Pacchetto Base",
+        description: "Aperitivo al tramonto.",
+        features: ["Noleggio barca (3 ore)", "Aperitivo a bordo", "Musica lounge", "Brindisi di benvenuto"]
+      },
+      premium: {
+        name: "Pacchetto Premium",
+        description: "Cruise Party serale.",
+        features: ["Yacht privato (6 ore)", "Cena a base di pesce", "Open Bar", "DJ set on board"]
+      },
+      exclusive: {
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
+      }
+    }
+  },
+
   "addio-al-nubilato": {
     slug: "addio-al-nubilato",
     title: "Addio al Nubilato",
@@ -492,9 +565,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["2 ore in Limousine Rosa", "Open bar a bordo", "Servizio foto professionale", "Ingresso VIP cena spettacolo"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Weekend da sogno.",
-        features: ["Volo privato per mete beach", "Luxury Villa con piscina", "Private Chef per brunch", "Programma attività segreto"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -516,9 +589,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Noleggio supercar 1 ora", "Tour in Limousine SUV", "Ingresso VIP discoteca", "Hotel centro città"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "L'ultima missione libera.",
-        features: ["Charter per Las Vegas o Ibiza", "Esperienza Yacht privata", "Consulente vita notturna", "Security privata dedicata"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   },
@@ -540,9 +613,9 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
         features: ["Carro funebre di lusso (Mercedes/Maserati)", "Allestimento floreale premium", "Supporto psicologico", "Necrologi stampa"]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Eccellenza nel ricordo.",
-        features: ["Accoglienza autorità", "Streaming cerimonia", "Archivio digitale commemorativo", "Allestimenti monumentali"]
+        name: "Pacchetto su Misura",
+        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
+        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
       }
     }
   }

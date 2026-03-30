@@ -23,7 +23,11 @@ const SERVIZI_LIST = [
   { label: "Inaugurazioni", slug: "inaugurazioni" },
   { label: "Feste a tema", slug: "feste-a-tema" },
   { label: "Allestimenti stagionali", slug: "allestimenti-stagionali" },
-  { label: "Pensionamento", slug: "pensionamento" },
+  { label: "Pool Party", slug: "pool-party" },
+  { label: "Funeral Party", slug: "funeral-party" },
+  { label: "Feste Private", slug: "feste-private" },
+  { label: "Party su imbarcazioni", slug: "party-su-imbarcazioni" },
+
   { label: "Addio al nubilato", slug: "addio-al-nubilato" },
   { label: "Addio al celibato", slug: "addio-al-celibato" },
   { label: "Funerale", slug: "funerale" }
