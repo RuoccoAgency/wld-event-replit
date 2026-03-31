@@ -47,24 +47,20 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isHome = location === "/";
+  const showGlass = scrolled || !isHome;
+
   // Close menus on location change
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsServiziOpen(false);
   }, [location]);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
-        scrolled ? "glass py-4 shadow-xl" : "bg-transparent py-6"
+        showGlass ? "glass py-4 shadow-xl" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between relative">
@@ -77,7 +73,7 @@ export function Navbar() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
-          <span className={cn("text-[10px] md:text-xs font-serif font-medium tracking-[0.2em] transition-colors uppercase whitespace-nowrap", scrolled ? "text-foreground" : "text-white")}>
+          <span className={cn("text-[10px] md:text-xs font-serif font-medium tracking-[0.2em] transition-colors uppercase whitespace-nowrap", showGlass ? "text-foreground" : "text-white")}>
             Wedding Luxury Drive
           </span>
         </Link>
@@ -92,7 +88,7 @@ export function Navbar() {
           >
             <button className={cn(
               "flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-primary py-4",
-              scrolled ? "text-foreground/80" : "text-white/80"
+              showGlass ? "text-foreground/80" : "text-white/80"
             )}>
               Servizi <ChevronDown size={14} className={cn("transition-transform duration-300", isServiziOpen ? "rotate-180" : "")} />
             </button>
@@ -130,22 +126,22 @@ export function Navbar() {
             </AnimatePresence>
           </div>
 
-          <Link href="/collection" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/collection" ? "text-primary border-b border-primary/30" : (scrolled ? "text-foreground/80" : "text-white/80"))}>
+          <Link href="/collection" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/collection" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
             Collezione
           </Link>
-          <Link href="/events" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/events" ? "text-primary border-b border-primary/30" : (scrolled ? "text-foreground/80" : "text-white/80"))}>
+          <Link href="/events" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/events" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
             Eventi
           </Link>
-          <Link href="/luxury-rental" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/luxury-rental" ? "text-primary border-b border-primary/30" : (scrolled ? "text-foreground/80" : "text-white/80"))}>
+          <Link href="/luxury-rental" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/luxury-rental" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
             Noleggio Lusso
           </Link>
-          <Link href="/limousine-rental" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/limousine-rental" ? "text-primary border-b border-primary/30" : (scrolled ? "text-foreground/80" : "text-white/80"))}>
+          <Link href="/limousine-rental" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/limousine-rental" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
              Limousine
           </Link>          
-          <Link href="/become-partner" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/become-partner" ? "text-primary border-b border-primary/30" : (scrolled ? "text-foreground/80" : "text-white/80"))}>
+          <Link href="/become-partner" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/become-partner" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
             Partners
           </Link>
-          <Link href="/about" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/about" ? "text-primary border-b border-primary/30" : (scrolled ? "text-foreground/80" : "text-white/80"))}>
+          <Link href="/about" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/about" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
             Contatti
           </Link>
         </div>
@@ -158,7 +154,7 @@ export function Navbar() {
           
           {/* MOBILE TOGGLE */}
           <button 
-            className={cn("lg:hidden p-2 rounded-full transition-colors", scrolled ? "text-foreground" : "text-white")}
+            className={cn("lg:hidden p-2 rounded-full transition-colors", showGlass ? "text-foreground" : "text-white")}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

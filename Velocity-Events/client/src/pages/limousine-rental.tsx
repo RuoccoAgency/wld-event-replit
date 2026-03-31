@@ -54,7 +54,7 @@ export default function LimousineRental() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
-      <main className="pt-24 uppercase-none">
+      <main className="uppercase-none">
         {/* HERO SECTION */}
         <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">

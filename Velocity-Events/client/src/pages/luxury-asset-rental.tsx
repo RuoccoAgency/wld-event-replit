@@ -105,7 +105,7 @@ export default function LuxuryAssetRental() {
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
       
-      <main className="pt-24 overflow-hidden">
+      <main className="overflow-hidden">
         {/* HERO SECTION */}
         <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">

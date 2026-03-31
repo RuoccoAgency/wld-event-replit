@@ -44,7 +44,7 @@ export default function ServiceDetail() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
-      <main className="pt-24 uppercase-none">
+      <main className="uppercase-none">
         {/* HERO SECTION */}
         <section className="relative py-32 bg-slate-900 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
