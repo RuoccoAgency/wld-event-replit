@@ -59,7 +59,16 @@ export function BookingForm() {
             <div className="space-y-4 text-sm text-foreground/80 font-light">
               <p className="flex items-center gap-3"><span className="text-primary w-20 uppercase text-xs tracking-widest">Telefono</span> 081 1878 9724</p>
               <p className="flex items-center gap-3"><span className="text-primary w-20 uppercase text-xs tracking-widest">Email</span> info@luxuryweddingcars.it</p>
-              <p className="flex items-center gap-3"><span className="text-primary w-20 uppercase text-xs tracking-widest">Indirizzo</span> Piazza J. Kennedy, 25 – 80019 Qualiano (NA)</p>
+              <div className="flex items-start gap-3">
+                <span className="text-primary w-20 uppercase text-xs tracking-widest mt-1">Sedi</span>
+                <div className="flex-1 space-y-2">
+                  <p>• Via Innsbruck, 27/C – 39100 Bolzano (BZ)</p>
+                  <p>• Piazza J. Kennedy, 25 – 80019 Qualiano (NA)</p>
+                  <p>• Via Orazio, 20/22 – 80122 Napoli</p>
+                  <p>• Via campana 2/A – Quarto (NA) 80010</p>
+                  <p className="text-xs text-muted-foreground pt-1 italic">Presenti anche a Barcelona, Tenerife e Madrid</p>
+                </div>
+              </div>
             </div>
           </motion.div>
 
