@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { BookingForm } from "@/components/contact/BookingForm";
 import { cars as staticCars } from "@/data/cars";
 import type { Car, CarImage } from "@/types/schema";
 
@@ -173,6 +174,7 @@ export default function CarsCollectionPage() {
           )}
         </div>
       </div>
+      <BookingForm />
       <Footer />
     </div>
   );

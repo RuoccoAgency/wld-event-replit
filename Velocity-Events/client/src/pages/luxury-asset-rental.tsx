@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { BookingForm } from "@/components/contact/BookingForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -32,7 +33,7 @@ const categories = [
   {
     title: "Yacht",
     description: "Scivola sulle onde a bordo di imbarcazioni magnifiche, dotate di ogni comfort immaginabile.",
-    image: "https://images.unsplash.com/photo-1567899832328-3c4b13bef307?auto=format&fit=crop&q=80&w=800",
+    image: "/luxury_yacht_mediterranean_1774971768830.png",
     icon: Anchor
   },
   {
@@ -363,6 +364,7 @@ export default function LuxuryAssetRental() {
         </section>
       </main>
       
+      <BookingForm />
       <Footer />
     </div>
   );

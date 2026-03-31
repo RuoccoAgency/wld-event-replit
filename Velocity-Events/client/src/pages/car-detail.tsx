@@ -2,6 +2,7 @@ import { useRoute } from "wouter";
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { BookingForm } from "@/components/contact/BookingForm";
 import { CarDetailView } from "@/components/cars/CarDetailView";
 import NotFound from "@/pages/not-found";
 import { cars as staticCars } from "@/data/cars";
@@ -83,6 +84,7 @@ export default function CarDetailPage() {
     <>
       <Navbar />
       <CarDetailView car={car} />
+      <BookingForm />
       <Footer />
     </>
   );

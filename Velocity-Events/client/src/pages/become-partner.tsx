@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { BookingForm } from "@/components/contact/BookingForm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -300,6 +301,7 @@ export default function BecomePartner() {
         </section>
       </main>
       
+      <BookingForm />
       <Footer />
     </div>
   );

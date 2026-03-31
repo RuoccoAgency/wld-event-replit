@@ -2,6 +2,7 @@ import { useRoute, Link } from "wouter";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { BookingForm } from "@/components/contact/BookingForm";
 import { Button } from "@/components/ui/button";
 import { SERVIZI_DATA } from "@/data/servizi";
 import { CheckCircle2, ChevronRight, Info, Star } from "lucide-react";
@@ -252,6 +253,7 @@ export default function ServiceDetail() {
         </section>
       </main>
       
+      <BookingForm />
       <Footer />
     </div>
   );

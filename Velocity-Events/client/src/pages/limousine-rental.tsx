@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { BookingForm } from "@/components/contact/BookingForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
@@ -11,29 +12,42 @@ import {
   ArrowRight,
   Sparkles,
   Music,
-  GlassWater
+  GlassWater,
+  X,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
-const limousineModels = [
+const fleet = [
   {
-    name: "Classic Lincoln Town Car",
-    description: "L'eleganza intramontabile per matrimoni ed eventi di classe. Interni in pelle e comfort assoluto.",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800",
-    capacity: "8 persone"
+    name: "Hover Limousine",
+    description: "Sperimenta l'eleganza moderna con la nostra Hover Limousine, perfetta per ogni cerimonia ed evento speciale.",
+    images: [
+      "/images/limousine/hover-limo/hover-limo-3.jpg",
+      "/images/limousine/hover-limo/hover-limo-4.jpg",
+      "/images/limousine/hover-limo/hover-limo-2.jpg",
+      "/images/limousine/hover-limo/hover-limo-1.jpg",
+      "/images/limousine/hover-limo/hover-limo-5.jpg",
+    ]
   },
   {
-    name: "Hummer H2 Stretch",
-    description: "Imponente e audace. Ideale per addii al celibato/nubilato e feste indimenticabili.",
-    image: "https://images.unsplash.com/photo-1517672651691-24622a91b52e?auto=format&fit=crop&q=80&w=800",
-    capacity: "12-16 persone"
-  },
-  {
-    name: "Limousine Party Bus",
-    description: "Un vero club su ruote. Sistema audio premium, luci LED e spazio per ballare.",
-    image: "https://images.unsplash.com/photo-1562920618-97427878696d?auto=format&fit=crop&q=80&w=800",
-    capacity: "20+ persone"
+    name: "Hummer H2 Limousine",
+    description: "Imponente, audace e lussuosa. L'Hummer H2 è il massimo per feste esclusive e ingressi indimenticabili.",
+    images: [
+      "/images/limousine/hummer-limo/hummer-limo-1.jpg",
+      "/images/limousine/hummer-limo/hummer-limo-2.jpg",
+      "/images/limousine/hummer-limo/hummer-interior-1.jpg",
+      "/images/limousine/hummer-limo/hummer-interior-2.jpg",
+      "/images/limousine/hummer-limo/hummer-limo-3.jpg",
+      "/images/limousine/hummer-limo/hummer-limo-4.jpg",
+      "/images/limousine/hummer-limo/hummer-limo-5.jpg",
+    ]
   }
 ];
+
+
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -41,6 +55,10 @@ const fadeIn = {
 };
 
 export default function LimousineRental() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeGallery, setActiveGallery] = useState<string[]>([]);
+
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
     if (contactSection) {
@@ -48,6 +66,22 @@ export default function LimousineRental() {
     } else {
       window.location.href = "/#contact";
     }
+  };
+
+  const openLightbox = (images: string[], index: number) => {
+    setActiveGallery(images);
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const nextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % activeGallery.length);
+  };
+
+  const prevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + activeGallery.length) % activeGallery.length);
   };
 
   return (
@@ -59,11 +93,11 @@ export default function LimousineRental() {
         <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2000" 
+              src="/images/limousine/hover-limo/hover-limo-3.jpg" 
               alt="Limousine luxury" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
+            <div className="absolute inset-0 bg-black/50" />
           </div>
           
           <div className="container mx-auto px-6 relative z-10 text-center text-white">
@@ -136,49 +170,50 @@ export default function LimousineRental() {
           </div>
         </section>
 
-        {/* FLEET SECTION */}
+        {/* GALLERY SECTION */}
         <section className="py-24 bg-slate-50">
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-serif mb-4">La Nostra Flotta</h2>
               <p className="text-muted-foreground font-light max-w-2xl mx-auto italic">
-                “Scegli il modello che meglio si adatta alla tua occasione.”
+                “Scegli l'eccellenza per la tua prossima destinazione.”
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              {limousineModels.map((limo, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2 }}
-                >
-                  <Card className="rounded-none border-none overflow-hidden shadow-sm hover:shadow-xl transition-all group">
-                    <div className="relative h-64 overflow-hidden">
+            {fleet.map((vehicle, vIndex) => (
+              <div key={vIndex} className={vIndex > 0 ? "mt-24" : ""}>
+                <div className="mb-10">
+                  <h3 className="text-2xl font-serif mb-3 text-primary">{vehicle.name}</h3>
+                  <p className="text-muted-foreground font-light max-w-3xl">{vehicle.description}</p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {vehicle.images.map((src, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="relative aspect-[4/3] overflow-hidden group cursor-pointer shadow-lg bg-white"
+                      onClick={() => openLightbox(vehicle.images, i)}
+                    >
                       <img 
-                        src={limo.image} 
-                        alt={limo.name} 
+                        src={src} 
+                        alt={`${vehicle.name} detail ${i + 1}`} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute top-4 right-4 bg-white/90 backdrop-blur p-2 px-4 shadow text-[10px] font-bold uppercase tracking-widest text-foreground">
-                        Fino a {limo.capacity}
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+                          <Sparkles size={20} />
+                        </div>
                       </div>
-                    </div>
-                    <CardContent className="p-8">
-                      <h3 className="text-xl font-serif mb-4 group-hover:text-primary transition-colors">{limo.name}</h3>
-                      <p className="text-sm text-muted-foreground font-light leading-relaxed mb-6 h-12">
-                        {limo.description}
-                      </p>
-                      <Button variant="outline" className="w-full rounded-none border-primary/20 hover:border-primary hover:bg-primary/5 group/btn">
-                        Dettagli Flotta <ArrowRight size={14} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -206,11 +241,11 @@ export default function LimousineRental() {
 
         {/* FINAL CTA */}
         <section className="py-24 bg-slate-950 text-white text-center rounded-none overflow-hidden relative">
-          <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 opacity-20">
             <img 
-              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2000" 
-              className="w-full h-full object-cover grayscale" 
-              alt="Background texture"
+              src="/images/limousine/hover-limo/hover-limo-4.jpg" 
+              className="w-full h-full object-cover" 
+              alt="Background context"
             />
           </div>
           <div className="container mx-auto px-6 relative z-10">
@@ -228,7 +263,60 @@ export default function LimousineRental() {
           </div>
         </section>
       </main>
-      
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-8"
+            onClick={() => setLightboxOpen(false)}
+          >
+            <button 
+              className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-[110]"
+              onClick={() => setLightboxOpen(false)}
+            >
+              <X size={32} />
+            </button>
+            
+            <button 
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-[110]"
+              onClick={prevImage}
+            >
+              <ChevronLeft size={48} />
+            </button>
+            
+            <button 
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors z-[110]"
+              onClick={nextImage}
+            >
+              <ChevronRight size={48} />
+            </button>
+            
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-5xl w-full aspect-video md:aspect-auto md:h-[80vh] flex items-center justify-center pointer-events-none"
+            >
+              <img 
+                src={activeGallery[currentImageIndex]} 
+                className="max-w-full max-h-full object-contain pointer-events-auto"
+                alt="Limousine full view"
+              />
+            </motion.div>
+            
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm font-light tracking-widest">
+              {currentImageIndex + 1} / {activeGallery.length}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <BookingForm />
       <Footer />
     </div>
   );
