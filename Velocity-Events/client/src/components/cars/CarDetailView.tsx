@@ -202,7 +202,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                 </Button>
                 <Button 
                   variant="ghost"
-                  onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
+                  onClick={() => window.open('https://wa.me/3908117767502', '_blank')}
                   className="text-slate-400 hover:text-[#8CBFAF] uppercase tracking-[0.2em] text-[10px] font-bold"
                 >
                   WhatsApp <ArrowRight className="ml-2 w-3 h-3" />
@@ -340,7 +340,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                   </ul>
 
                   <Button 
-                    onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
+                    onClick={() => window.open('https://wa.me/3908117767502', '_blank')}
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-bold uppercase tracking-widest py-8 text-xs shadow-[0_0_30px_rgba(22,163,74,0.3)]"
                   >
                     Inizia Conversazione
