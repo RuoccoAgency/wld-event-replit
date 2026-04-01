@@ -20,34 +20,33 @@ import {
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
+
 const fleet = [
   {
     name: "Hover Limousine",
-    description: "Sperimenta l'eleganza moderna con la nostra Hover Limousine, perfetta per ogni cerimonia ed evento speciale.",
+    description: "Sperimenta l'eleganza moderna con la nostra Hover Limousine. Con i suoi interni raffinati e il design distintivo, è la scelta d'elezione per matrimoni, cerimonie di lusso e ingressi indimenticabili.",
     images: [
+      "/images/limousine/hover-limo/hover-limo-1.jpg",
+      "/images/limousine/hover-limo/hover-limo-2.jpg",
       "/images/limousine/hover-limo/hover-limo-3.jpg",
       "/images/limousine/hover-limo/hover-limo-4.jpg",
-      "/images/limousine/hover-limo/hover-limo-2.jpg",
-      "/images/limousine/hover-limo/hover-limo-1.jpg",
       "/images/limousine/hover-limo/hover-limo-5.jpg",
     ]
   },
   {
     name: "Hummer H2 Limousine",
-    description: "Imponente, audace e lussuosa. L'Hummer H2 è il massimo per feste esclusive e ingressi indimenticabili.",
+    description: "Imponente, audace e iconica. La nostra Hummer H2 Limousine è il massimo dell'esclusività per feste indimenticabili, addii al celibato/nubilato e tour notturni di grande impatto.",
     images: [
       "/images/limousine/hummer-limo/hummer-limo-1.jpg",
       "/images/limousine/hummer-limo/hummer-limo-2.jpg",
-      "/images/limousine/hummer-limo/hummer-interior-1.jpg",
-      "/images/limousine/hummer-limo/hummer-interior-2.jpg",
       "/images/limousine/hummer-limo/hummer-limo-3.jpg",
       "/images/limousine/hummer-limo/hummer-limo-4.jpg",
       "/images/limousine/hummer-limo/hummer-limo-5.jpg",
+      "/images/limousine/hummer-limo/hummer-limo-6.jpg",
+      "/images/limousine/hummer-limo/hummer-limo-7.jpg",
     ]
   }
 ];
-
-
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -93,7 +92,7 @@ export default function LimousineRental() {
         <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="/images/limousine/hover-limo/hover-limo-3.jpg" 
+              src="/images/limousine/hover-limo/hover-limo-5.jpg" 
               alt="Limousine luxury" 
               className="w-full h-full object-cover"
             />
@@ -170,20 +169,17 @@ export default function LimousineRental() {
           </div>
         </section>
 
-        {/* GALLERY SECTION */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-serif mb-4">La Nostra Flotta</h2>
-              <p className="text-muted-foreground font-light max-w-2xl mx-auto italic">
-                “Scegli l'eccellenza per la tua prossima destinazione.”
-              </p>
-            </div>
-            
+        {/* FLEET SECTION */}
+        <section className="py-24 bg-slate-50" id="fleet-gallery">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl font-serif mb-4">La Nostra Flotta</h2>
+            <p className="text-muted-foreground font-light max-w-2xl mx-auto italic mb-12">
+              “Scegli il modello che meglio si adatta alla tua occasione.”
+            </p>
             {fleet.map((vehicle, vIndex) => (
               <div key={vIndex} className={vIndex > 0 ? "mt-24" : ""}>
-                <div className="mb-10">
-                  <h3 className="text-2xl font-serif mb-3 text-primary">{vehicle.name}</h3>
+                <div className="mb-10 text-center md:text-left">
+                  <h3 className="text-2xl font-serif mb-3 text-primary uppercase tracking-wider">{vehicle.name}</h3>
                   <p className="text-muted-foreground font-light max-w-3xl">{vehicle.description}</p>
                 </div>
                 
@@ -195,7 +191,7 @@ export default function LimousineRental() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
-                      className="relative aspect-[4/3] overflow-hidden group cursor-pointer shadow-lg bg-white"
+                      className="relative aspect-[4/3] overflow-hidden group cursor-pointer shadow-lg bg-white border border-slate-100"
                       onClick={() => openLightbox(vehicle.images, i)}
                     >
                       <img 
@@ -203,7 +199,7 @@ export default function LimousineRental() {
                         alt={`${vehicle.name} detail ${i + 1}`} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
                           <Sparkles size={20} />
@@ -214,8 +210,10 @@ export default function LimousineRental() {
                 </div>
               </div>
             ))}
+
           </div>
         </section>
+
 
         {/* TRUST SECTION */}
         <section className="py-24 bg-white">
