@@ -116,71 +116,68 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-slate-950 uppercase-none">
-      {/* 1. REFINED HERO SECTION */}
-      <section className="relative min-h-[calc(100vh-88px)] flex flex-col lg:flex-row bg-white overflow-hidden">
-        {/* Left: Dynamic Car Visual */}
-        <div className="w-full lg:w-[60%] h-[40vh] lg:h-auto relative overflow-hidden">
+    <div className="min-h-screen bg-white text-slate-900 uppercase-none">
+      {/* 1. BOUTIQUE OVERLAY HERO */}
+      <section className="relative h-[calc(100vh-88px)] w-full overflow-hidden flex items-center justify-center lg:justify-end bg-slate-950 px-6 lg:px-20">
+        {/* Full Background Image */}
+        <div className="absolute inset-0 z-0">
           <motion.img 
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.8, ease: "easeOut" }}
+            transition={{ duration: 2.2, ease: "easeOut" }}
             src={galleryImages[0]} 
             alt={car.title} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-70 lg:opacity-90"
           />
-          {/* Subtle gradient for depth */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent hidden lg:block" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent lg:hidden" />
         </div>
 
-        {/* Right: The Content Card */}
-        <div className="w-full lg:w-[40%] flex items-center bg-white z-20">
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="w-full p-10 lg:p-24 lg:-ml-24 bg-white shadow-[-40px_0_80px_rgba(0,0,0,0.03)] relative h-full flex flex-col justify-center"
-          >
-            {/* Elegant accent border box overlay */}
-            <div className="absolute inset-0 border border-gold/10 -m-8 pointer-events-none hidden lg:block" style={{ borderColor: 'rgba(197, 160, 89, 0.12)' }} />
-            
-            <div className="space-y-8 relative">
-              <span className="text-[11px] font-bold uppercase tracking-[0.6em] text-[#C5A059] block mb-2">
-                Luxury Car Selection
-              </span>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif text-slate-900 leading-[1.1] tracking-tight uppercase">
-                {car.brand}<br />
-                {car.model.split(' ').map((part, i) => (
-                  <span key={i} className="block">{part}</span>
-                ))}
-              </h1>
-              
-              <div className="w-16 h-[1px] bg-[#C5A059]" />
-              
-              <p className="text-base text-slate-500 font-light leading-relaxed max-w-sm">
-                {car.description || "Eccellenza senza compromessi per i vostri arrivi più prestigiosi."}
-              </p>
-              
-              <div className="pt-8 flex flex-col sm:flex-row gap-6">
-                <Button 
-                  onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  size="lg"
-                  className="rounded-none bg-slate-900 text-white hover:bg-primary px-12 py-8 uppercase tracking-widest text-xs font-bold transition-all shadow-xl"
-                >
-                  Richiedi Ora
-                </Button>
-                <button 
-                  onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
-                  className="flex items-center gap-3 text-slate-400 hover:text-primary transition-colors uppercase tracking-[0.2em] text-[10px] font-bold py-4"
-                >
-                  <MessageCircle size={18} className="text-green-500" /> WhatsApp Direct
-                </button>
-              </div>
-            </div>
+        {/* Decorative Gold Frame (Behind the card) */}
+        <div className="absolute top-[15%] right-[5%] bottom-[15%] left-[55%] border-t border-r border-[#C5A059] opacity-40 z-10 hidden lg:block pointer-events-none" />
 
-            {/* Signature Gold Arrow Box */}
-            <div className="absolute bottom-0 right-0 lg:bottom-10 lg:right-10 bg-[#C5A059] w-14 h-14 flex items-center justify-center text-white cursor-pointer hover:bg-slate-900 transition-all shadow-2xl z-30"
+        {/* The White Content Card */}
+        <div className="relative z-20 w-full max-w-xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+            className="bg-white p-10 lg:p-16 shadow-[0_30px_60px_rgba(0,0,0,0.2)] relative"
+          >
+            {/* Elegant Subtitle */}
+            <span className="text-[10px] font-bold uppercase tracking-[0.8em] text-[#C5A059] block mb-8">
+              {car.brand.includes("Bentley") || car.brand.includes("Ferrari") ? "SPORTCAR" : "LUXURY CAR"}
+            </span>
+            
+            {/* High-Impact Title */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-sans font-black text-slate-900 leading-[1.05] mb-8 tracking-tighter uppercase">
+              {car.brand}<br />
+              <span className="text-slate-800 opacity-90">{car.model}</span>
+            </h1>
+            
+            <div className="w-16 h-[2px] bg-[#C5A059] mb-10" />
+            
+            <p className="text-base text-slate-500 font-light leading-relaxed mb-12 max-w-md">
+              {car.description || "Un'opera d'arte d'ingegneria che ridefinisce il concetto di performance e lusso estremo."}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Button 
+                onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
+                size="lg"
+                className="rounded-none bg-slate-900 text-white hover:bg-[#C5A059] px-10 py-7 uppercase tracking-widest text-[10px] font-bold transition-all"
+              >
+                Scopri l'Esclusività
+              </Button>
+              <button 
+                onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
+                className="flex items-center gap-3 text-slate-400 hover:text-primary transition-colors uppercase tracking-[0.2em] text-[9px] font-bold"
+              >
+                <MessageCircle size={16} className="text-green-500" /> WhatsApp
+              </button>
+            </div>
+            
+            {/* The Signature Arrow Box */}
+            <div className="absolute -bottom-6 -right-6 lg:bottom-0 lg:right-0 bg-[#C5A059] w-12 h-12 flex items-center justify-center text-white cursor-pointer hover:bg-slate-900 transition-all z-30"
                 onClick={() => document.getElementById('vehicle-details')?.scrollIntoView({ behavior: 'smooth' })}>
               <ArrowRight className="-rotate-45" size={20} />
             </div>
