@@ -33,7 +33,7 @@ const categories = [
   {
     title: "Yacht",
     description: "Scivola sulle onde a bordo di imbarcazioni magnifiche, dotate di ogni comfort immaginabile.",
-    image: "/luxury_yacht_mediterranean_blue_sea_1775038191896.png",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800",
     icon: Anchor
   },
   {
