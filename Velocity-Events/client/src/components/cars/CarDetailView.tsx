@@ -117,84 +117,83 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
 
   return (
     <div className="min-h-screen bg-white text-slate-950 uppercase-none">
-      {/* 1. HERO SECTION */}
-      {/* 1. NEW HERO SECTION (MATCHING SCREENSHOT) */}
-      <section className="relative min-h-[calc(100vh-88px)] flex flex-col lg:flex-row items-center overflow-hidden bg-white">
-        {/* Left Side: Car Image */}
-        <div className="w-full lg:w-3/5 h-[50vh] lg:h-full relative overflow-hidden bg-slate-100">
-          <motion.img 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            src={galleryImages[0]} 
-            alt={car.title} 
-            className="w-full h-full object-cover"
-          />
-          {/* Subtle gradient to blend into the right side if needed, or just clean cut */}
-          <div className="absolute inset-0 bg-black/5 lg:hidden" />
+      {/* 1. COMPACT HERO SECTION (IMPROVED FIT) */}
+      <section className="relative h-[calc(100vh-100px)] min-h-[600px] flex flex-col lg:flex-row items-center overflow-hidden bg-white">
+        {/* Left Side: Car Image (Optimized Size) */}
+        <div className="w-full lg:w-3/5 h-[45vh] lg:h-full relative overflow-hidden bg-slate-50 flex items-center justify-center p-6 lg:p-12">
+          <motion.div 
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="relative w-full h-full"
+          >
+            <img 
+              src={galleryImages[0]} 
+              alt={car.title} 
+              className="w-full h-full object-contain drop-shadow-2xl"
+            />
+          </motion.div>
+          {/* Subtle decorative background element */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-slate-100/50 rounded-full blur-3xl -z-10" />
         </div>
 
-        {/* Right Side / Overlapping Content Card */}
-        <div className="w-full lg:w-2/5 flex items-center justify-center lg:-ml-16 z-10 p-6 lg:p-0">
+        {/* Right Side: Proportioned Content Card */}
+        <div className="w-full lg:w-2/5 h-full flex items-center justify-center lg:-ml-20 z-10 p-4 lg:p-0">
           <motion.div 
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white p-10 lg:p-16 border border-slate-100 shadow-2xl relative max-w-xl w-full"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="bg-white p-8 lg:p-12 border border-slate-100 shadow-2xl relative max-w-lg w-full flex flex-col justify-center"
           >
-            {/* Outline box accent */}
-            <div className="absolute inset-0 border border-gold/20 -m-4 pointer-events-none hidden lg:block" style={{ borderColor: 'rgba(197, 160, 89, 0.2)' }} />
+            {/* Outline box accent refined */}
+            <div className="absolute inset-0 border border-gold/10 -m-3 pointer-events-none hidden lg:block" style={{ borderColor: 'rgba(197, 160, 89, 0.15)' }} />
             
-            <div className="space-y-6 relative">
+            <div className="space-y-5 relative">
               <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#C5A059] block">
-                {car.brand.includes("Bentley") ? "SPORTCAR" : "LUXURY CAR"}
+                {car.brand.includes("Bentley") || car.brand.includes("Ferrari") ? "SPORTCAR" : "LUXURY CAR"}
               </span>
               
-              <h1 className="text-4xl md:text-6xl font-serif text-slate-900 leading-tight uppercase">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif text-slate-900 leading-tight uppercase tracking-tight">
                 {car.title.split(' ').map((word, i) => (
                   <span key={i} className="block">{word}</span>
                 ))}
               </h1>
               
-              <div className="w-16 h-[1px] bg-gold" style={{ backgroundColor: '#C5A059' }} />
+              <div className="w-12 h-[1px] bg-[#C5A059]" />
               
-              <p className="text-sm md:text-base text-slate-500 font-light leading-relaxed max-w-md">
-                {car.description || "Un'opera d'arte in movimento che ridefinisce il concetto di performance e lusso estremo. Eleganza senza compromessi per i vostri momenti più importanti."}
+              <p className="text-xs md:text-sm text-slate-500 font-light leading-relaxed max-w-sm">
+                {car.description || "Un'opera d'arte d'ingegneria che ridefinisce il concetto di performance e lusso estremo. Eleganza senza compromessi per i vostri momenti più importanti."}
               </p>
               
-              <div className="pt-6 flex gap-4">
+              <div className="pt-4 flex flex-wrap gap-3">
                 <Button 
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
                   variant="outline"
-                  className="rounded-none border-primary text-primary hover:bg-primary hover:text-white px-8 py-6 uppercase tracking-widest text-[10px] font-bold"
+                  className="rounded-none border-primary text-primary hover:bg-primary hover:text-white px-6 py-4 uppercase tracking-widest text-[9px] font-bold"
                 >
                   Richiedi Ora
                 </Button>
                 <Button 
                   variant="ghost"
                   onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
-                  className="text-slate-400 hover:text-primary uppercase tracking-widest text-[10px] font-bold"
+                  className="text-slate-400 hover:text-primary uppercase tracking-widest text-[9px] font-bold"
                 >
                   WhatsApp <ArrowRight className="ml-2 w-3 h-3" />
                 </Button>
               </div>
             </div>
 
-            {/* The Gold Arrow Box from Screenshot */}
-            <div className="absolute -bottom-6 -right-6 lg:bottom-0 lg:right-0 bg-[#C5A059] w-12 h-12 flex items-center justify-center text-white cursor-pointer hover:bg-[#B38D4A] transition-colors"
-                onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}>
-              <ArrowRight className="-rotate-45" size={18} />
+            {/* Compact Gold Arrow Box */}
+            <div className="absolute -bottom-5 -right-5 lg:bottom-0 lg:right-0 bg-[#C5A059] w-10 h-10 flex items-center justify-center text-white cursor-pointer hover:bg-slate-900 transition-colors z-30"
+                onClick={() => document.getElementById('vehicle-details')?.scrollIntoView({ behavior: 'smooth' })}>
+              <ArrowRight className="-rotate-45" size={16} />
             </div>
           </motion.div>
         </div>
 
-        {/* Scroll hint (Optional, keeping site style) */}
-        <div className="absolute bottom-10 right-10 hidden lg:block z-0 opacity-20">
-          <div className="flex items-center gap-4 text-slate-950">
-            <span className="text-[10px] uppercase tracking-[0.4em] font-medium">EXPLORE</span>
-            <div className="w-10 h-[1px] bg-slate-950" />
-            <MousePointer2 size={16} />
-          </div>
+        {/* Minimal Scroll hint */}
+        <div className="absolute bottom-6 right-6 hidden lg:block z-0 opacity-10">
+          <MousePointer2 size={12} />
         </div>
       </section>
 
