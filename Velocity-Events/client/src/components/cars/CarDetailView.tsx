@@ -289,7 +289,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
               {galleryImages.map((src, idx) => (
                 <div 
                   key={idx} 
-                  className="embla__slide flex-[0_0_90%] md:flex-[0_0_45%] lg:flex-[0_0_40%] aspect-[16/10] relative group cursor-pointer overflow-hidden rounded-sm bg-slate-200"
+                  className="embla__slide flex-[0_0_95%] md:flex-[0_0_45%] lg:flex-[0_0_42%] aspect-[4/3] relative group cursor-pointer overflow-hidden rounded-sm bg-slate-200"
                   onClick={() => openLightbox(idx)}
                 >
                   <img 
