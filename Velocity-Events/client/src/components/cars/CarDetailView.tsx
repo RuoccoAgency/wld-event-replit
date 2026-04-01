@@ -117,83 +117,113 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
 
   return (
     <div className="min-h-screen bg-white text-slate-950 uppercase-none">
-      {/* 1. REFINED COMPACT HERO (MATCHING REFERENCE FIT) */}
-      <section className="relative h-[calc(100vh-100px)] min-h-[550px] flex flex-col lg:flex-row items-center justify-center overflow-hidden bg-white px-6 lg:px-12">
-        {/* Left Side: Squared Car Image Container */}
-        <div className="w-full lg:w-1/2 h-[40vh] lg:h-[70%] relative flex items-center justify-center p-8 lg:p-16">
+      {/* 1. PREMIUM SPLIT HERO - BRAND THEME */}
+      <section className="relative h-auto lg:h-[calc(100vh-80px)] min-h-[700px] flex flex-col lg:flex-row items-center overflow-hidden bg-white">
+        {/* Left Half: Dark Perspective (Brand-Infused Dark Green) */}
+        <div className="w-full lg:w-3/5 h-[400px] lg:h-full relative flex items-center justify-center p-8 bg-[#050805]">
           <motion.div 
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative w-full h-full aspect-square flex items-center justify-center"
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="relative w-full h-full flex items-center justify-center"
           >
             <img 
               src={galleryImages[0]} 
               alt={car.title} 
-              className="max-w-full max-h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
+              className="max-w-full max-h-[85%] object-contain drop-shadow-[0_20px_100px_rgba(140,191,175,0.15)] z-20"
             />
           </motion.div>
-          {/* Subtle glow behind car */}
-          <div className="absolute inset-0 bg-radial-gradient from-slate-100/40 via-transparent to-transparent -z-10" />
+          {/* Brand-colored subtle focal point behind car */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2/3 h-2/3 bg-[#8CBFAF]/5 rounded-full blur-[150px] z-10" />
+          
+          {/* Visual Divider Text (Vertical label like premium car sites) */}
+          <div className="absolute left-10 bottom-20 hidden lg:block overflow-hidden h-[100px]">
+            <motion.span 
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="[writing-mode:vertical-lr] text-[10px] font-bold uppercase tracking-[0.6em] text-[#8CBFAF]/30"
+            >
+              Exclusive Fleet
+            </motion.span>
+          </div>
         </div>
 
-        {/* Right Side: Compact content card pulled closer */}
-        <div className="w-full lg:w-1/2 h-full flex items-center justify-start lg:-ml-24 z-10">
+        {/* Right Half: Elegant Context (White) with Overlapping Card */}
+        <div className="w-full lg:w-2/5 h-auto lg:h-full flex items-center justify-center lg:justify-start z-30 p-6 lg:p-0 lg:-ml-32">
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-white p-8 lg:p-14 border border-slate-100 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] relative max-w-lg w-full flex flex-col justify-center"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="bg-white p-8 lg:p-16 border border-slate-100 shadow-[0_45px_100px_-20px_rgba(0,0,0,0.12)] relative max-w-xl w-full flex flex-col justify-center"
           >
-            {/* The Signature Frame Accent */}
-            <div className="absolute inset-0 border border-gold/10 -m-3 pointer-events-none hidden lg:block" style={{ borderColor: 'rgba(197, 160, 89, 0.12)' }} />
+            {/* THE SIGNATURE BORDER ACCENT (Offset frame matching reference) */}
+            <div className="absolute -top-4 -left-4 w-1/3 h-[1px] bg-[#8CBFAF]" />
+            <div className="absolute -top-4 -left-4 w-[1px] h-1/4 bg-[#8CBFAF]" />
+            <div className="absolute -bottom-4 -right-4 w-1/3 h-[1px] bg-[#8CBFAF]" />
+            <div className="absolute -bottom-4 -right-4 w-[1px] h-1/4 bg-[#8CBFAF]" />
             
-            <div className="space-y-4 relative">
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#C5A059] block mb-1">
-                Luxury Car Selection
-              </span>
+            <div className="space-y-6 relative">
+              {/* Category Highlight */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-[1px] bg-[#8CBFAF]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#8CBFAF]">
+                  {car.tags?.split(',')[0] || "LUXURY RENTAL"}
+                </span>
+              </div>
               
-              <h1 className="text-3xl md:text-5xl font-serif text-slate-900 leading-[1.1] uppercase tracking-tighter">
-                {car.brand}<br />
-                {car.model.split(' ').map((word, i) => (
-                  <span key={i} className="block">{word}</span>
-                ))}
+              <h1 className="text-4xl md:text-6xl font-sans font-black text-[#050805] leading-[1] uppercase tracking-[-0.04em] mb-2">
+                <span className="block text-[#8CBFAF]/20 text-[0.4em] tracking-[0.2em] mb-2">{car.brand}</span>
+                {car.model}
               </h1>
               
-              <div className="w-12 h-[1px] bg-[#C5A059] opacity-50" />
-              
-              <p className="text-[13px] text-slate-500 font-light leading-relaxed max-w-sm">
+              <p className="text-[14px] text-slate-500 font-light leading-relaxed max-w-sm">
                 {car.description || "Un'esperienza di guida senza precedenti che ridefinisce il concetto di performance e lusso estremo."}
               </p>
+              
+              {/* Refined Feature Snapshot (Reference has specific specs in the card) */}
+              <div className="grid grid-cols-2 gap-4 py-4 border-y border-slate-50">
+                <div>
+                  <p className="text-[8px] uppercase tracking-widest text-[#8CBFAF] font-bold">Potenza</p>
+                  <p className="text-lg font-bold text-slate-900">{car.powerCv ? `${car.powerCv} CV` : "Richiedi"}</p>
+                </div>
+                <div>
+                  <p className="text-[8px] uppercase tracking-widest text-[#8CBFAF] font-bold">Prestazioni</p>
+                  <p className="text-lg font-bold text-slate-900">{car.specifiche?.accelerazione || "Eccezionali"}</p>
+                </div>
+              </div>
               
               <div className="pt-4 flex flex-wrap gap-4">
                 <Button 
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  variant="outline"
-                  className="rounded-none border-primary text-primary hover:bg-primary hover:text-white px-8 py-5 uppercase tracking-widest text-[9px] font-bold transition-all shadow-md"
+                  className="rounded-none bg-[#8CBFAF] hover:bg-[#5C8F80] text-white px-10 py-7 uppercase tracking-[0.2em] text-[10px] font-black transition-all shadow-lg hover:translate-y-[-2px] active:translate-y-0"
                 >
-                  Richiedi Ora
+                  PRENOTA ORA
                 </Button>
                 <Button 
                   variant="ghost"
                   onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
-                  className="text-slate-400 hover:text-primary uppercase tracking-widest text-[9px] font-bold"
+                  className="text-slate-400 hover:text-[#8CBFAF] uppercase tracking-[0.2em] text-[10px] font-bold"
                 >
                   WhatsApp <ArrowRight className="ml-2 w-3 h-3" />
                 </Button>
               </div>
             </div>
 
-            {/* Signature Compact Arrow Box */}
-            <div className="absolute bottom-0 right-0 lg:bottom-0 lg:right-0 bg-[#C5A059] w-10 h-10 flex items-center justify-center text-white cursor-pointer hover:bg-slate-900 transition-all z-30"
-                onClick={() => document.getElementById('vehicle-details')?.scrollIntoView({ behavior: 'smooth' })}>
-              <ArrowRight className="-rotate-45" size={16} />
+            {/* Signature Compact Navigation / Scroll Indicator */}
+            <div 
+              className="absolute -bottom-8 right-8 bg-[#8CBFAF] w-16 h-16 flex items-center justify-center text-white cursor-pointer hover:bg-[#5C8F80] transition-all z-40 shadow-xl"
+              onClick={() => document.getElementById('vehicle-details')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <ArrowRight className="rotate-90" size={20} />
+              </motion.div>
             </div>
           </motion.div>
         </div>
-
-        {/* Subtle decorative background detail */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-slate-50/30 rounded-full blur-3xl -z-20" />
       </section>
 
       {/* 2. VEHICLE DETAILS SECTION */}
