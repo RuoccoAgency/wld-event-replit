@@ -23,46 +23,56 @@ export function Footer() {
             </div>
           </div>
           
-          <div>
+          <div className="md:col-span-2">
             <h4 className="text-xs uppercase tracking-widest text-primary mb-6">Le Nostre Sedi</h4>
-            <ul className="space-y-6 text-[11px] leading-relaxed text-muted-foreground uppercase tracking-wider">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>Via Innsbruck, 27/C<br />39100 BOLZANO (BZ)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>P.zza J.F. Kennedy, 25<br />80019 Qualiano (NA)</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>Via Orazio, 20/22<br />80122 NAPOLI</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>Via campana 2/A<br />Quarto ( NA) 80010</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>Carrer de Mallorca, 414<br />08013 Barcelona, Spagna</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>Puerto Colon n 59, Planta Baja<br />Adeje, TENERIFE</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span>Paseo de la Castellana n 114<br />28046 MADRID, España</span>
-              </li>
-            </ul>
-             <div className="mt-8 pt-8 border-t border-border/10 space-y-4">
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Phone className="w-4 h-4 text-primary shrink-0" />
-                <span>081 1878 9724</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+              <div>
+                <h5 className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground mb-4 border-b border-border/10 pb-2">Italia</h5>
+                <ul className="space-y-4 text-[11px] leading-relaxed text-muted-foreground uppercase tracking-wider font-light">
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Via Innsbruck, 27/C<br />39100 BOLZANO (BZ)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>P.zza J.F. Kennedy, 25<br />80019 Qualiano (NA)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Via Orazio, 20/22<br />80122 NAPOLI</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Via campana 2/A<br />Quarto (NA) 80010</span>
+                  </li>
+                </ul>
               </div>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Mail className="w-4 h-4 text-primary shrink-0" />
-                <span className="lowercase">info@luxuryweddingcars.it</span>
+              <div>
+                <h5 className="text-[10px] font-bold uppercase tracking-[0.2em] text-foreground mb-4 border-b border-border/10 pb-2">Spagna</h5>
+                <ul className="space-y-4 text-[11px] leading-relaxed text-muted-foreground uppercase tracking-wider font-light">
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Carrer de Mallorca, 414<br />08013 Barcelona, Spain</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Puerto Colon n 59, Planta Baja<br />Adeje, TENERIFE</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                    <span>Paseo de la Castellana n 114<br />28046 MADRID, Spain</span>
+                  </li>
+                </ul>
+                <div className="mt-8 pt-8 border-t border-border/10 space-y-4">
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                    <Phone className="w-4 h-4 text-primary shrink-0" />
+                    <span>081 1878 9724</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                    <Mail className="w-4 h-4 text-primary shrink-0" />
+                    <span className="lowercase">info@luxuryweddingcars.it</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

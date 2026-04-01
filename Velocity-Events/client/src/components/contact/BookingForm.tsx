@@ -63,10 +63,12 @@ export function BookingForm() {
                 <span className="text-primary w-20 uppercase text-xs tracking-widest mt-1">Sedi</span>
                 <div className="flex-1 space-y-2">
                   <p>• Via Innsbruck, 27/C – 39100 Bolzano (BZ)</p>
-                  <p>• Piazza J. Kennedy, 25 – 80019 Qualiano (NA)</p>
+                  <p>• Piazza J. F. Kennedy, 25 – 80019 Qualiano (NA)</p>
                   <p>• Via Orazio, 20/22 – 80122 Napoli</p>
-                  <p>• Via campana 2/A – Quarto (NA) 80010</p>
-                  <p className="text-xs text-muted-foreground pt-1 italic">Presenti anche a Barcelona, Tenerife e Madrid</p>
+                  <p>• Via Campana 2/A – Quarto (NA) 80010</p>
+                  <p>• Carrer de Mallorca, 414 – 08013 Barcelona, Spain</p>
+                  <p>• Puerto Colon n 59, Planta Baja – Adeje, Tenerife</p>
+                  <p>• Paseo de la Castellana n 114 – 28046 Madrid, Spain</p>
                 </div>
               </div>
             </div>

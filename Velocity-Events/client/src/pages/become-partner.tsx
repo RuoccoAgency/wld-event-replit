@@ -50,9 +50,9 @@ export default function BecomePartner() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
-      <main className="uppercase-none">
+      <main className="uppercase-none pt-24 md:pt-28">
         {/* HERO SECTION */}
-        <section className="relative py-32 bg-slate-950 text-white overflow-hidden">
+        <section className="relative py-24 md:py-32 bg-slate-950 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10" />
             <img 

@@ -90,8 +90,8 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <main className="pt-24 md:pt-28">
+        <section className="relative h-[45vh] md:h-[55vh] min-h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background z-10" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80')] bg-cover bg-center" />
         <div className="relative z-20 text-center px-6">
@@ -225,6 +225,7 @@ export default function EventsPage() {
         )}
       </AnimatePresence>
 
+      </main>
       <BookingForm />
       <Footer />
     </div>
