@@ -87,9 +87,9 @@ export default function LimousineRental() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
-      <main className="uppercase-none pt-24 md:pt-28">
+      <main className="uppercase-none">
         {/* HERO SECTION */}
-        <section className="relative h-[65vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
               src="/images/limousine/hover-limo/hover-limo-5.jpg" 

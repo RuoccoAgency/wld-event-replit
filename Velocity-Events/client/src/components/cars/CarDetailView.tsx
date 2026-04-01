@@ -116,9 +116,9 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-slate-950 uppercase-none pt-24 md:pt-28">
+    <div className="min-h-screen bg-white text-slate-950 uppercase-none">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[70vh] md:h-[85vh] flex items-center overflow-hidden bg-slate-950">
+      <section className="relative min-h-[60vh] md:h-[75vh] flex items-center overflow-hidden bg-slate-950">
         <div className="absolute inset-0 z-0">
           <img 
             src={galleryImages[0]} 

@@ -33,7 +33,7 @@ const categories = [
   {
     title: "Yacht",
     description: "Scivola sulle onde a bordo di imbarcazioni magnifiche, dotate di ogni comfort immaginabile.",
-    image: "/luxury_yacht_mediterranean_1774971768830.png",
+    image: "/luxury_yacht_mediterranean_blue_sea_1775038191896.png",
     icon: Anchor
   },
   {
@@ -106,9 +106,9 @@ export default function LuxuryAssetRental() {
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
       
-      <main className="overflow-hidden pt-24 md:pt-28">
+      <main className="overflow-hidden">
         {/* HERO SECTION */}
-        <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
               src="https://images.unsplash.com/photo-1562190108-963df173fb73?auto=format&fit=crop&q=80&w=2000" 

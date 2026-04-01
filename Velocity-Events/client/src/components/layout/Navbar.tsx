@@ -59,7 +59,8 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
+        isHome ? "fixed" : "sticky",
+        "top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
         showGlass ? "glass py-4 shadow-xl" : "bg-transparent py-6"
       )}
     >

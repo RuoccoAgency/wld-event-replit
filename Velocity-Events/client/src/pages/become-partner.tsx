@@ -50,7 +50,7 @@ export default function BecomePartner() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
-      <main className="uppercase-none pt-24 md:pt-28">
+      <main className="uppercase-none">
         {/* HERO SECTION */}
         <section className="relative py-24 md:py-32 bg-slate-950 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
