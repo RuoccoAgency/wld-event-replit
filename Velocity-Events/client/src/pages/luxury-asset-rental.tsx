@@ -103,19 +103,19 @@ export default function LuxuryAssetRental() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa]">
+    <div className="min-h-screen bg-[#fafafa] overflow-x-hidden w-full">
       <Navbar />
       
-      <main className="overflow-hidden">
+      <main className="w-full">
         {/* HERO SECTION */}
-        <section className="relative h-[60vh] md:h-[75vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] flex items-center justify-center overflow-hidden w-full">
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1562190108-963df173fb73?auto=format&fit=crop&q=80&w=2000" 
-              alt="Luxury background" 
+              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=2000" 
+              alt="Luxury Yacht Hero" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
           </div>
           
           <div className="container mx-auto px-6 relative z-10 text-center text-white">
