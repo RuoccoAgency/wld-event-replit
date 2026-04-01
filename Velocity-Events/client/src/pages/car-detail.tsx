@@ -39,6 +39,7 @@ function staticToApi(c: typeof staticCars[number]): CarWithImages {
       sortOrder: i,
       createdAt: new Date(),
     })) || [],
+    specifiche: c.specifiche,
   } as CarWithImages;
 }
 
@@ -84,7 +85,6 @@ export default function CarDetailPage() {
     <>
       <Navbar />
       <CarDetailView car={car} />
-      <BookingForm />
       <Footer />
     </>
   );
