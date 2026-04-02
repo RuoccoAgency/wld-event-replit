@@ -38,23 +38,32 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
     slug: "battesimo",
     title: "Battesimo",
     subtitle: "Un passo importante celebrato con sacralità ed eleganza.",
-    description: "Il primo sacramento merita una cornice di purezza e bellezza. Creiamo l'ambiente perfetto per questa giornata spirituale.",
-    presentation: "Dalle cerimonie classiche a quelle più moderne, curiamo ogni dettaglio stilistico per riflettere l'importanza del rito.",
+    description: "Il primo sacramento merita una cornice di purezza e bellezza. Creiamo l'ambiente perfetto per questa giornata spirituale con pacchetti completi chiavi in mano.",
+    presentation: "Dalle cerimonie classiche a quelle più moderne, curiamo ogni dettaglio per riflettere l'importanza del rito e la gioia della nuova vita, garantendo un evento indimenticabile.",
     packages: {
-      base: {
-        name: "Pacchetto Base",
-        description: "Allestimento sobrio e raffinato per la cerimonia.",
-        features: ["Decorazione fonte battesimale", "Libretti messa coordinati", "Segnaposti in carta pregio", "Consulenza stile"]
-      },
       premium: {
-        name: "Pacchetto Premium",
-        description: "Un tocco di classe in più per il ricevimento.",
-        features: ["Tableau de mariage tematico", "Angolo dolci personalizzato", "Centrotavola floreali", "Bomboniere artigianali"]
+        name: "Pacchetto Completo Battesimo",
+        description: "Il meglio per festeggiare il primo grande traguardo del tuo bambino, senza stress.",
+        price: "2.999,00 €",
+        features: [
+          "Location per 30 adulti e 10 bambini",
+          "Animazione dedicata",
+          "Servizio Fotografico d'autore",
+          "Auto di Lusso con chauffeur",
+          "Bomboniere artigianali",
+          "Gadget ricordo",
+          "Viaggio (Bonus Speciale)"
+        ]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "Eccellenza assoluta per una giornata memorabile.",
-        features: ["Location esclusiva", "Catering gourmet", "Intrattenimento musicale live", "Servizio fotografico d'arte"]
+        name: "Pacchetto Personalizzato",
+        description: "Costruisci il tuo evento ideale in base ai tuoi gusti e al numero di ospiti.",
+        features: [
+          "Numero di invitati flessibile",
+          "Scelta dei servizi on-demand",
+          "Consulenza dedicata",
+          "Preventivo su misura"
+        ]
       }
     }
   },
