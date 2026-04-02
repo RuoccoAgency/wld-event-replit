@@ -59,27 +59,29 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "sticky top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
         showGlass ? "glass py-4 shadow-xl" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between relative">
-        {/* Logo / Brand */}
-        <Link href="/" className="flex items-center gap-3 z-50 group/logo">
-          <motion.img 
-            src="/logo.png" 
-            alt="Wedding Luxury Drive" 
-            className="h-12 md:h-14 w-auto"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          />
-          <span className={cn("text-[10px] md:text-xs font-serif font-medium tracking-[0.2em] transition-colors uppercase whitespace-nowrap", showGlass ? "text-foreground" : "text-white")}>
-            Wedding Luxury Drive
-          </span>
-        </Link>
+        {/* LEFT: Logo / Brand */}
+        <div className="flex-1 flex justify-start items-center">
+          <Link href="/" className="flex items-center gap-3 z-50 group/logo">
+            <motion.img 
+              src="/logo.png" 
+              alt="Wedding Luxury Drive" 
+              className="h-10 md:h-12 lg:h-14 w-auto"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            <span className={cn("hidden xl:inline-block text-xs font-serif font-medium tracking-[0.2em] transition-colors uppercase whitespace-nowrap", showGlass ? "text-foreground" : "text-white")}>
+              Wedding Luxury Drive
+            </span>
+          </Link>
+        </div>
 
-        {/* Desktop Menu Items */}
-        <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+        {/* CENTER: Desktop Menu Items */}
+        <div className="hidden lg:flex items-center justify-center gap-4 xl:gap-8 flex-none">
           {/* SERVIZI DROPDOWN */}
           <div 
             className="relative h-full flex items-center"
@@ -146,8 +148,8 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* RIGHT ACTION ITEMS */}
-        <div className="flex items-center gap-4 z-50">
+        {/* RIGHT: Action Items */}
+        <div className="flex-1 flex justify-end items-center gap-4 z-50">
           <a href="/#contact" className="hidden xl:block px-6 py-2.5 bg-primary text-primary-foreground text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-primary/90 transition-all shadow-lg">
             Preventivo
           </a>
