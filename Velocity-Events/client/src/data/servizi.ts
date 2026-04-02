@@ -2,6 +2,7 @@ export interface Package {
   name: string;
   description: string;
   features: string[];
+  price?: string;
 }
 
 export interface ServiceData {
@@ -145,23 +146,32 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
     slug: "diciottesimo",
     title: "Diciottesimo",
     subtitle: "L'ingresso nell'età adulta merita un party leggendario.",
-    description: "I 18 anni sono unici. Organizziamo la festa che hai sempre sognato, tra musica, luci e divertimento sfrenato.",
-    presentation: "Dall'ingresso trionfale al brindisi di mezzanotte, coordiniamo registicamente il tuo evento più atteso.",
+    description: "I 18 anni sono unici. Organizziamo la festa che hai sempre sognato, tra musica, luci e divertimento sfrenato. Dalla location alla supercar, pensiamo a tutto noi.",
+    presentation: "Dall'ingresso trionfale al brindisi di mezzanotte, coordiniamo registicamente il tuo evento più atteso con pacchetti chiavi in mano esclusivi.",
     packages: {
-      base: {
-        name: "Pacchetto Base",
-        description: "Festa club per te e i tuoi amici.",
-        features: ["Ingresso prioritario", "Tavolo VIP riservato", "Torta 18 anni scenografica", "Consumazione inclusa"]
-      },
       premium: {
-        name: "Pacchetto Premium",
-        description: "Evento completo e tecnologico.",
-        features: ["Dj set + Vocalist", "Effetti speciali LED", "Servizio foto e video pro", "Buffet cena di qualità"]
+        name: "Pacchetto Completo 18°",
+        description: "Tutto quello che serve per una festa indimenticabile, senza pensieri.",
+        price: "1.999,00 €",
+        features: [
+          "Location Esclusiva",
+          "Animazione & DJ Set",
+          "Servizio Fotografico Professionale",
+          "Auto di Lusso con chauffeur",
+          "Bomboniere per gli ospiti",
+          "Gadget Personalizzati",
+          "Viaggio (Bonus Speciale)"
+        ]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "La festa dell'anno.",
-        features: ["Trasporto in Limousine Hummer", "Location in esclusiva", "Open bar illimitato", "Gadget tecnologici per tutti"]
+        name: "Pacchetto Personalizzato",
+        description: "Disegna la tua festa su misura in base ai tuoi desideri e budget.",
+        features: [
+          "Scelta libera dei servizi",
+          "Consulenza dedicata 1-to-1",
+          "Flessibilità totale",
+          "Preventivo personalizzato"
+        ]
       }
     }
   },

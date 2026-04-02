@@ -127,18 +127,27 @@ export default function ServiceDetail() {
               <h2 className="text-4xl font-serif mb-6">Scegli il tuo Livello di Eccellenza</h2>
               <div className="w-20 h-1 bg-primary/20 mx-auto" />
             </div>
-            
-            <div className={cn(
-              "grid grid-cols-1 gap-10 max-w-6xl mx-auto",
-              !data.packages.base && !data.packages.premium ? "md:grid-cols-1 max-w-2xl" : "md:grid-cols-2 lg:grid-cols-3"
-            )}>
-              {/* BASE PACKAGE */}
+            {(() => {
+              const packageCount = [data.packages.base, data.packages.premium, data.packages.exclusive].filter(Boolean).length;
+              return (
+                <div className={cn(
+                  "grid grid-cols-1 gap-10 mx-auto",
+                  packageCount === 1 ? "max-w-2xl" : 
+                  packageCount === 2 ? "md:grid-cols-2 max-w-4xl" : 
+                  "lg:grid-cols-3 max-w-6xl"
+                )}>
+                  {/* BASE PACKAGE */}
               {data.packages.base && (
                 <motion.div variants={fadeIn} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                   <Card className="h-full border-none shadow-sm rounded-none hover:shadow-2xl transition-all duration-500 overflow-hidden group">
                     <div className="h-2 bg-slate-200" />
                     <CardHeader className="text-center pb-8 pt-12">
                       <h3 className="text-2xl font-serif mb-2">{data.packages.base.name}</h3>
+                      {data.packages.base.price && (
+                        <p className="text-lg font-bold text-primary mb-2 italic">
+                          A partire da {data.packages.base.price}
+                        </p>
+                      )}
                       <p className="text-sm text-muted-foreground font-light italic">{data.packages.base.description}</p>
                     </CardHeader>
                     <CardContent className="px-8 pb-12">
@@ -175,6 +184,11 @@ export default function ServiceDetail() {
                     <CardHeader className="text-center pb-8 pt-12">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-primary mb-2 block">Il più scelto</span>
                       <h3 className="text-2xl font-serif mb-2">{data.packages.premium.name}</h3>
+                      {data.packages.premium.price && (
+                        <p className="text-lg font-bold text-primary mb-2 italic text-glow">
+                          A partire da {data.packages.premium.price}
+                        </p>
+                      )}
                       <p className="text-sm text-muted-foreground font-light italic">{data.packages.premium.description}</p>
                     </CardHeader>
                     <CardContent className="px-8 pb-12">
@@ -205,6 +219,11 @@ export default function ServiceDetail() {
                   <div className="h-2 bg-slate-900" />
                   <CardHeader className="text-center pb-8 pt-12">
                     <h3 className="text-2xl font-serif mb-2">{data.packages.exclusive.name}</h3>
+                    {data.packages.exclusive.price && (
+                        <p className="text-lg font-bold text-primary mb-2 italic">
+                          A partire da {data.packages.exclusive.price}
+                        </p>
+                      )}
                     <p className="text-sm text-muted-foreground font-light italic">{data.packages.exclusive.description}</p>
                   </CardHeader>
                   <CardContent className="px-8 pb-12">
@@ -228,8 +247,9 @@ export default function ServiceDetail() {
                   </CardFooter>
                 </Card>
               </motion.div>
-            </div>
-
+                </div>
+              );
+            })()}
           </div>
         </section>
 
