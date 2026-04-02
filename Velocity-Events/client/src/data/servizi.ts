@@ -242,14 +242,34 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
     slug: "matrimonio",
     title: "Matrimonio",
     subtitle: "Il tuo sogno, la nostra regia impeccabile.",
-    description: "Il giorno più bello deve essere perfetto. Portiamo l'eccellenza in ogni fase della vostra unione.",
-    presentation: "Dal trasporto di lusso con autista privato agli allestimenti scenografici, garantiamo un matrimonio da favola.",
+    description: "Il giorno più bello deve essere perfetto. Portiamo l'eccellenza in ogni fase della vostra unione, offrendo pacchetti all-inclusive curati registicamente in ogni dettaglio.",
+    presentation: "Dal trasporto di lusso con autista privato agli abiti e all'arredamento, garantiamo un matrimonio da favola gestendo ogni complessità per voi.",
     packages: {
-
+      premium: {
+        name: "Pacchetto Wedding Luxury",
+        description: "L'apice dell'eleganza e dell'organizzazione per un matrimonio senza pensieri, tutto incluso.",
+        price: "19.900,00 €",
+        features: [
+          "Location per 100 invitati",
+          "Arredamento Casa",
+          "Atelier per Lui e Lei",
+          "Servizio Fotografico Pro",
+          "Auto di Lusso con chauffeur",
+          "Fedi Nuziali",
+          "Bomboniere dedicate",
+          "Partecipazioni",
+          "Luna di Miele (Bonus Speciale)"
+        ]
+      },
       exclusive: {
-        name: "Pacchetto su Misura",
-        description: "Questo pacchetto è da personalizzare in base all'esigenza del cliente.",
-        features: ["Personalizzazione totale", "Consulenza dedicata", "Flessibilità di budget", "Ogni dettaglio è concordato"]
+        name: "Pacchetto Personalizzato",
+        description: "Costruite il vostro matrimonio su misura in base ai vostri sogni e al numero di ospiti.",
+        features: [
+          "Sia Location che numero ospiti su misura",
+          "Scelta libera dei servizi aggiuntivi",
+          "Wedding Planner dedicata",
+          "Preventivo personalizzato"
+        ]
       }
     }
   },
