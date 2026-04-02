@@ -105,25 +105,34 @@ export const SERVIZI_DATA: Record<string, ServiceData> = {
   },
   "comunione": {
     slug: "comunione",
-    title: "Comunione",
+    title: "Prima Comunione",
     subtitle: "La purezza del bianco in un evento indimenticabile.",
-    description: "Un momento di crescita spirituale circondato dall'affetto della famiglia in un ambiente solenne e gioioso.",
-    presentation: "Curiamo ogni aspetto, dai fiori ai dettagli del tavolo, per riflettere l'innocenza e l'importanza della giornata.",
+    description: "Un momento di crescita spirituale circondato dall'affetto della famiglia in un ambiente solenne e gioioso. Organizziamo la Prima Comunione perfetta con pacchetti completi curati in ogni dettaglio.",
+    presentation: "Dalla cerimonia al ricevimento, curiamo ogni dettaglio per riflettere l'importanza di questo sacramento, garantendo eleganza e divertimento per grandi e piccini.",
     packages: {
-      base: {
-        name: "Pacchetto Base",
-        description: "Tradizione e sobrietà.",
-        features: ["Bomboniere classiche", "Allestimento fiori freschi", "Menù per bambini", "Segnaposti sacri"]
-      },
       premium: {
-        name: "Pacchetto Premium",
-        description: "Ricordo indelebile e divertimento.",
-        features: ["Servizio fotografico", "Animazione bambini", "Confettata d'onore", "Video della giornata"]
+        name: "Pacchetto Completo Comunione",
+        description: "Tutto quello che serve per una cerimonia e un ricevimento perfetto, senza stress.",
+        price: "2.999,00 €",
+        features: [
+          "Location per 30 adulti e 10 bambini",
+          "Animazione professionale",
+          "Servizio Fotografico dedicato",
+          "Auto di Lusso con chauffeur",
+          "Bomboniere per gli ospiti",
+          "Gadget della giornata",
+          "Viaggio (Bonus Speciale)"
+        ]
       },
       exclusive: {
-        name: "Pacchetto Exclusive",
-        description: "L'apice dell'eleganza.",
-        features: ["Location panoramica", "Auto d'epoca per gli spostamenti", "Torta artistica multi-piano", "Regali ospiti di design"]
+        name: "Pacchetto Personalizzato",
+        description: "Crea il tuo evento su misura in base alle tue necessità e al numero di invitati.",
+        features: [
+          "Personalizzazione numero ospiti",
+          "Scelta libera dei servizi aggiuntivi",
+          "Consulenza dedicata 1-to-1",
+          "Preventivo personalizzato"
+        ]
       }
     }
   },
