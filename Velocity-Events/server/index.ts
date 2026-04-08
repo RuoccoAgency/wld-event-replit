@@ -58,25 +58,40 @@ function log(message: string, source = "express") {
 
 }
 
+const SENSITIVE_FIELDS = new Set([
+  "accessToken", "refreshToken", "token", "password", "passwordHash",
+]);
+
+function redactResponse(obj: unknown): unknown {
+  if (obj === null || typeof obj !== "object") return obj;
+  if (Array.isArray(obj)) return obj.map(redactResponse);
+  const result: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
+    result[key] = SENSITIVE_FIELDS.has(key) ? "[REDACTED]" : redactResponse(value);
+  }
+  return result;
+}
+
 // Log solo per /api
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
 
   const originalResJson = res.json;
-  let capturedJsonResponse: Record<string, any> | undefined;
+  let capturedJsonResponse: unknown;
 
-  res.json = function (bodyJson: any, ...args: any[]) {
+  res.json = function (bodyJson: unknown, ...args: unknown[]) {
     capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
+    return (originalResJson as Function).apply(res, [bodyJson, ...args]);
   };
 
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-
-      if (capturedJsonResponse) logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      if (capturedJsonResponse !== undefined) {
+        logLine += ` :: ${JSON.stringify(redactResponse(capturedJsonResponse))}`;
+      }
       log(logLine);
     }
   });

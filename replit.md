@@ -4,7 +4,8 @@
 A luxury wedding car rental website built with React/Vite frontend and Express backend, backed by PostgreSQL. Features a public-facing website for showcasing luxury cars and an admin panel for managing car inventory with image uploads.
 
 ## Recent Changes
-- 2026-04-08: Added HR Module backend: hr_users, hr_attendance, hr_vacations tables; JWT auth (24h token, localStorage); full REST API under /api/hr/*; bootstrap seed for first admin (admin@hr.local / hrAdmin2025); bcryptjs password hashing; complete isolation from car admin system
+- 2026-04-08: HR Module security hardening: fail-fast in production if HR_JWT_SECRET missing; auto-generated random admin password in production if HR_ADMIN_PASSWORD not set; response logging middleware redacts accessToken/password fields with [REDACTED]; TypeScript any cleanup in hr-routes.ts (SQL[] typed conditions, typed PATCH updates, catch narrowing); vacation date validation rejects equal start/end dates
+- 2026-04-08: Added HR Module backend: hr_users, hr_attendance, hr_vacations, hr_sessions tables; 15m JWT access token + 7d opaque refresh token (httpOnly cookie, hashed in hr_sessions); full REST API under /api/hr/*; bootstrap seed for first admin; bcryptjs password hashing; complete isolation from car admin system
 - 2026-02-26: Made project Vercel-compatible: decoupled client from server build, created standalone client/package.json, moved shared types into client/src/types/schema.ts
 - 2026-02-11: Added "Chi Siamo" (About Us) page with company story, values, stats, and reasons sections
 - 2026-02-11: Added logo to navbar and footer, resized brand text
