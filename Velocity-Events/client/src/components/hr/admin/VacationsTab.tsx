@@ -99,9 +99,12 @@ export function VacationsTab() {
         await load(appliedFilters);
       } else {
         const data = await res.json().catch(() => ({}));
-        setRecords((prev) => prev.map((r) => r.id === id ? { ...r, status: "pending" } : r));
+        setRecords((prev) => prev.map((r) => r.id === id ? { ...r, status: "pending" as const } : r));
         toast({ title: "Errore", description: data.message ?? "Impossibile aggiornare", variant: "destructive" });
       }
+    } catch {
+      setRecords((prev) => prev.map((r) => r.id === id ? { ...r, status: "pending" as const } : r));
+      toast({ title: "Errore di rete", description: "Controlla la connessione e riprova.", variant: "destructive" });
     } finally {
       setDeciding(null);
     }
