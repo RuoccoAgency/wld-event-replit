@@ -3,6 +3,7 @@ import cors from "cors";
 import { createServer } from "http";
 import { registerRoutes } from "./routes";
 import { seedProductionDatabase } from "./seed";
+import { seedHrAdmin } from "./hr-seed";
 import { serveStatic } from "./static";
 
 
@@ -87,6 +88,7 @@ app.get("/health", (_req, res) => res.status(200).send("ok"));
 (async () => {
   // Registra tutte le routes API (es: /api/...)
   await seedProductionDatabase();
+  await seedHrAdmin();
 
   await registerRoutes(httpServer, app);
 

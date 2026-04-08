@@ -1,5 +1,5 @@
 import { sql, relations } from "drizzle-orm";
-import { pgTable, text, varchar, integer, boolean, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, boolean, timestamp, pgEnum, serial, date } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -70,3 +70,50 @@ export type Car = typeof cars.$inferSelect;
 export type InsertCar = z.infer<typeof insertCarSchema>;
 export type CarImage = typeof carImages.$inferSelect;
 export type InsertCarImage = z.infer<typeof insertCarImageSchema>;
+
+export const hrUsers = pgTable("hr_users", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  name: text("name").notNull(),
+  role: text("role").notNull().default("employee"),
+  status: text("status").notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const hrAttendance = pgTable("hr_attendance", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => hrUsers.id),
+  date: date("date").notNull(),
+  checkIn: timestamp("check_in"),
+  checkOut: timestamp("check_out"),
+});
+
+export const hrVacations = pgTable("hr_vacations", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => hrUsers.id),
+  startDate: date("start_date").notNull(),
+  endDate: date("end_date").notNull(),
+  reason: text("reason"),
+  status: text("status").notNull().default("pending"),
+  decidedBy: integer("decided_by").references(() => hrUsers.id),
+  decidedAt: timestamp("decided_at"),
+});
+
+export const hrUsersRelations = relations(hrUsers, ({ many }) => ({
+  attendance: many(hrAttendance),
+  vacations: many(hrVacations),
+}));
+
+export const hrAttendanceRelations = relations(hrAttendance, ({ one }) => ({
+  user: one(hrUsers, { fields: [hrAttendance.userId], references: [hrUsers.id] }),
+}));
+
+export const hrVacationsRelations = relations(hrVacations, ({ one }) => ({
+  user: one(hrUsers, { fields: [hrVacations.userId], references: [hrUsers.id] }),
+  decidedByUser: one(hrUsers, { fields: [hrVacations.decidedBy], references: [hrUsers.id] }),
+}));
+
+export type HrUser = typeof hrUsers.$inferSelect;
+export type HrAttendance = typeof hrAttendance.$inferSelect;
+export type HrVacation = typeof hrVacations.$inferSelect;
