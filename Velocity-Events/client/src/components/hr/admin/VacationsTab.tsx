@@ -22,6 +22,7 @@ interface VacationRecord {
   decidedAt: string | null;
   userName: string | null;
   userEmail: string | null;
+  decidedByName: string | null;
 }
 
 function formatDate(dateStr: string): string {
@@ -152,7 +153,7 @@ export function VacationsTab() {
                 <th className="text-left text-xs text-zinc-400 font-medium px-4 py-3">Periodo</th>
                 <th className="text-left text-xs text-zinc-400 font-medium px-4 py-3">Motivo</th>
                 <th className="text-left text-xs text-zinc-400 font-medium px-4 py-3">Stato</th>
-                <th className="text-left text-xs text-zinc-400 font-medium px-4 py-3">Decisione</th>
+                <th className="text-left text-xs text-zinc-400 font-medium px-4 py-3">Deciso da</th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
@@ -179,8 +180,15 @@ export function VacationsTab() {
                       {STATUS_LABELS[r.status]}
                     </Badge>
                   </td>
-                  <td className="px-4 py-3 text-xs text-zinc-400">
-                    {r.decidedAt ? formatDateTime(r.decidedAt) : "—"}
+                  <td className="px-4 py-3 text-xs text-zinc-500">
+                    {r.status !== "pending" ? (
+                      <div>
+                        <p className="font-medium text-zinc-700">{r.decidedByName ?? "—"}</p>
+                        <p className="text-zinc-400">{r.decidedAt ? formatDateTime(r.decidedAt) : "—"}</p>
+                      </div>
+                    ) : (
+                      <span className="text-zinc-300">—</span>
+                    )}
                   </td>
                   <td className="px-4 py-3">
                     {r.status === "pending" && (

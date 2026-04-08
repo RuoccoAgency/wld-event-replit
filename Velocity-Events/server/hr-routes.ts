@@ -1,6 +1,7 @@
 import type { Express, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { eq, and, gte, lte, desc, sql, SQL } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 import { db } from "./storage";
 import { hrUsers, hrAttendance, hrVacations, hrSessions } from "@shared/schema";
 import {
@@ -381,6 +382,9 @@ export function registerHrRoutes(app: Express) {
 
       const where = conditions.length > 0 ? and(...conditions) : undefined;
 
+      const employeeAlias = alias(hrUsers, "employee");
+      const adminAlias = alias(hrUsers, "admin_user");
+
       const records = await db
         .select({
           id: hrVacations.id,
@@ -391,11 +395,13 @@ export function registerHrRoutes(app: Express) {
           status: hrVacations.status,
           decidedBy: hrVacations.decidedBy,
           decidedAt: hrVacations.decidedAt,
-          userName: hrUsers.name,
-          userEmail: hrUsers.email,
+          userName: employeeAlias.name,
+          userEmail: employeeAlias.email,
+          decidedByName: adminAlias.name,
         })
         .from(hrVacations)
-        .leftJoin(hrUsers, eq(hrVacations.userId, hrUsers.id))
+        .leftJoin(employeeAlias, eq(hrVacations.userId, employeeAlias.id))
+        .leftJoin(adminAlias, eq(hrVacations.decidedBy, adminAlias.id))
         .where(where)
         .orderBy(desc(hrVacations.startDate));
 
@@ -484,17 +490,18 @@ export function registerHrRoutes(app: Express) {
 
   app.post("/api/hr/employees", requireHrAdmin, async (req: Request, res: Response) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, role } = req.body;
 
       if (!name || !email || !password) {
         return res.status(400).json({ message: "Nome, email e password obbligatori" });
       }
 
+      const roleValue: "admin" | "employee" = role === "admin" ? "admin" : "employee";
       const passwordHash = await bcrypt.hash(password, 10);
 
       const inserted = await db
         .insert(hrUsers)
-        .values({ name, email, passwordHash, role: "employee", status: "active" })
+        .values({ name, email, passwordHash, role: roleValue, status: "active" })
         .returning({
           id: hrUsers.id,
           name: hrUsers.name,

@@ -39,10 +39,11 @@ function NewEmployeeModal({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState<"employee" | "admin">("employee");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const reset = () => { setName(""); setEmail(""); setPassword(""); setError(""); };
+  const reset = () => { setName(""); setEmail(""); setPassword(""); setRole("employee"); setError(""); };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ function NewEmployeeModal({
     try {
       const res = await hrFetch("/api/hr/employees", {
         method: "POST",
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, role }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.status === 201) {
@@ -105,6 +106,17 @@ function NewEmployeeModal({
               placeholder="••••••••"
               className="w-full px-3 py-2 text-sm border border-zinc-200 rounded focus:outline-none focus:border-primary"
             />
+          </div>
+          <div>
+            <label className="block text-xs text-zinc-500 mb-1">Ruolo *</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value as "employee" | "admin")}
+              className="w-full px-3 py-2 text-sm border border-zinc-200 rounded focus:outline-none focus:border-primary bg-white"
+            >
+              <option value="employee">Dipendente</option>
+              <option value="admin">Amministratore</option>
+            </select>
           </div>
           {error && <p className="text-red-500 text-xs">{error}</p>}
           <div className="flex gap-2 pt-1">
