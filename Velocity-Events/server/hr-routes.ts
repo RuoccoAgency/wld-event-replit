@@ -1,6 +1,6 @@
 import type { Express, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { eq, and, gte, lte, desc, sql, lt } from "drizzle-orm";
+import { eq, and, gte, lte, desc, sql, SQL } from "drizzle-orm";
 import { db } from "./storage";
 import { hrUsers, hrAttendance, hrVacations, hrSessions } from "@shared/schema";
 import {
@@ -274,7 +274,7 @@ export function registerHrRoutes(app: Express) {
       const offset = (page - 1) * limit;
       const { userId, dateFrom, dateTo } = req.query;
 
-      const conditions: any[] = [];
+      const conditions: SQL[] = [];
       if (userId) conditions.push(eq(hrAttendance.userId, parseInt(userId as string)));
       if (dateFrom) conditions.push(gte(hrAttendance.date, dateFrom as string));
       if (dateTo) conditions.push(lte(hrAttendance.date, dateTo as string));
@@ -320,7 +320,7 @@ export function registerHrRoutes(app: Express) {
       if (!startDate || !endDate) {
         return res.status(400).json({ message: "Date obbligatorie" });
       }
-      if (startDate > endDate) {
+      if (startDate >= endDate) {
         return res.status(400).json({ message: "La data di inizio deve essere prima della data di fine" });
       }
 
@@ -373,9 +373,9 @@ export function registerHrRoutes(app: Express) {
     try {
       const { userId, status, dateFrom, dateTo } = req.query;
 
-      const conditions: any[] = [];
+      const conditions: SQL[] = [];
       if (userId) conditions.push(eq(hrVacations.userId, parseInt(userId as string)));
-      if (status) conditions.push(eq(hrVacations.status, status as string));
+      if (status) conditions.push(eq(hrVacations.status, status as "pending" | "approved" | "rejected"));
       if (dateFrom) conditions.push(gte(hrVacations.startDate, dateFrom as string));
       if (dateTo) conditions.push(lte(hrVacations.endDate, dateTo as string));
 
@@ -504,10 +504,13 @@ export function registerHrRoutes(app: Express) {
           createdAt: hrUsers.createdAt,
         });
       return res.status(201).json(inserted[0]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("[hr] employees POST error:", error);
-      if (error?.constraint?.includes("email") || error?.detail?.includes("email")) {
-        return res.status(409).json({ message: "Email già in uso" });
+      if (typeof error === "object" && error !== null) {
+        const pgErr = error as { constraint?: string; detail?: string };
+        if (pgErr.constraint?.includes("email") || pgErr.detail?.includes("email")) {
+          return res.status(409).json({ message: "Email già in uso" });
+        }
       }
       return res.status(500).json({ message: "Errore del server" });
     }
@@ -518,10 +521,10 @@ export function registerHrRoutes(app: Express) {
       const id = parseInt(req.params.id);
       const { name, status, password } = req.body;
 
-      const updates: Record<string, any> = {};
-      if (name !== undefined) updates.name = name;
-      if (status !== undefined && ["active", "inactive"].includes(status)) updates.status = status;
-      if (password) updates.passwordHash = await bcrypt.hash(password, 10);
+      const updates: Partial<{ name: string; status: "active" | "inactive"; passwordHash: string }> = {};
+      if (typeof name === "string") updates.name = name;
+      if (status === "active" || status === "inactive") updates.status = status;
+      if (typeof password === "string" && password.length > 0) updates.passwordHash = await bcrypt.hash(password, 10);
 
       if (Object.keys(updates).length === 0) {
         return res.status(400).json({ message: "Nessun campo da aggiornare" });

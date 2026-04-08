@@ -1,4 +1,4 @@
-import { sql, relations } from "drizzle-orm";
+import { sql, relations, SQL } from "drizzle-orm";
 import { pgTable, text, varchar, integer, boolean, timestamp, pgEnum, serial, date } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -71,13 +71,17 @@ export type InsertCar = z.infer<typeof insertCarSchema>;
 export type CarImage = typeof carImages.$inferSelect;
 export type InsertCarImage = z.infer<typeof insertCarImageSchema>;
 
+export const hrRoleEnum = pgEnum("hr_role", ["admin", "employee"]);
+export const hrStatusEnum = pgEnum("hr_status", ["active", "inactive"]);
+export const hrVacationStatusEnum = pgEnum("hr_vacation_status", ["pending", "approved", "rejected"]);
+
 export const hrUsers = pgTable("hr_users", {
   id: serial("id").primaryKey(),
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   name: text("name").notNull(),
-  role: text("role").notNull().default("employee"),
-  status: text("status").notNull().default("active"),
+  role: hrRoleEnum("role").notNull().default("employee"),
+  status: hrStatusEnum("status").notNull().default("active"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -96,7 +100,7 @@ export const hrVacations = pgTable("hr_vacations", {
   startDate: date("start_date").notNull(),
   endDate: date("end_date").notNull(),
   reason: text("reason"),
-  status: text("status").notNull().default("pending"),
+  status: hrVacationStatusEnum("status").notNull().default("pending"),
   decidedBy: integer("decided_by").references(() => hrUsers.id),
   decidedAt: timestamp("decided_at"),
 });
