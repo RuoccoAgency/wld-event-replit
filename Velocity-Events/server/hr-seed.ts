@@ -21,10 +21,11 @@ export async function seedHrAdmin() {
       status: "active",
     });
 
-    console.log(`[hr-seed] ✓ First HR admin created`);
-    console.log(`[hr-seed]   Email:    ${email}`);
-    console.log(`[hr-seed]   Password: ${password}`);
-    console.log(`[hr-seed]   (Set HR_ADMIN_EMAIL and HR_ADMIN_PASSWORD env vars to change these)`);
+    const usingDefaults = !process.env.HR_ADMIN_EMAIL && !process.env.HR_ADMIN_PASSWORD;
+    console.log(`[hr-seed] First HR admin created: ${email}`);
+    if (usingDefaults) {
+      console.warn("[hr-seed] WARNING: Using default credentials. Set HR_ADMIN_EMAIL and HR_ADMIN_PASSWORD env vars before production use.");
+    }
   } catch (error) {
     console.error("[hr-seed] Error seeding HR admin:", error);
   }

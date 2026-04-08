@@ -1,13 +1,30 @@
 import type { Express, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { eq, and, gte, lte, desc, sql, or, lt } from "drizzle-orm";
+import { eq, and, gte, lte, desc, sql, lt } from "drizzle-orm";
 import { db } from "./storage";
-import { hrUsers, hrAttendance, hrVacations } from "@shared/schema";
-import { signHrToken, hrAuth, requireHrAdmin } from "./hr-auth";
+import { hrUsers, hrAttendance, hrVacations, hrSessions } from "@shared/schema";
+import {
+  signAccessToken,
+  generateRefreshToken,
+  hashToken,
+  hrAuth,
+  requireHrAdmin,
+  requireHrEmployee,
+  REFRESH_COOKIE,
+  REFRESH_TOKEN_TTL_MS,
+} from "./hr-auth";
 
 function todayString(): string {
   return new Date().toISOString().split("T")[0];
 }
+
+const REFRESH_COOKIE_OPTS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax" as const,
+  maxAge: REFRESH_TOKEN_TTL_MS,
+  path: "/api/hr",
+};
 
 export function registerHrRoutes(app: Express) {
 
@@ -18,13 +35,13 @@ export function registerHrRoutes(app: Express) {
         return res.status(400).json({ message: "Email e password obbligatori" });
       }
 
-      const users = await db
+      const rows = await db
         .select()
         .from(hrUsers)
         .where(and(eq(hrUsers.email, email), eq(hrUsers.status, "active")))
         .limit(1);
 
-      const user = users[0];
+      const user = rows[0];
       if (!user) {
         return res.status(401).json({ message: "Credenziali non valide" });
       }
@@ -34,9 +51,17 @@ export function registerHrRoutes(app: Express) {
         return res.status(401).json({ message: "Credenziali non valide" });
       }
 
-      const token = signHrToken({ id: user.id, role: user.role });
+      const accessToken = signAccessToken({ id: user.id, role: user.role });
+      const rawRefresh = generateRefreshToken();
+      const tokenHash = hashToken(rawRefresh);
+      const expiresAt = new Date(Date.now() + REFRESH_TOKEN_TTL_MS);
+
+      await db.insert(hrSessions).values({ userId: user.id, tokenHash, expiresAt });
+
+      res.cookie(REFRESH_COOKIE, rawRefresh, REFRESH_COOKIE_OPTS);
+
       return res.json({
-        token,
+        accessToken,
         user: { id: user.id, name: user.name, email: user.email, role: user.role },
       });
     } catch (error) {
@@ -45,29 +70,92 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
+  app.post("/api/hr/refresh", async (req: Request, res: Response) => {
+    try {
+      const rawRefresh = req.cookies?.[REFRESH_COOKIE];
+      if (!rawRefresh) {
+        return res.status(401).json({ message: "Refresh token mancante" });
+      }
+
+      const tokenHash = hashToken(rawRefresh);
+      const now = new Date();
+
+      const sessions = await db
+        .select()
+        .from(hrSessions)
+        .where(and(eq(hrSessions.tokenHash, tokenHash), gte(hrSessions.expiresAt, now)))
+        .limit(1);
+
+      const session = sessions[0];
+      if (!session) {
+        res.clearCookie(REFRESH_COOKIE, { path: "/api/hr" });
+        return res.status(401).json({ message: "Sessione non valida o scaduta" });
+      }
+
+      const users = await db
+        .select()
+        .from(hrUsers)
+        .where(and(eq(hrUsers.id, session.userId), eq(hrUsers.status, "active")))
+        .limit(1);
+
+      const user = users[0];
+      if (!user) {
+        await db.delete(hrSessions).where(eq(hrSessions.id, session.id));
+        res.clearCookie(REFRESH_COOKIE, { path: "/api/hr" });
+        return res.status(401).json({ message: "Utente non trovato o disattivato" });
+      }
+
+      const newRawRefresh = generateRefreshToken();
+      const newHash = hashToken(newRawRefresh);
+      const newExpiry = new Date(Date.now() + REFRESH_TOKEN_TTL_MS);
+
+      await db.delete(hrSessions).where(eq(hrSessions.id, session.id));
+      await db.insert(hrSessions).values({ userId: user.id, tokenHash: newHash, expiresAt: newExpiry });
+
+      const accessToken = signAccessToken({ id: user.id, role: user.role });
+      res.cookie(REFRESH_COOKIE, newRawRefresh, REFRESH_COOKIE_OPTS);
+
+      return res.json({ accessToken });
+    } catch (error) {
+      console.error("[hr] refresh error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
+  });
+
   app.get("/api/hr/me", hrAuth, async (req: Request, res: Response) => {
     try {
-      const users = await db
+      const rows = await db
         .select({ id: hrUsers.id, name: hrUsers.name, email: hrUsers.email, role: hrUsers.role })
         .from(hrUsers)
         .where(and(eq(hrUsers.id, req.hrUser!.id), eq(hrUsers.status, "active")))
         .limit(1);
 
-      if (!users[0]) {
+      if (!rows[0]) {
         return res.status(401).json({ message: "Utente non trovato" });
       }
-      return res.json(users[0]);
+      return res.json(rows[0]);
     } catch (error) {
       console.error("[hr] /me error:", error);
       return res.status(500).json({ message: "Errore del server" });
     }
   });
 
-  app.post("/api/hr/logout", (_req: Request, res: Response) => {
-    return res.json({ ok: true });
+  app.post("/api/hr/logout", hrAuth, async (req: Request, res: Response) => {
+    try {
+      const rawRefresh = req.cookies?.[REFRESH_COOKIE];
+      if (rawRefresh) {
+        const tokenHash = hashToken(rawRefresh);
+        await db.delete(hrSessions).where(eq(hrSessions.tokenHash, tokenHash));
+      }
+      res.clearCookie(REFRESH_COOKIE, { path: "/api/hr" });
+      return res.json({ ok: true });
+    } catch (error) {
+      console.error("[hr] logout error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
   });
 
-  app.post("/api/hr/attendance/checkin", hrAuth, async (req: Request, res: Response) => {
+  app.post("/api/hr/attendance/checkin", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const today = todayString();
@@ -104,7 +192,7 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
-  app.post("/api/hr/attendance/checkout", hrAuth, async (req: Request, res: Response) => {
+  app.post("/api/hr/attendance/checkout", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const today = todayString();
@@ -134,7 +222,7 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
-  app.get("/api/hr/attendance/today", hrAuth, async (req: Request, res: Response) => {
+  app.get("/api/hr/attendance/today", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const today = todayString();
@@ -152,7 +240,7 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
-  app.get("/api/hr/attendance/history", hrAuth, async (req: Request, res: Response) => {
+  app.get("/api/hr/attendance/history", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const page = Math.max(1, parseInt(req.query.page as string) || 1);
@@ -200,6 +288,7 @@ export function registerHrRoutes(app: Express) {
           date: hrAttendance.date,
           checkIn: hrAttendance.checkIn,
           checkOut: hrAttendance.checkOut,
+          notes: hrAttendance.notes,
           userName: hrUsers.name,
           userEmail: hrUsers.email,
         })
@@ -223,7 +312,7 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
-  app.post("/api/hr/vacations", hrAuth, async (req: Request, res: Response) => {
+  app.post("/api/hr/vacations", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const { startDate, endDate, reason } = req.body;
@@ -263,7 +352,7 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
-  app.get("/api/hr/vacations/mine", hrAuth, async (req: Request, res: Response) => {
+  app.get("/api/hr/vacations/mine", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
 
@@ -395,18 +484,17 @@ export function registerHrRoutes(app: Express) {
 
   app.post("/api/hr/employees", requireHrAdmin, async (req: Request, res: Response) => {
     try {
-      const { name, email, password, role } = req.body;
+      const { name, email, password } = req.body;
 
       if (!name || !email || !password) {
         return res.status(400).json({ message: "Nome, email e password obbligatori" });
       }
 
-      const validRole = ["admin", "employee"].includes(role) ? role : "employee";
       const passwordHash = await bcrypt.hash(password, 10);
 
       const inserted = await db
         .insert(hrUsers)
-        .values({ name, email, passwordHash, role: validRole, status: "active" })
+        .values({ name, email, passwordHash, role: "employee", status: "active" })
         .returning({
           id: hrUsers.id,
           name: hrUsers.name,
@@ -468,6 +556,8 @@ export function registerHrRoutes(app: Express) {
       if (id === req.hrUser!.id) {
         return res.status(400).json({ message: "Non puoi disattivare il tuo account" });
       }
+
+      await db.delete(hrSessions).where(eq(hrSessions.userId, id));
 
       const updated = await db
         .update(hrUsers)

@@ -101,6 +101,16 @@ export const hrVacations = pgTable("hr_vacations", {
   decidedAt: timestamp("decided_at"),
 });
 
+export const hrSessions = pgTable("hr_sessions", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => hrUsers.id, { onDelete: "cascade" }),
+  tokenHash: text("token_hash").notNull().unique(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type HrSession = typeof hrSessions.$inferSelect;
+
 export const hrUsersRelations = relations(hrUsers, ({ many }) => ({
   attendance: many(hrAttendance),
   vacations: many(hrVacations),

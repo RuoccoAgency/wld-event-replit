@@ -77,15 +77,19 @@ Velocity-Events/
 - `hr_users`: id, email, passwordHash, name, role (admin|employee), status (active|inactive), createdAt
 - `hr_attendance`: id, userId→hr_users, date, checkIn, checkOut
 - `hr_vacations`: id, userId→hr_users, startDate, endDate, reason, status (pending|approved|rejected), decidedBy→hr_users, decidedAt
+- `hr_sessions`: id, userId→hr_users, tokenHash (SHA-256 of refresh token), expiresAt, createdAt
 
 ### Authentication
 - **Car admin**: Simple token-based (password stored in ADMIN_PASSWORD env var, default: "admin2025"); routes at /admin, /api/admin/*
-- **HR module**: JWT-based (24h token, stored in localStorage); routes at /hr/*, /api/hr/*; bootstrap seed creates first admin on startup
+- **HR module**: 15m JWT access token (body) + 7d opaque refresh token (httpOnly cookie, hashed in hr_sessions); routes at /hr/*, /api/hr/*; bootstrap seed creates first admin on startup
 
 ### HR Module
 - Private internal system, fully isolated from public website and car admin
 - Routes: /hr/login, /hr/dashboard (employee), /hr/admin (admin)
-- API: /api/hr/login, /api/hr/me, /api/hr/attendance/*, /api/hr/vacations/*, /api/hr/employees/*
+- API: /api/hr/login, /api/hr/refresh, /api/hr/logout, /api/hr/me, /api/hr/attendance/*, /api/hr/vacations/*, /api/hr/employees/*
+- Auth: 15m JWT access token (returned in body) + 7d opaque refresh token (httpOnly cookie, hashed in hr_sessions)
+- Attendance & vacation self-service: employee-only (admins use separate admin view)
+- POST /api/hr/employees always creates role=employee (admins only via hr-seed)
 - Server files: server/hr-auth.ts, server/hr-routes.ts, server/hr-seed.ts
 
 ### Environment Variables

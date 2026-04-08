@@ -1,7 +1,11 @@
 import jwt from "jsonwebtoken";
+import { createHash, randomBytes } from "crypto";
 import type { Request, Response, NextFunction } from "express";
 
 const JWT_SECRET = process.env.HR_JWT_SECRET || "hr-jwt-secret-dev";
+
+export const REFRESH_COOKIE = "hr_refresh";
+export const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 export interface HrTokenPayload {
   id: number;
@@ -16,8 +20,16 @@ declare global {
   }
 }
 
-export function signHrToken(payload: HrTokenPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "24h" });
+export function signAccessToken(payload: HrTokenPayload): string {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
+}
+
+export function generateRefreshToken(): string {
+  return randomBytes(40).toString("hex");
+}
+
+export function hashToken(token: string): string {
+  return createHash("sha256").update(token).digest("hex");
 }
 
 export function hrAuth(req: Request, res: Response, next: NextFunction) {
@@ -31,14 +43,23 @@ export function hrAuth(req: Request, res: Response, next: NextFunction) {
     req.hrUser = { id: payload.id, role: payload.role };
     next();
   } catch {
-    return res.status(401).json({ message: "Invalid or expired token" });
+    return res.status(401).json({ message: "Token non valido o scaduto" });
   }
 }
 
 export function requireHrAdmin(req: Request, res: Response, next: NextFunction) {
   hrAuth(req, res, () => {
     if (req.hrUser?.role !== "admin") {
-      return res.status(403).json({ message: "Admin access required" });
+      return res.status(403).json({ message: "Accesso riservato agli amministratori" });
+    }
+    next();
+  });
+}
+
+export function requireHrEmployee(req: Request, res: Response, next: NextFunction) {
+  hrAuth(req, res, () => {
+    if (req.hrUser?.role !== "employee") {
+      return res.status(403).json({ message: "Accesso riservato ai dipendenti" });
     }
     next();
   });
