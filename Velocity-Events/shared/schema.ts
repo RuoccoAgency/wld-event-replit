@@ -87,6 +87,7 @@ export const hrAttendance = pgTable("hr_attendance", {
   date: date("date").notNull(),
   checkIn: timestamp("check_in"),
   checkOut: timestamp("check_out"),
+  notes: text("notes"),
 });
 
 export const hrVacations = pgTable("hr_vacations", {

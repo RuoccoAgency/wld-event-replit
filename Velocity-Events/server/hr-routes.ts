@@ -1,6 +1,6 @@
 import type { Express, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { eq, and, gte, lte, desc, sql } from "drizzle-orm";
+import { eq, and, gte, lte, desc, sql, or, lt } from "drizzle-orm";
 import { db } from "./storage";
 import { hrUsers, hrAttendance, hrVacations } from "@shared/schema";
 import { signHrToken, hrAuth, requireHrAdmin } from "./hr-auth";
@@ -235,6 +235,23 @@ export function registerHrRoutes(app: Express) {
         return res.status(400).json({ message: "La data di inizio deve essere prima della data di fine" });
       }
 
+      const overlapping = await db
+        .select({ id: hrVacations.id })
+        .from(hrVacations)
+        .where(
+          and(
+            eq(hrVacations.userId, userId),
+            eq(hrVacations.status, "approved"),
+            lte(hrVacations.startDate, endDate),
+            gte(hrVacations.endDate, startDate),
+          )
+        )
+        .limit(1);
+
+      if (overlapping.length > 0) {
+        return res.status(409).json({ message: "Esiste già una richiesta approvata in questo periodo" });
+      }
+
       const inserted = await db
         .insert(hrVacations)
         .values({ userId, startDate, endDate, reason: reason || null, status: "pending" })
@@ -440,6 +457,30 @@ export function registerHrRoutes(app: Express) {
       return res.json(updated[0]);
     } catch (error) {
       console.error("[hr] employees PATCH error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
+  });
+
+  app.delete("/api/hr/employees/:id", requireHrAdmin, async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+
+      if (id === req.hrUser!.id) {
+        return res.status(400).json({ message: "Non puoi disattivare il tuo account" });
+      }
+
+      const updated = await db
+        .update(hrUsers)
+        .set({ status: "inactive" })
+        .where(eq(hrUsers.id, id))
+        .returning({ id: hrUsers.id, status: hrUsers.status });
+
+      if (!updated[0]) {
+        return res.status(404).json({ message: "Utente non trovato" });
+      }
+      return res.json({ success: true, id: updated[0].id, status: "inactive" });
+    } catch (error) {
+      console.error("[hr] employees DELETE error:", error);
       return res.status(500).json({ message: "Errore del server" });
     }
   });
