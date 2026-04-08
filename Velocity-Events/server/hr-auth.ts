@@ -2,14 +2,14 @@ import jwt from "jsonwebtoken";
 import { createHash, randomBytes } from "crypto";
 import type { Request, Response, NextFunction } from "express";
 
-const JWT_SECRET = process.env.HR_JWT_SECRET ?? "hr-jwt-secret-dev";
-
 if (process.env.NODE_ENV === "production" && !process.env.HR_JWT_SECRET) {
-  console.error(
-    "[SECURITY] HR_JWT_SECRET is not set. Using an insecure default secret in production. " +
-    "Set HR_JWT_SECRET to a strong random value immediately."
+  throw new Error(
+    "[SECURITY] HR_JWT_SECRET env var is required in production. " +
+    "Set it to a strong random value (e.g. openssl rand -hex 32) before starting the server."
   );
 }
+
+const JWT_SECRET = process.env.HR_JWT_SECRET ?? "hr-jwt-secret-dev";
 
 export const REFRESH_COOKIE = "hr_refresh";
 export const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
