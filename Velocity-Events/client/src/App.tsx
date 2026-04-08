@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -23,6 +23,10 @@ import BecomePartner from "@/pages/become-partner";
 import LimousineRental from "@/pages/limousine-rental";
 import ServiceDetail from "@/pages/service-detail";
 
+import { HrAuthProvider, useHrAuth } from "@/contexts/HrAuthContext";
+import HrLogin from "@/pages/hr/login";
+import HrDashboard from "@/pages/hr/dashboard";
+
 function ScrollToTop() {
   const [pathname] = useLocation();
 
@@ -35,13 +39,38 @@ function ScrollToTop() {
 
 import { CustomCursor } from "@/components/ui/CustomCursor";
 
+function ProtectedHrDashboard() {
+  const { user, loading } = useHrAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-zinc-50">
+        <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+  if (!user) return <Redirect to="/hr/login" />;
+  if (user.role === "admin") return <Redirect to="/hr/admin" />;
+  return <HrDashboard />;
+}
+
+function HrAdminStub() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-zinc-50">
+      <p className="text-zinc-400 text-sm">Admin HR — coming soon</p>
+    </div>
+  );
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <CustomCursor />
-        <Router />
+        <HrAuthProvider>
+          <Router />
+        </HrAuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
@@ -49,7 +78,22 @@ function App() {
 
 function Router() {
   const [location] = useLocation();
-  
+
+  const isHrRoute = location.startsWith("/hr");
+
+  if (isHrRoute) {
+    return (
+      <Switch>
+        <Route path="/hr/login" component={HrLogin} />
+        <Route path="/hr/dashboard" component={ProtectedHrDashboard} />
+        <Route path="/hr/admin" component={HrAdminStub} />
+        <Route>
+          <Redirect to="/hr/login" />
+        </Route>
+      </Switch>
+    );
+  }
+
   return (
     <>
       <ScrollToTop />
