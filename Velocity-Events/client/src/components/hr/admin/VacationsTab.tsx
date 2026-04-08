@@ -85,20 +85,21 @@ export function VacationsTab() {
 
   const decide = async (id: number, status: "approved" | "rejected") => {
     setDeciding(id);
+    setRecords((prev) => prev.map((r) => r.id === id ? { ...r, status } : r));
     try {
       const res = await hrFetch(`/api/hr/vacations/${id}/decide`, {
         method: "PATCH",
         body: JSON.stringify({ status }),
       });
       if (res.ok) {
-        const updated = await res.json();
-        setRecords((prev) => prev.map((r) => (r.id === id ? { ...r, ...updated } : r)));
         toast({
           title: status === "approved" ? "Richiesta approvata" : "Richiesta rifiutata",
           description: status === "approved" ? "La ferie è stata approvata." : "La ferie è stata rifiutata.",
         });
+        await load(appliedFilters);
       } else {
         const data = await res.json().catch(() => ({}));
+        setRecords((prev) => prev.map((r) => r.id === id ? { ...r, status: "pending" } : r));
         toast({ title: "Errore", description: data.message ?? "Impossibile aggiornare", variant: "destructive" });
       }
     } finally {
