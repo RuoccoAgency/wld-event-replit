@@ -140,7 +140,7 @@ export function registerHrRoutes(app: Express) {
     }
   });
 
-  app.post("/api/hr/logout", hrAuth, async (req: Request, res: Response) => {
+  app.post("/api/hr/logout", async (req: Request, res: Response) => {
     try {
       const rawRefresh = req.cookies?.[REFRESH_COOKIE];
       if (rawRefresh) {
