@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useHrAuth } from "@/contexts/HrAuthContext";
 
@@ -10,11 +10,11 @@ export default function HrLogin() {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  if (!loading && user) {
-    if (user.role === "admin") setLocation("/hr/admin");
-    else setLocation("/hr/dashboard");
-    return null;
-  }
+  useEffect(() => {
+    if (!loading && user) {
+      setLocation(user.role === "admin" ? "/hr/admin" : "/hr/dashboard");
+    }
+  }, [loading, user, setLocation]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

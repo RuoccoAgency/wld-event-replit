@@ -18,6 +18,11 @@ export function VacationRequestForm({ onSubmitted }: VacationRequestFormProps) {
   const [error, setError] = useState("");
 
   const todayStr = new Date().toISOString().split("T")[0];
+  const tomorrowStr = (() => {
+    const d = new Date();
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().split("T")[0];
+  })();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +36,8 @@ export function VacationRequestForm({ onSubmitted }: VacationRequestFormProps) {
       setError("La data di inizio deve essere precedente alla data di fine.");
       return;
     }
-    if (startDate < todayStr) {
-      setError("La data di inizio non può essere nel passato.");
+    if (startDate <= todayStr) {
+      setError("La data di inizio deve essere nel futuro (da domani in poi).");
       return;
     }
 
@@ -80,7 +85,7 @@ export function VacationRequestForm({ onSubmitted }: VacationRequestFormProps) {
               <input
                 type="date"
                 value={startDate}
-                min={todayStr}
+                min={tomorrowStr}
                 onChange={(e) => setStartDate(e.target.value)}
                 className="w-full px-3 py-2 text-sm border border-zinc-200 rounded focus:outline-none focus:border-primary bg-white"
                 required

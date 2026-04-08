@@ -98,29 +98,24 @@ export function AttendanceWidget() {
                 <p className="font-medium text-zinc-800">{isCheckedOut ? formatTime(record!.checkOut) : "—"}</p>
               </div>
             </div>
-            <div className="sm:ml-auto">
-              {isFullyClocked ? (
-                <p className="text-xs text-zinc-400 italic">Turno completato</p>
-              ) : !isCheckedIn ? (
-                <Button
-                  onClick={checkIn}
-                  disabled={acting}
-                  className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
-                >
-                  <LogIn size={15} />
-                  Timbra Entrata
-                </Button>
-              ) : (
-                <Button
-                  onClick={checkOut}
-                  disabled={acting}
-                  variant="outline"
-                  className="gap-2 border-primary text-primary hover:bg-primary/5"
-                >
-                  <LogOut size={15} />
-                  Timbra Uscita
-                </Button>
-              )}
+            <div className="sm:ml-auto flex gap-2">
+              <Button
+                onClick={checkIn}
+                disabled={acting || isCheckedIn}
+                className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-40"
+              >
+                <LogIn size={15} />
+                Timbra Entrata
+              </Button>
+              <Button
+                onClick={checkOut}
+                disabled={acting || !isCheckedIn || isCheckedOut}
+                variant="outline"
+                className="gap-2 border-primary text-primary hover:bg-primary/5 disabled:opacity-40"
+              >
+                <LogOut size={15} />
+                Timbra Uscita
+              </Button>
             </div>
           </div>
         )}
