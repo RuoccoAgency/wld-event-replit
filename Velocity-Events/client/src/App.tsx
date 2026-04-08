@@ -26,6 +26,7 @@ import ServiceDetail from "@/pages/service-detail";
 import { HrAuthProvider, useHrAuth } from "@/contexts/HrAuthContext";
 import HrLogin from "@/pages/hr/login";
 import HrDashboard from "@/pages/hr/dashboard";
+import HrAdmin from "@/pages/hr/admin";
 
 function ScrollToTop() {
   const [pathname] = useLocation();
@@ -54,12 +55,19 @@ function ProtectedHrDashboard() {
   return <HrDashboard />;
 }
 
-function HrAdminStub() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-50">
-      <p className="text-zinc-400 text-sm">Admin HR — coming soon</p>
-    </div>
-  );
+function ProtectedAdminHrRoute() {
+  const { user, loading } = useHrAuth();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-zinc-50">
+        <div className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+  if (!user) return <Redirect to="/hr/login" />;
+  if (user.role === "employee") return <Redirect to="/hr/dashboard" />;
+  return <HrAdmin />;
 }
 
 function App() {
@@ -86,7 +94,7 @@ function Router() {
       <Switch>
         <Route path="/hr/login" component={HrLogin} />
         <Route path="/hr/dashboard" component={ProtectedHrDashboard} />
-        <Route path="/hr/admin" component={HrAdminStub} />
+        <Route path="/hr/admin" component={ProtectedAdminHrRoute} />
         <Route>
           <Redirect to="/hr/login" />
         </Route>

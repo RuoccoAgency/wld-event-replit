@@ -1,12 +1,13 @@
 import { useHrAuth } from "@/contexts/HrAuthContext";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
+import { LogOut, Shield } from "lucide-react";
 
 interface HrLayoutProps {
   children: React.ReactNode;
+  isAdmin?: boolean;
 }
 
-export function HrLayout({ children }: HrLayoutProps) {
+export function HrLayout({ children, isAdmin = false }: HrLayoutProps) {
   const { user, logout } = useHrAuth();
 
   return (
@@ -18,6 +19,12 @@ export function HrLayout({ children }: HrLayoutProps) {
             <span className="hidden sm:inline-block text-xs font-serif font-medium tracking-[0.15em] text-zinc-500 uppercase">
               Portale HR
             </span>
+            {isAdmin && (
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-semibold uppercase tracking-wider">
+                <Shield size={10} />
+                Area Admin
+              </span>
+            )}
           </div>
           <div className="flex items-center gap-3">
             {user && (
