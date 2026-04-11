@@ -43,3 +43,9 @@ externalPort = 80
 build = ["sh", "-c", "cd Velocity-Events && npm install && npm run build"]
 run = ["sh", "-c", "cd Velocity-Events && npm start"]
 deploymentTarget = "vm"
+
+[userenv]
+
+[userenv.shared]
+HR_JWT_SECRET = "60c9b9bf1a91cf76e3ac860e3d48770fe71ea09661db996ec1eb2c6fd6304ef8"
+HR_ADMIN_EMAIL = "admin@hr.local"
