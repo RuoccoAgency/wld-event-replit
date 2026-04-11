@@ -42,4 +42,4 @@ externalPort = 80
 [deployment]
 build = ["sh", "-c", "cd Velocity-Events && npm install && npm run build"]
 run = ["sh", "-c", "cd Velocity-Events && npm start"]
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
