@@ -5,6 +5,7 @@ import { OverviewTab } from "@/components/hr/admin/OverviewTab";
 import { EmployeesTab } from "@/components/hr/admin/EmployeesTab";
 import { AttendanceTab } from "@/components/hr/admin/AttendanceTab";
 import { VacationsTab } from "@/components/hr/admin/VacationsTab";
+import { PerformanceTab } from "@/components/hr/admin/PerformanceTab";
 
 export default function HrAdmin() {
   const { user } = useHrAuth();

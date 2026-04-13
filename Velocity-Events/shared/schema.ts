@@ -129,6 +129,18 @@ export const hrVacationsRelations = relations(hrVacations, ({ one }) => ({
   decidedByUser: one(hrUsers, { fields: [hrVacations.decidedBy], references: [hrUsers.id] }),
 }));
 
+export const hrPerformance = pgTable("hr_performance", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").notNull().references(() => hrUsers.id),
+  date: date("date").notNull(),
+  contractsCount: integer("contracts_count").notNull().default(0),
+  modulesCount: integer("modules_count").notNull().default(0),
+  note: text("note"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 export type HrUser = typeof hrUsers.$inferSelect;
 export type HrAttendance = typeof hrAttendance.$inferSelect;
 export type HrVacation = typeof hrVacations.$inferSelect;
+export type HrPerformance = typeof hrPerformance.$inferSelect;

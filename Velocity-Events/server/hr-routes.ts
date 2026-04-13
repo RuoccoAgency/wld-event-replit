@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { eq, and, gte, lte, desc, sql, SQL } from "drizzle-orm";
 import { alias } from "drizzle-orm/pg-core";
 import { db } from "./storage";
-import { hrUsers, hrAttendance, hrVacations, hrSessions } from "@shared/schema";
+import { hrUsers, hrAttendance, hrVacations, hrSessions, hrPerformance } from "@shared/schema";
 import {
   signAccessToken,
   generateRefreshToken,
@@ -581,6 +581,180 @@ export function registerHrRoutes(app: Express) {
       return res.json({ success: true, id: updated[0].id, status: "inactive" });
     } catch (error) {
       console.error("[hr] employees DELETE error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
+  });
+
+  // ── Performance ──────────────────────────────────────────────────────────
+
+  // POST /api/hr/performance/increment — employee increments contracts or modules by 1
+  app.post("/api/hr/performance/increment", hrAuth, async (req: Request, res: Response) => {
+    try {
+      const userId = req.hrUser!.id;
+      const { field, note } = req.body as { field?: string; note?: string };
+
+      if (field !== "contracts" && field !== "modules") {
+        return res.status(400).json({ message: "field deve essere 'contracts' o 'modules'" });
+      }
+
+      const today = todayString();
+
+      const existing = await db
+        .select()
+        .from(hrPerformance)
+        .where(and(eq(hrPerformance.userId, userId), eq(hrPerformance.date, today)))
+        .limit(1);
+
+      let row: typeof hrPerformance.$inferSelect;
+
+      if (existing[0]) {
+        const updates: Partial<typeof hrPerformance.$inferInsert> = {
+          updatedAt: new Date(),
+          contractsCount: field === "contracts" ? existing[0].contractsCount + 1 : existing[0].contractsCount,
+          modulesCount: field === "modules" ? existing[0].modulesCount + 1 : existing[0].modulesCount,
+        };
+        if (note !== undefined && note !== "") updates.note = note;
+
+        const updated = await db
+          .update(hrPerformance)
+          .set(updates)
+          .where(eq(hrPerformance.id, existing[0].id))
+          .returning();
+        row = updated[0];
+      } else {
+        const inserted = await db
+          .insert(hrPerformance)
+          .values({
+            userId,
+            date: today,
+            contractsCount: field === "contracts" ? 1 : 0,
+            modulesCount: field === "modules" ? 1 : 0,
+            note: note && note !== "" ? note : null,
+          })
+          .returning();
+        row = inserted[0];
+      }
+
+      return res.json({
+        id: row.id,
+        date: row.date,
+        contractsCount: row.contractsCount,
+        modulesCount: row.modulesCount,
+        note: row.note,
+      });
+    } catch (error) {
+      console.error("[hr] performance increment error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
+  });
+
+  // GET /api/hr/performance/mine — employee's own performance history
+  app.get("/api/hr/performance/mine", hrAuth, async (req: Request, res: Response) => {
+    try {
+      const userId = req.hrUser!.id;
+      const limit = Math.min(parseInt(req.query.limit as string) || 30, 90);
+
+      const rows = await db
+        .select({
+          id: hrPerformance.id,
+          date: hrPerformance.date,
+          contractsCount: hrPerformance.contractsCount,
+          modulesCount: hrPerformance.modulesCount,
+          note: hrPerformance.note,
+        })
+        .from(hrPerformance)
+        .where(eq(hrPerformance.userId, userId))
+        .orderBy(desc(hrPerformance.date))
+        .limit(limit);
+
+      return res.json(rows);
+    } catch (error) {
+      console.error("[hr] performance mine error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
+  });
+
+  // Helper: current-month date range
+  function currentMonthRange(): { from: string; to: string } {
+    const now = new Date();
+    const from = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
+    const to = now.toISOString().split("T")[0];
+    return { from, to };
+  }
+
+  // GET /api/hr/performance/leaderboard — admin ranked view
+  app.get("/api/hr/performance/leaderboard", requireHrAdmin, async (req: Request, res: Response) => {
+    try {
+      let { from, to } = req.query as { from?: string; to?: string };
+      if (!from || !to) {
+        const range = currentMonthRange();
+        from = range.from;
+        to = range.to;
+      }
+
+      const rows = await db.execute(sql`
+        SELECT
+          u.id   AS "userId",
+          u.name AS "name",
+          COALESCE(SUM(p.contracts_count), 0)::int AS "contractsTotal",
+          COALESCE(SUM(p.modules_count), 0)::int   AS "modulesTotal"
+        FROM hr_users u
+        LEFT JOIN hr_performance p
+          ON p.user_id = u.id AND p.date BETWEEN ${from} AND ${to}
+        WHERE u.status = 'active' AND u.role = 'employee'
+        GROUP BY u.id, u.name
+        ORDER BY "contractsTotal" DESC, "modulesTotal" DESC
+      `);
+
+      const ranked = (rows.rows as Array<{ userId: number; name: string; contractsTotal: number; modulesTotal: number }>).map(
+        (r, i) => ({ rank: i + 1, ...r })
+      );
+
+      return res.json({ from, to, rows: ranked });
+    } catch (error) {
+      console.error("[hr] leaderboard error:", error);
+      return res.status(500).json({ message: "Errore del server" });
+    }
+  });
+
+  // GET /api/hr/performance/leaderboard/csv — admin CSV export
+  app.get("/api/hr/performance/leaderboard/csv", requireHrAdmin, async (req: Request, res: Response) => {
+    try {
+      let { from, to } = req.query as { from?: string; to?: string };
+      if (!from || !to) {
+        const range = currentMonthRange();
+        from = range.from;
+        to = range.to;
+      }
+
+      const rows = await db.execute(sql`
+        SELECT
+          u.id   AS "userId",
+          u.name AS "name",
+          COALESCE(SUM(p.contracts_count), 0)::int AS "contractsTotal",
+          COALESCE(SUM(p.modules_count), 0)::int   AS "modulesTotal"
+        FROM hr_users u
+        LEFT JOIN hr_performance p
+          ON p.user_id = u.id AND p.date BETWEEN ${from} AND ${to}
+        WHERE u.status = 'active' AND u.role = 'employee'
+        GROUP BY u.id, u.name
+        ORDER BY "contractsTotal" DESC, "modulesTotal" DESC
+      `);
+
+      const data = rows.rows as Array<{ name: string; contractsTotal: number; modulesTotal: number }>;
+
+      let csv = "Posizione,Nome,Contratti,Moduli\n";
+      data.forEach((r, i) => {
+        const name = `"${r.name.replace(/"/g, '""')}"`;
+        csv += `${i + 1},${name},${r.contractsTotal},${r.modulesTotal}\n`;
+      });
+
+      const filename = `leaderboard-${todayString()}.csv`;
+      res.setHeader("Content-Type", "text/csv; charset=utf-8");
+      res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+      return res.send(csv);
+    } catch (error) {
+      console.error("[hr] leaderboard csv error:", error);
       return res.status(500).json({ message: "Errore del server" });
     }
   });

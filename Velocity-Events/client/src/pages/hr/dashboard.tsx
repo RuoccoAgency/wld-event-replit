@@ -4,6 +4,7 @@ import { HrLayout } from "@/components/hr/HrLayout";
 import { AttendanceWidget } from "@/components/hr/AttendanceWidget";
 import { VacationRequestForm } from "@/components/hr/VacationRequestForm";
 import { PersonalHistory } from "@/components/hr/PersonalHistory";
+import { PerformanceWidget } from "@/components/hr/PerformanceWidget";
 import {
   Collapsible,
   CollapsibleContent,
@@ -39,6 +40,8 @@ export default function HrDashboard() {
         </div>
 
         <AttendanceWidget />
+
+        <PerformanceWidget />
 
         <Collapsible open={vacationOpen} onOpenChange={setVacationOpen}>
           <CollapsibleTrigger className="flex items-center gap-2 w-full text-left px-4 py-3 bg-white border border-zinc-200 rounded shadow-sm hover:bg-zinc-50 transition-colors">
