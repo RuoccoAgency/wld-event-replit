@@ -1,0 +1,99 @@
+Add a new performance tracking feature to the existing HR management system.
+
+Goal:
+Each employee must be able to quickly update how many contracts and modules they close.
+The admin must be able to see a leaderboard ranking employees by contracts closed, and export that leaderboard as a .csv file.
+
+Requirements:
+
+1. Database
+Add a new table for employee performance tracking, for example:
+- hr_performance
+Fields:
+- id
+- userId
+- date
+- contractsCount
+- modulesCount
+- note
+- createdAt
+- updatedAt
+
+Use one row per employee per day.
+If a row for today already exists, increment the existing values instead of creating duplicates.
+
+2. Employee dashboard
+Inside the employee dashboard, add a new section called "Performance".
+
+This section must include:
+- a "Contracts" card with:
+  - current total for today
+  - a +1 button
+  - an optional short note/message field
+- a "Modules" card with:
+  - current total for today
+  - a +1 button
+  - an optional short note/message field
+
+Behavior:
+- when the employee clicks +1 on Contracts, today's contractsCount increases by 1
+- when the employee clicks +1 on Modules, today's modulesCount increases by 1
+- the employee can optionally add a short message/note for that update
+- the note must not be required
+- the interaction must be fast and simple
+- optionally include a small success toast
+
+3. Employee performance history
+Allow the employee to see their own performance history in a simple table:
+- Date
+- Contracts
+- Modules
+- Note
+
+4. Admin dashboard
+Add a new admin tab called "Leaderboard" or "Performance".
+
+This admin section must show:
+- ranking of employees ordered by highest number of contracts
+- total contracts per employee
+- total modules per employee
+
+Include:
+- employee name
+- contracts total
+- modules total
+- ranking position
+
+5. Filters
+In the admin leaderboard, add period filters such as:
+- current month
+- custom date range
+
+Default view should be current month.
+
+6. CSV export
+Add a button:
+- "Export CSV"
+
+It must export the current leaderboard view into a .csv file including:
+- ranking position
+- employee name
+- total contracts
+- total modules
+- selected period
+
+7. API endpoints
+Add backend endpoints for:
+- incrementing contracts for the logged-in employee
+- incrementing modules for the logged-in employee
+- fetching employee personal performance history
+- fetching admin leaderboard with filters
+- exporting leaderboard CSV
+
+Important:
+- The short note/message for each contract or module update must be optional, not required
+- Keep the existing HR system intact
+- Do not change the public website
+- Integrate this cleanly inside the current HR module
+- Keep the UI simple, fast, and easy to use
+- Focus on MVP first
