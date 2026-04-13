@@ -588,7 +588,7 @@ export function registerHrRoutes(app: Express) {
   // ── Performance ──────────────────────────────────────────────────────────
 
   // POST /api/hr/performance/increment — employee increments contracts or modules by 1
-  app.post("/api/hr/performance/increment", hrAuth, async (req: Request, res: Response) => {
+  app.post("/api/hr/performance/increment", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const { field, note } = req.body as { field?: string; note?: string };
@@ -649,7 +649,7 @@ export function registerHrRoutes(app: Express) {
   });
 
   // GET /api/hr/performance/mine — employee's own performance history
-  app.get("/api/hr/performance/mine", hrAuth, async (req: Request, res: Response) => {
+  app.get("/api/hr/performance/mine", requireHrEmployee, async (req: Request, res: Response) => {
     try {
       const userId = req.hrUser!.id;
       const limit = Math.min(parseInt(req.query.limit as string) || 30, 90);

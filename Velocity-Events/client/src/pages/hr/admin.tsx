@@ -28,6 +28,7 @@ export default function HrAdmin() {
             <TabsTrigger value="dipendenti" className="text-xs">Dipendenti</TabsTrigger>
             <TabsTrigger value="presenze" className="text-xs">Presenze</TabsTrigger>
             <TabsTrigger value="ferie" className="text-xs">Ferie</TabsTrigger>
+            <TabsTrigger value="performance" className="text-xs">Performance</TabsTrigger>
           </TabsList>
           <TabsContent value="panoramica">
             <OverviewTab />
@@ -40,6 +41,9 @@ export default function HrAdmin() {
           </TabsContent>
           <TabsContent value="ferie">
             <VacationsTab />
+          </TabsContent>
+          <TabsContent value="performance">
+            <PerformanceTab />
           </TabsContent>
         </Tabs>
       </div>
