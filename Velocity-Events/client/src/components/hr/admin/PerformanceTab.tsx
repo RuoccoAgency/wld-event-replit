@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Download, Trophy, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useHrAuth } from "@/contexts/HrAuthContext";
+import { hrFetch } from "@/lib/hrAuth";
 
 interface LeaderboardRow {
   rank: number;
@@ -33,7 +33,6 @@ function formatDate(iso: string): string {
 }
 
 export function PerformanceTab() {
-  const { accessToken } = useHrAuth();
   const [data, setData] = useState<LeaderboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
@@ -48,9 +47,8 @@ export function PerformanceTab() {
     async (from: string, to: string) => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `/api/hr/performance/leaderboard?from=${from}&to=${to}`,
-          { headers: { Authorization: `Bearer ${accessToken}` } }
+        const res = await hrFetch(
+          `/api/hr/performance/leaderboard?from=${from}&to=${to}`
         );
         if (!res.ok) return;
         const json: LeaderboardData = await res.json();
@@ -61,7 +59,7 @@ export function PerformanceTab() {
         setLoading(false);
       }
     },
-    [accessToken]
+    []
   );
 
   useEffect(() => {
@@ -85,9 +83,8 @@ export function PerformanceTab() {
   const exportCsv = async () => {
     setExporting(true);
     try {
-      const res = await fetch(
-        `/api/hr/performance/leaderboard/csv?from=${activeFrom}&to=${activeTo}`,
-        { headers: { Authorization: `Bearer ${accessToken}` } }
+      const res = await hrFetch(
+        `/api/hr/performance/leaderboard/csv?from=${activeFrom}&to=${activeTo}`
       );
       if (!res.ok) return;
       const blob = await res.blob();

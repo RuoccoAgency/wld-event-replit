@@ -686,6 +686,9 @@ export function registerHrRoutes(app: Express) {
   app.get("/api/hr/performance/leaderboard", requireHrAdmin, async (req: Request, res: Response) => {
     try {
       let { from, to } = req.query as { from?: string; to?: string };
+      if ((!from && to) || (from && !to)) {
+        return res.status(400).json({ message: "Fornire sia 'from' che 'to', oppure nessuno dei due" });
+      }
       if (!from || !to) {
         const range = currentMonthRange();
         from = range.from;
@@ -721,6 +724,9 @@ export function registerHrRoutes(app: Express) {
   app.get("/api/hr/performance/leaderboard/csv", requireHrAdmin, async (req: Request, res: Response) => {
     try {
       let { from, to } = req.query as { from?: string; to?: string };
+      if ((!from && to) || (from && !to)) {
+        return res.status(400).json({ message: "Fornire sia 'from' che 'to', oppure nessuno dei due" });
+      }
       if (!from || !to) {
         const range = currentMonthRange();
         from = range.from;

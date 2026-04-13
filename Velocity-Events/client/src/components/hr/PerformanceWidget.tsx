@@ -4,7 +4,7 @@ import { Plus, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useHrAuth } from "@/contexts/HrAuthContext";
+import { hrFetch } from "@/lib/hrAuth";
 
 interface PerformanceRow {
   id: number;
@@ -24,7 +24,6 @@ function formatDate(iso: string): string {
 }
 
 export function PerformanceWidget() {
-  const { accessToken } = useHrAuth();
   const [history, setHistory] = useState<PerformanceRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [incrementing, setIncrementing] = useState<"contracts" | "modules" | null>(null);
@@ -35,9 +34,7 @@ export function PerformanceWidget() {
 
   const fetchHistory = useCallback(async () => {
     try {
-      const res = await fetch("/api/hr/performance/mine?limit=30", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
+      const res = await hrFetch("/api/hr/performance/mine?limit=30");
       if (!res.ok) return;
       const data: PerformanceRow[] = await res.json();
       setHistory(data);
@@ -46,7 +43,7 @@ export function PerformanceWidget() {
     } finally {
       setLoading(false);
     }
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
     fetchHistory();
@@ -56,12 +53,8 @@ export function PerformanceWidget() {
     const note = field === "contracts" ? noteContracts : noteModules;
     setIncrementing(field);
     try {
-      const res = await fetch("/api/hr/performance/increment", {
+      const res = await hrFetch("/api/hr/performance/increment", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
         body: JSON.stringify({ field, note: note.trim() || undefined }),
       });
       if (!res.ok) {
