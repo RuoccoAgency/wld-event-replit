@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Il nome è obbligatorio" }),
@@ -16,6 +17,9 @@ const formSchema = z.object({
   date: z.string().min(1, { message: "Data richiesta" }),
   eventType: z.string().min(1, { message: "Seleziona un tipo di evento" }),
   message: z.string().optional(),
+  videoCallRequested: z.boolean().default(false),
+  preferredDate: z.string().optional(),
+  preferredTime: z.string().optional(),
 });
 
 export function BookingForm() {
@@ -29,6 +33,9 @@ export function BookingForm() {
       date: "",
       eventType: "",
       message: "",
+      videoCallRequested: false,
+      preferredDate: "",
+      preferredTime: "",
     },
   });
 
@@ -177,6 +184,75 @@ export function BookingForm() {
                       </FormItem>
                     )}
                   />
+
+                  {/* Video Call Booking Section */}
+                  <div className="pt-4 border-t border-border/10 space-y-4">
+                    <div className="space-y-1">
+                      <h3 className="text-sm font-medium text-foreground">Prenota una videochiamata (opzionale)</h3>
+                      <p className="text-xs text-muted-foreground">Se vuoi, possiamo organizzare una breve videochiamata per definire tutti i dettagli.</p>
+                    </div>
+
+                    <FormField
+                      control={form.control}
+                      name="videoCallRequested"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center space-x-3 space-y-0 p-4 border border-input/50 rounded-none bg-accent/5">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            />
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                            <FormLabel className="text-xs uppercase tracking-widest cursor-pointer">
+                              Voglio prenotare una videochiamata
+                            </FormLabel>
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
+                    <AnimatePresence>
+                      {form.watch("videoCallRequested") && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                          animate={{ height: "auto", opacity: 1, marginTop: 16 }}
+                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <FormField
+                              control={form.control}
+                              name="preferredDate"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-xs uppercase tracking-widest text-muted-foreground">Data Preferita</FormLabel>
+                                  <FormControl>
+                                    <Input type="date" {...field} className="bg-transparent border-input text-foreground focus:border-primary rounded-none h-12" />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                            <FormField
+                              control={form.control}
+                              name="preferredTime"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel className="text-xs uppercase tracking-widest text-muted-foreground">Orario Preferito</FormLabel>
+                                  <FormControl>
+                                    <Input type="time" {...field} className="bg-transparent border-input text-foreground focus:border-primary rounded-none h-12" />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Button type="submit" className="w-full md:w-auto bg-primary text-white uppercase tracking-widest text-xs font-bold py-6 px-8 hover:bg-primary/90 rounded-none transition-colors">
