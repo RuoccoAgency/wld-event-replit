@@ -85,7 +85,7 @@ export default function CarsCollectionPage() {
           left: 0,
           width: "100%",
           height: "100%",
-          zIndex: 9999,
+          zIndex: 40,
           backgroundColor: "#fafaf9",
           display: "flex",
           flexDirection: "column",
@@ -100,7 +100,6 @@ export default function CarsCollectionPage() {
             from { opacity: 0; }
             to   { opacity: 1; }
           }
-          body { overflow: hidden; }
         `}</style>
         <p
           style={{
