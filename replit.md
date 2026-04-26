@@ -4,6 +4,10 @@
 A luxury wedding car rental website built with React/Vite frontend and Express backend, backed by PostgreSQL. Features a public-facing website for showcasing luxury cars and an admin panel for managing car inventory with image uploads.
 
 ## Recent Changes
+- 2026-04-08: HR Admin Dashboard: /hr/admin protected route (admin-only, employees redirected to /hr/dashboard); 4 tabs: Panoramica (stats + today's check-ins), Dipendenti (searchable employee list + create modal + deactivate/reset), Presenze (filterable paginated attendance), Ferie (approve/reject with optimistic update); HrLayout updated with "Area Admin" badge
+- 2026-04-08: HR Employee Dashboard: /hr/login and /hr/dashboard pages; HrAuthContext (in-memory JWT, auto-refresh on load); HrLayout (minimal top bar, no public nav); AttendanceWidget (check-in/out); VacationRequestForm (collapsible, success toast); PersonalHistory (Presenze + Ferie tabs with pagination); App.tsx HR routes isolated from public site
+- 2026-04-08: HR Module security hardening: fail-fast in production if HR_JWT_SECRET missing; auto-generated random admin password in production if HR_ADMIN_PASSWORD not set; response logging middleware redacts accessToken/password fields with [REDACTED]; TypeScript any cleanup in hr-routes.ts (SQL[] typed conditions, typed PATCH updates, catch narrowing); vacation date validation rejects equal start/end dates
+- 2026-04-08: Added HR Module backend: hr_users, hr_attendance, hr_vacations, hr_sessions tables; 15m JWT access token + 7d opaque refresh token (httpOnly cookie, hashed in hr_sessions); full REST API under /api/hr/*; bootstrap seed for first admin; bcryptjs password hashing; complete isolation from car admin system
 - 2026-02-26: Made project Vercel-compatible: decoupled client from server build, created standalone client/package.json, moved shared types into client/src/types/schema.ts
 - 2026-02-11: Added "Chi Siamo" (About Us) page with company story, values, stats, and reasons sections
 - 2026-02-11: Added logo to navbar and footer, resized brand text
@@ -73,14 +77,30 @@ Velocity-Events/
 ### Database Schema
 - `cars`: id, slug, brand, model, title, priceEur, priceText, powerCv, year, engine, color, seats, tags, description, status
 - `car_images`: id, carId, url, alt, sortOrder, isCover
+- `hr_users`: id, email, passwordHash, name, role (admin|employee), status (active|inactive), createdAt
+- `hr_attendance`: id, userId→hr_users, date, checkIn, checkOut
+- `hr_vacations`: id, userId→hr_users, startDate, endDate, reason, status (pending|approved|rejected), decidedBy→hr_users, decidedAt
+- `hr_sessions`: id, userId→hr_users, tokenHash (SHA-256 of refresh token), expiresAt, createdAt
 
 ### Authentication
-- Simple token-based admin auth (password stored in ADMIN_PASSWORD env var, default: "admin2025")
-- No user registration system - single admin password
+- **Car admin**: Simple token-based (password stored in ADMIN_PASSWORD env var, default: "admin2025"); routes at /admin, /api/admin/*
+- **HR module**: 15m JWT access token (body) + 7d opaque refresh token (httpOnly cookie, hashed in hr_sessions); routes at /hr/*, /api/hr/*; bootstrap seed creates first admin on startup
+
+### HR Module
+- Private internal system, fully isolated from public website and car admin
+- Routes: /hr/login, /hr/dashboard (employee), /hr/admin (admin)
+- API: /api/hr/login, /api/hr/refresh, /api/hr/logout, /api/hr/me, /api/hr/attendance/*, /api/hr/vacations/*, /api/hr/employees/*
+- Auth: 15m JWT access token (returned in body) + 7d opaque refresh token (httpOnly cookie, hashed in hr_sessions)
+- Attendance & vacation self-service: employee-only (admins use separate admin view)
+- POST /api/hr/employees always creates role=employee (admins only via hr-seed)
+- Server files: server/hr-auth.ts, server/hr-routes.ts, server/hr-seed.ts
 
 ### Environment Variables
 - `DATABASE_URL`: PostgreSQL connection string (auto-set)
-- `ADMIN_PASSWORD`: Admin panel password (default: "admin2025")
+- `ADMIN_PASSWORD`: Car admin panel password (default: "admin2025")
+- `HR_JWT_SECRET`: JWT signing secret for HR module (default: "hr-jwt-secret-dev")
+- `HR_ADMIN_EMAIL`: First HR admin email (default: "admin@hr.local")
+- `HR_ADMIN_PASSWORD`: First HR admin password (default: "hrAdmin2025")
 - Object storage secrets managed via Replit integrations
 
 ## User Preferences

@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { registerObjectStorageRoutes } from "./replit_integrations/object_storage";
 import { insertCarSchema } from "@shared/schema";
+import { registerHrRoutes } from "./hr-routes";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin2025";
 
@@ -169,6 +170,8 @@ export async function registerRoutes(
       res.status(500).json({ message: "Failed to set cover" });
     }
   });
+
+  registerHrRoutes(app);
 
   return httpServer;
 }

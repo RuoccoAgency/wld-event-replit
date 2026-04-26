@@ -1,0 +1,82 @@
+Add a private employee management system inside this existing website project.
+
+Important:
+- Do NOT rebuild the website from scratch
+- Do NOT change the public pages of the website unless strictly necessary
+- This must be a private internal system added inside the current project
+
+Main goal:
+Create a simple internal management system to track the history of employee attendance and vacations.
+
+Access rules:
+- This is a private system
+- Do NOT add public registration
+- Do NOT add a public sign-up page
+- Only pre-created users can log in
+- There must be 2 roles:
+  - admin
+  - employee
+
+Login behavior:
+- Create a /login page
+- If the user role is admin, redirect to /admin
+- If the user role is employee, redirect to /dashboard
+
+Main structure:
+- /login
+- /dashboard for employees
+- /admin for admin
+
+Employee dashboard must include:
+- attendance section
+- vacation request section
+- personal history section
+
+Employee features:
+- mark check-in
+- mark check-out
+- submit vacation request
+- view personal attendance history
+- view personal vacation history
+
+Admin dashboard must include:
+- employees section
+- attendance section
+- vacations section
+- full history section
+
+Admin features:
+- view all employees
+- add employees
+- edit employees
+- view all attendance records
+- view all vacation requests
+- approve or reject vacation requests
+- view full company history with filters
+
+Database:
+Use Supabase for authentication and database.
+
+Create the database structure needed for:
+- user profiles with roles
+- employees
+- attendance records
+- vacation records
+
+Technical requirements:
+- Keep the UI simple, modern, and clean
+- Use a dashboard layout
+- Use tabs or sidebar sections inside /dashboard and /admin instead of too many extra routes
+- Make it responsive
+- Build the MVP first
+- Focus on functionality before visual polish
+
+Very important:
+- No open registration
+- No public user creation
+- Only admin-created employee accounts
+- Employees must only see their own data
+- Admin must see all company data
+
+First step:
+Set up the base structure, authentication logic, role-based redirects, and the initial dashboard layout.

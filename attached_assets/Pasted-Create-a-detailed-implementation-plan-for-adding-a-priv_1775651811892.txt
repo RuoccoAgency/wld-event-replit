@@ -1,0 +1,91 @@
+Create a detailed implementation plan for adding a private employee management system inside an existing website project.
+
+Context:
+- This is NOT a new project, it must be integrated into an existing website
+- The system is private (internal use only)
+- No public registration allowed
+- Only admin-created users can access the system
+- There are 2 roles: admin and employee
+
+Main goal:
+Track and manage employee attendance and vacation history.
+
+Architecture requirements:
+- Use Supabase for database and authentication
+- Use role-based access (admin vs employee)
+- Keep the public website untouched
+- Add a protected internal system
+
+Required routes:
+- /login
+- /dashboard (employee)
+- /admin (admin)
+
+Core features:
+
+Employee:
+- mark check-in / check-out
+- submit vacation request
+- view personal history (attendance + vacations)
+
+Admin:
+- create and manage employees
+- view all attendance records
+- view all vacation requests
+- approve/reject vacations
+- view full company history with filters
+
+Plan must include:
+
+1. Project structure
+- how to integrate into existing project
+- folder structure
+- routing structure
+
+2. Authentication system
+- Supabase auth setup
+- how users are created (admin only)
+- how roles are stored and enforced
+- login flow and role-based redirects
+
+3. Database design
+Define tables with fields:
+- profiles (id, email, role, name, status)
+- employees
+- attendance
+- vacations
+
+4. Data relationships
+- how employees link to attendance and vacations
+- how user auth links to profiles
+
+5. UI structure
+- layout for /dashboard (employee)
+- layout for /admin (admin)
+- sections or tabs inside each
+
+6. Feature breakdown (step by step)
+- Step 1: auth setup
+- Step 2: database setup
+- Step 3: employee dashboard
+- Step 4: admin dashboard
+- Step 5: history and filters
+
+7. Security rules
+- no public signup
+- employees can only see their own data
+- admin can see all data
+
+8. API / data flow
+- how frontend interacts with Supabase
+- how data is fetched, inserted, updated
+
+9. MVP scope
+- define the simplest working version first
+- what can be added later
+
+Important:
+- Be very structured and technical
+- Break everything into clear steps
+- Do not write code yet
+- Focus on planning the cleanest and simplest implementation
