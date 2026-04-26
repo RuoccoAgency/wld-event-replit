@@ -23,13 +23,7 @@ interface CarForm {
   brand: string;
   model: string;
   title: string;
-  priceEur: string;
-  priceText: string;
-  powerCv: string;
-  year: string;
-  engine: string;
   color: string;
-  seats: string;
   tags: string;
   description: string;
   status: string;
@@ -40,13 +34,7 @@ const defaultForm: CarForm = {
   brand: "",
   model: "",
   title: "",
-  priceEur: "",
-  priceText: "",
-  powerCv: "",
-  year: "",
-  engine: "",
   color: "",
-  seats: "",
   tags: "",
   description: "",
   status: "available",
@@ -97,13 +85,7 @@ export default function CarEditor() {
         brand: car.brand,
         model: car.model,
         title: car.title,
-        priceEur: car.priceEur?.toString() || "",
-        priceText: car.priceText || "",
-        powerCv: car.powerCv?.toString() || "",
-        year: car.year?.toString() || "",
-        engine: car.engine || "",
         color: car.color || "",
-        seats: car.seats?.toString() || "",
         tags: car.tags || "",
         description: car.description || "",
         status: car.status,
@@ -141,17 +123,11 @@ export default function CarEditor() {
         brand: form.brand,
         model: form.model,
         title: form.title,
-        priceText: form.priceText || null,
-        engine: form.engine || null,
         color: form.color || null,
         tags: form.tags || null,
         description: form.description || null,
         status: form.status,
       };
-      if (form.priceEur) body.priceEur = parseInt(form.priceEur);
-      if (form.powerCv) body.powerCv = parseInt(form.powerCv);
-      if (form.year) body.year = parseInt(form.year);
-      if (form.seats) body.seats = parseInt(form.seats);
 
       let res;
       if (isNew) {
@@ -327,13 +303,7 @@ export default function CarEditor() {
                 <option value="sold">Venduta</option>
               </select>
             </div>
-            <Field label="Prezzo EUR" name="priceEur" value={form.priceEur} onChange={handleChange} type="number" />
-            <Field label="Prezzo Testo" name="priceText" value={form.priceText} onChange={handleChange} placeholder="es: 1.000,00€" />
-            <Field label="CV" name="powerCv" value={form.powerCv} onChange={handleChange} type="number" />
-            <Field label="Anno" name="year" value={form.year} onChange={handleChange} type="number" />
-            <Field label="Motore" name="engine" value={form.engine} onChange={handleChange} />
             <Field label="Colore" name="color" value={form.color} onChange={handleChange} />
-            <Field label="Posti" name="seats" value={form.seats} onChange={handleChange} type="number" />
             <Field label="Tags (virgola separati)" name="tags" value={form.tags} onChange={handleChange} className="md:col-span-2" placeholder="Eventi aziendali, Transfer VIP, Matrimoni" />
           </div>
 

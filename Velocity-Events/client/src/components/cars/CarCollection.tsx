@@ -52,7 +52,7 @@ export function CarCollection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {hasDbCars
             ? dbCars.map((car, index) => (
                 <Link key={car.id} href={`/cars/${car.slug}`} className="block group relative bg-card overflow-hidden cursor-pointer border border-border/20 hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(140,191,175,0.3)] hover:-translate-y-2">

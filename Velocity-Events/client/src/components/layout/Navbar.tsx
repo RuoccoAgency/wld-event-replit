@@ -144,7 +144,7 @@ export function Navbar() {
             Partners
           </Link>
           <Link href="/about" className={cn("text-[10px] font-bold uppercase tracking-[0.2em] hover:text-primary transition-all", location === "/about" ? "text-primary border-b border-primary/30" : (showGlass ? "text-foreground/80" : "text-white/80"))}>
-            Contatti
+            Chi Siamo
           </Link>
         </div>
 

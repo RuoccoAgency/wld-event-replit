@@ -38,8 +38,6 @@ function ScrollToTop() {
   return null;
 }
 
-import { CustomCursor } from "@/components/ui/CustomCursor";
-
 function ProtectedHrDashboard() {
   const { user, loading } = useHrAuth();
 
@@ -75,7 +73,6 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <CustomCursor />
         <HrAuthProvider>
           <Router />
         </HrAuthProvider>

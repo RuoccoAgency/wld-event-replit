@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { setAdminToken } from "@/lib/adminAuth";
 
 export default function AdminLogin() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,11 +18,11 @@ export default function AdminLogin() {
       const res = await fetch("/api/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (!res.ok) {
-        setError("Password non valida");
+        setError("Email o password non validi");
         return;
       }
 
@@ -41,11 +42,20 @@ export default function AdminLogin() {
         <h1 className="text-2xl font-serif text-white text-center mb-8">Admin Panel</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded focus:outline-none focus:border-primary"
+            autoComplete="email"
+          />
+          <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 text-white rounded focus:outline-none focus:border-primary"
+            autoComplete="current-password"
           />
           {error && <p className="text-red-400 text-sm">{error}</p>}
           <button
