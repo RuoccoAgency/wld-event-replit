@@ -6,6 +6,7 @@ import { insertCarSchema } from "@shared/schema";
 import { registerHrRoutes } from "./hr-routes";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin2025";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@wldeventi.it";
 
 function adminAuth(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
@@ -28,11 +29,11 @@ export async function registerRoutes(
   registerObjectStorageRoutes(app);
 
   app.post("/api/admin/login", (req, res) => {
-    const { password } = req.body;
-    if (password === ADMIN_PASSWORD) {
+    const { email, password } = req.body;
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       return res.json({ token: ADMIN_PASSWORD, success: true });
     }
-    return res.status(401).json({ message: "Invalid password" });
+    return res.status(401).json({ message: "Credenziali non valide" });
   });
 
   app.get("/api/cars", async (req, res) => {

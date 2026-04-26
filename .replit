@@ -49,3 +49,4 @@ deploymentTarget = "vm"
 [userenv.shared]
 HR_JWT_SECRET = "60c9b9bf1a91cf76e3ac860e3d48770fe71ea09661db996ec1eb2c6fd6304ef8"
 HR_ADMIN_EMAIL = "admin@hr.local"
+ADMIN_EMAIL = "admin@wldeventi.it"
