@@ -3,14 +3,8 @@ import {
   ChevronLeft, 
   ChevronRight, 
   X, 
-  Users, 
-  Fuel, 
-  Zap, 
   Star, 
-  Gauge, 
-  Settings2, 
   Palette, 
-  Armchair,
   MessageCircle,
   ArrowRight,
   ShieldCheck,
@@ -106,13 +100,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
   };
 
   const specs = [
-    { icon: Gauge, label: "Velocità Max", value: car.specifiche?.velocitaMax || "N/D" },
-    { icon: Zap, label: "Accelerazione", value: car.specifiche?.accelerazione || "N/D" },
-    { icon: Fuel, label: "Motore", value: car.engine || car.specifiche?.motore || "N/D" },
-    { icon: Settings2, label: "Erogazione", value: car.powerCv ? `${car.powerCv} CV` : (car.specifiche?.cavalli || "N/D") },
-    { icon: Users, label: "Posti", value: car.seats ? `${car.seats} Posti` : (car.specifiche?.posti ? `${car.specifiche.posti} Posti` : "N/D") },
     { icon: Palette, label: "Colore", value: car.color || "Personalizzato" },
-    { icon: Armchair, label: "Interni", value: "Pelle Premium / Carbon" },
   ];
 
   return (
@@ -181,17 +169,6 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                 {car.description || "Un'esperienza di guida senza precedenti che ridefinisce il concetto di performance e lusso estremo."}
               </p>
               
-              {/* Refined Feature Snapshot (Reference has specific specs in the card) */}
-              <div className="grid grid-cols-2 gap-4 py-4 border-y border-slate-50">
-                <div>
-                  <p className="text-[8px] uppercase tracking-widest text-[#8CBFAF] font-bold">Potenza</p>
-                  <p className="text-lg font-bold text-slate-900">{car.powerCv ? `${car.powerCv} CV` : "Richiedi"}</p>
-                </div>
-                <div>
-                  <p className="text-[8px] uppercase tracking-widest text-[#8CBFAF] font-bold">Prestazioni</p>
-                  <p className="text-lg font-bold text-slate-900">{car.specifiche?.accelerazione || "Eccezionali"}</p>
-                </div>
-              </div>
               
               <div className="pt-4 flex flex-wrap gap-4">
                 <Button 
