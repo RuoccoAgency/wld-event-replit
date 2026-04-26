@@ -76,56 +76,6 @@ export default function CarsCollectionPage() {
   }, []);
 
   return (
-    <>
-      <div
-        id="maintenance-overlay"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 40,
-          backgroundColor: "#fafaf9",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          animation: "fadeIn 0.6s ease",
-          overflow: "hidden",
-        }}
-      >
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-          }
-        `}</style>
-        <p
-          style={{
-            fontFamily: "Georgia, serif",
-            fontSize: "clamp(1.4rem, 3vw, 2rem)",
-            fontWeight: 400,
-            color: "#1a1a1a",
-            letterSpacing: "0.04em",
-            marginBottom: "1rem",
-            textAlign: "center",
-          }}
-        >
-          Pagina in manutenzione
-        </p>
-        <p
-          style={{
-            fontFamily: "Georgia, serif",
-            fontSize: "clamp(0.85rem, 1.5vw, 1rem)",
-            color: "#666",
-            letterSpacing: "0.06em",
-            textAlign: "center",
-          }}
-        >
-          Stiamo lavorando per migliorare questa sezione
-        </p>
-      </div>
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-32 pb-20">
@@ -227,6 +177,5 @@ export default function CarsCollectionPage() {
       <BookingForm />
       <Footer />
     </div>
-    </>
   );
 }
