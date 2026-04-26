@@ -19,7 +19,6 @@ import { PageTransition } from "@/components/layout/PageTransition";
 import EventsPage from "@/pages/events";
 import AboutPage from "@/pages/about";
 import LuxuryAssetRental from "@/pages/luxury-asset-rental";
-import LuxuryCategoryDetail from "@/pages/luxury-category-detail";
 import BecomePartner from "@/pages/become-partner";
 import LimousineRental from "@/pages/limousine-rental";
 import ServiceDetail from "@/pages/service-detail";
@@ -119,9 +118,6 @@ function Router() {
           </Route>
           <Route path="/luxury-rental">
             <PageTransition><LuxuryAssetRental /></PageTransition>
-          </Route>
-          <Route path="/luxury-rental/:slug">
-            <PageTransition><LuxuryCategoryDetail /></PageTransition>
           </Route>
           <Route path="/become-partner">
             <PageTransition><BecomePartner /></PageTransition>

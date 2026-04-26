@@ -4,7 +4,6 @@ import { Footer } from "@/components/layout/Footer";
 import { BookingForm } from "@/components/contact/BookingForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "wouter";
 import { 
   Watch, 
   Plane, 
@@ -12,6 +11,7 @@ import {
   Home, 
   ShoppingBag, 
   Gem, 
+  Car,
   MapPin,
   CheckCircle2,
   ArrowRight
@@ -19,46 +19,46 @@ import {
 
 const categories = [
   {
-    slug: "orologi-di-lusso",
     title: "Orologi di lusso",
     description: "Pezzi rari e collezioni esclusive dei marchi più prestigiosi al mondo.",
     image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=800",
     icon: Watch
   },
   {
-    slug: "jet-privati",
     title: "Jet privati",
     description: "Viaggia con il massimo del comfort e della flessibilità, per i tuoi spostamenti veloci e privati.",
     image: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=800",
     icon: Plane
   },
   {
-    slug: "yacht",
     title: "Yacht",
     description: "Scivola sulle onde a bordo di imbarcazioni magnifiche, dotate di ogni comfort immaginabile.",
     image: "/images/yacht.png",
     icon: Anchor
   },
   {
-    slug: "ville-e-appartamenti-di-lusso",
     title: "Ville e appartamenti di lusso",
     description: "Dimore da sogno nelle posizioni più esclusive, curate in ogni minimo dettaglio.",
     image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80&w=800",
     icon: Home
   },
   {
-    slug: "borse-di-lusso",
     title: "Borse di lusso",
     description: "Accessori iconici e modelli da collezione, per completare il tuo stile con eleganza.",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=800",
     icon: ShoppingBag
   },
   {
-    slug: "gioielli",
     title: "Gioielli",
     description: "Creazioni uniche e pietre preziose che catturano la luce e l'ammirazione in ogni occasione.",
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800",
     icon: Gem
+  },
+  {
+    title: "Auto di lusso",
+    description: "Prestazioni mozzafiato e design leggendario per guidare il futuro dell'eleganza.",
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800",
+    icon: Car
   }
 ];
 
@@ -215,28 +215,26 @@ export default function LuxuryAssetRental() {
             >
               {categories.map((cat, i) => (
                 <motion.div key={i} variants={fadeIn}>
-                  <Link href={`/luxury-rental/${cat.slug}`} className="block h-full">
-                    <Card className="group border-none overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 rounded-none h-full flex flex-col">
-                      <div className="relative h-64 overflow-hidden">
-                        <img 
-                          src={cat.image} 
-                          alt={cat.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
-                        <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-3 rounded-full text-white">
-                          <cat.icon size={20} />
-                        </div>
+                  <Card className="group border-none overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 rounded-none h-full flex flex-col">
+                    <div className="relative h-64 overflow-hidden">
+                      <img 
+                        src={cat.image} 
+                        alt={cat.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
+                      <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-3 rounded-full text-white">
+                        <cat.icon size={20} />
                       </div>
-                      <CardContent className="p-8 flex-grow flex flex-col">
-                        <h3 className="text-xl font-serif mb-4 group-hover:text-primary transition-colors">{cat.title}</h3>
-                        <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6 flex-grow">{cat.description}</p>
-                        <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-[10px] opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
-                          Scopri di più <ArrowRight size={12} />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                    </div>
+                    <CardContent className="p-8 flex-grow flex flex-col">
+                      <h3 className="text-xl font-serif mb-4 group-hover:text-primary transition-colors">{cat.title}</h3>
+                      <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6 flex-grow">{cat.description}</p>
+                      <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-[10px] opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
+                        Scopri di più <ArrowRight size={12} />
+                      </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               ))}
             </motion.div>
