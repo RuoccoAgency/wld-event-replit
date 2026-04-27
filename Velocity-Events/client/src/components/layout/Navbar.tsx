@@ -200,6 +200,14 @@ export function Navbar() {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed inset-0 bg-white z-[60] pt-24 pb-8 px-5 sm:px-8 flex flex-col items-start overflow-y-auto"
             >
+              <button
+                onClick={closeMobileMenu}
+                aria-label="Chiudi menu mobile"
+                className="absolute top-6 right-5 sm:right-8 p-2 rounded-full text-slate-900 hover:bg-slate-100 transition-colors"
+              >
+                <X size={24} />
+              </button>
+
               <div className="w-full space-y-6">
                 {/* MOBILE DROPDOWN (SERVIZI) */}
                 <div className="space-y-4">
