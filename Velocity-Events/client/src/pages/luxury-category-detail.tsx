@@ -15,6 +15,12 @@ type LuxuryCategoryData = {
   highlights: string[];
 };
 
+type FeaturedCard = {
+  title: string;
+  description: string;
+  image: string;
+};
+
 const CATEGORY_DATA: Record<string, LuxuryCategoryData> = {
   "orologi-di-lusso": {
     title: "Orologi di lusso",
@@ -66,10 +72,22 @@ const CATEGORY_DATA: Record<string, LuxuryCategoryData> = {
   },
 };
 
+const FEATURED_CARDS: Partial<Record<string, FeaturedCard[]>> = {
+  "orologi-di-lusso": [
+    {
+      title: "Rolex Daytona Ref.16520 Tiffany & Co.",
+      image: "/images/rolex-daytona-tiffany.png",
+      description:
+        "Il Rolex Daytona Ref.16520 Tiffany e Co. è una versione rarissima del celebre “Zenith Daytona”, prodotta tra la fine degli anni ’80 e ’90. Si distingue per il quadrante doppia firma, dove oltre al logo Rolex compare anche “Tiffany e Co.”, rivenditore ufficiale per un breve periodo. Questi esemplari furono realizzati in quantità estremamente limitate, rendendoli oggi altamente ricercati dai collezionisti più esperti. Questo modello presenta anche il quadrante “Floating” ulteriore dettaglio che rende questo orologio ancor più raro e ricercato.",
+    },
+  ],
+};
+
 export default function LuxuryCategoryDetail() {
   const [, params] = useRoute("/luxury-rental/:slug");
   const slug = params?.slug;
   const category = slug ? CATEGORY_DATA[slug] : null;
+  const featuredCards = slug ? FEATURED_CARDS[slug] : undefined;
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
@@ -167,6 +185,35 @@ export default function LuxuryCategoryDetail() {
             </div>
           </div>
         </section>
+
+        {featuredCards?.length ? (
+          <section className="py-20 bg-[#fafafa]">
+            <div className="container mx-auto px-6">
+              <div className="max-w-2xl mb-10">
+                <h2 className="text-3xl md:text-4xl font-serif mb-3">In evidenza</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Una selezione di pezzi particolarmente rari e ricercati, scelti per chi desidera il massimo in termini di
+                  prestigio e collezionismo.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                {featuredCards.map((item) => (
+                  <Card key={item.title} className="border-none shadow-sm rounded-none overflow-hidden bg-white">
+                    <div className="relative h-72 md:h-96 overflow-hidden">
+                      <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-black/10" />
+                    </div>
+                    <CardContent className="p-10">
+                      <h3 className="text-2xl font-serif mb-5">{item.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
       </main>
 
       <BookingForm />
