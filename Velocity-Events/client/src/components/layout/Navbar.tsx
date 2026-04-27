@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 
 const SERVIZI_LIST = [
   { label: "Nascita", slug: "nascita" },
@@ -192,13 +193,13 @@ export function Navbar() {
 
         {/* MOBILE MENU */}
         <AnimatePresence>
-          {isMobileMenuOpen && (
+          {isMobileMenuOpen && typeof document !== "undefined" && createPortal(
             <motion.div 
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 bg-white z-[60] pt-24 pb-8 px-5 sm:px-8 flex flex-col items-start overflow-y-auto"
+              className="fixed inset-0 bg-white z-[120] pt-24 pb-8 px-5 sm:px-8 flex flex-col items-start overflow-y-auto"
             >
               <button
                 onClick={closeMobileMenu}
@@ -254,7 +255,8 @@ export function Navbar() {
                   Richiedi Preventivo
                 </a>
               </div>
-            </motion.div>
+            </motion.div>,
+            document.body
           )}
         </AnimatePresence>
       </div>
