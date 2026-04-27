@@ -99,7 +99,7 @@ export default function LimousineRental() {
             <div className="absolute inset-0 bg-black/50" />
           </div>
           
-          <div className="container mx-auto px-6 relative z-10 text-center text-white">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center text-white">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function LimousineRental() {
               <Button 
                 onClick={scrollToContact}
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-10 py-7 text-sm shadow-2xl transition-all"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-10 py-6 sm:py-7 text-sm shadow-2xl transition-all"
               >
                 Prenota ora
               </Button>
@@ -133,8 +133,8 @@ export default function LimousineRental() {
         </section>
 
         {/* INTRO SECTION */}
-        <section className="py-24">
-          <div className="container mx-auto px-6 max-w-4xl text-center">
+        <section className="py-16 sm:py-20 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -143,7 +143,7 @@ export default function LimousineRental() {
             >
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Elegance on Wheels</span>
               <h2 className="text-3xl md:text-4xl font-serif mb-10">Un'esperienza indimenticabile</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed font-light mb-12">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light mb-12">
                 Il nostro servizio di noleggio limousine offre molto più di un semplice trasporto. 
                 È un’immersione totale nel comfort e nel lusso, pensata per rendere unico ogni evento: 
                 matrimoni, compleanni, serate di gala o importanti incontri d’affari. 
@@ -170,8 +170,8 @@ export default function LimousineRental() {
         </section>
 
         {/* FLEET SECTION */}
-        <section className="py-24 bg-slate-50" id="fleet-gallery">
-          <div className="container mx-auto px-6 text-center">
+        <section className="py-16 sm:py-20 lg:py-24 bg-slate-50" id="fleet-gallery">
+          <div className="container mx-auto px-4 sm:px-6 text-center">
             <h2 className="text-4xl font-serif mb-4">La Nostra Flotta</h2>
             <p className="text-muted-foreground font-light max-w-2xl mx-auto italic mb-12">
               “Scegli il modello che meglio si adatta alla tua occasione.”
@@ -216,8 +216,8 @@ export default function LimousineRental() {
 
 
         {/* TRUST SECTION */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
               {[
                 { icon: ShieldCheck, title: "Qualità Garantita", desc: "Veicoli controllati e sanificati prima di ogni servizio." },
@@ -238,7 +238,7 @@ export default function LimousineRental() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="py-24 bg-slate-950 text-white text-center rounded-none overflow-hidden relative">
+        <section className="py-16 sm:py-20 lg:py-24 bg-slate-950 text-white text-center rounded-none overflow-hidden relative">
           <div className="absolute inset-0 opacity-20">
             <img 
               src="/images/limousine/hover-limo/hover-limo-4.jpg" 
@@ -246,7 +246,7 @@ export default function LimousineRental() {
               alt="Background context"
             />
           </div>
-          <div className="container mx-auto px-6 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <h2 className="text-4xl md:text-5xl font-serif mb-8 max-w-2xl mx-auto">Pronto per un viaggio straordinario?</h2>
             <p className="text-lg text-slate-400 font-light mb-12 max-w-xl mx-auto">
               Contattaci oggi stesso per ricevere un preventivo personalizzato per il tuo noleggio limousine.
@@ -254,7 +254,7 @@ export default function LimousineRental() {
             <Button 
               onClick={scrollToContact}
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-14 py-8 shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-12 sm:px-14 py-7 sm:py-8 shadow-[0_0_30px_rgba(var(--primary),0.3)] transition-all hover:scale-105"
             >
               Contattaci Ora
             </Button>

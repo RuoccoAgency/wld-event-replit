@@ -52,7 +52,7 @@ export default function BecomePartner() {
       
       <main className="uppercase-none">
         {/* HERO SECTION */}
-        <section className="relative py-24 md:py-32 bg-slate-950 text-white overflow-hidden">
+        <section className="relative py-16 sm:py-20 md:py-32 bg-slate-950 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10" />
             <img 
@@ -62,7 +62,7 @@ export default function BecomePartner() {
             />
           </div>
           
-          <div className="container mx-auto px-6 relative z-20">
+          <div className="container mx-auto px-4 sm:px-6 relative z-20">
             <div className="max-w-3xl">
               <motion.span 
                 initial={{ opacity: 0, x: -20 }}
@@ -83,7 +83,7 @@ export default function BecomePartner() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl md:text-2xl font-light mb-10 text-slate-300"
+                className="text-base sm:text-xl md:text-2xl font-light mb-10 text-slate-300"
               >
                 Entra nella nostra rete e offri i tuoi servizi di noleggio beni di lusso a una clientela d'élite.
               </motion.p>
@@ -105,8 +105,8 @@ export default function BecomePartner() {
         </section>
 
         {/* INTRO SECTION */}
-        <section className="py-24 border-b border-slate-100">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 border-b border-slate-100">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial="hidden"
@@ -156,8 +156,8 @@ export default function BecomePartner() {
         </section>
 
         {/* REQUIREMENTS SECTION */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-6 max-w-5xl">
+        <section className="py-16 sm:py-20 lg:py-24 bg-slate-50">
+          <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
             <div className="text-center mb-16">
               <span className="text-primary font-bold tracking-[0.3em] text-[10px] mb-4 block uppercase">Criteri di Accesso</span>
               <h2 className="text-3xl font-serif">Requisiti per la Candidatura</h2>
@@ -186,8 +186,8 @@ export default function BecomePartner() {
         </section>
 
         {/* APPLICATION FORM */}
-        <section id="application-form" className="py-24">
-          <div className="container mx-auto px-6 max-w-4xl">
+        <section id="application-form" className="py-16 sm:py-20 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
             <div className="bg-white border border-slate-100 shadow-2xl p-8 md:p-12">
               <div className="mb-12 text-center">
                 <h2 className="text-3xl font-serif mb-4">Modulo di Candidatura</h2>
@@ -255,7 +255,7 @@ export default function BecomePartner() {
                   <Button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold uppercase tracking-widest py-8 text-sm group"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold uppercase tracking-widest py-7 sm:py-8 text-sm group"
                   >
                     {isSubmitting ? "Invio in corso..." : "Invia candidatura"} 
                     {!isSubmitting && <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />}
@@ -267,8 +267,8 @@ export default function BecomePartner() {
         </section>
 
         {/* TRUST SECTION */}
-        <section className="py-24 bg-slate-50">
-          <div className="container mx-auto px-6 text-center max-w-3xl">
+        <section className="py-16 sm:py-20 lg:py-24 bg-slate-50">
+          <div className="container mx-auto px-4 sm:px-6 text-center max-w-3xl">
             <ShieldCheck className="text-primary mx-auto mb-8" size={48} />
             <h2 className="text-3xl font-serif mb-6">Qualità e Trasparenza Garantite</h2>
             <div className="space-y-4 text-muted-foreground font-light text-lg">
@@ -285,15 +285,15 @@ export default function BecomePartner() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="py-32 bg-slate-900 text-white text-center">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-32 bg-slate-900 text-white text-center">
+          <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-4xl md:text-5xl font-serif mb-8 max-w-2xl mx-auto leading-tight">
               Unisciti a una rete di servizi di alto livello
             </h2>
             <Button 
               onClick={scrollToForm}
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-12 py-8 transition-all hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-12 py-7 sm:py-8 transition-all hover:scale-105"
             >
               Invia la tua candidatura
             </Button>

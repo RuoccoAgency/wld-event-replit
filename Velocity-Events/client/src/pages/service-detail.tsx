@@ -47,7 +47,7 @@ export default function ServiceDetail() {
       
       <main className="uppercase-none">
         {/* HERO SECTION */}
-        <section className="relative py-32 bg-slate-900 text-white overflow-hidden">
+        <section className="relative py-16 sm:py-20 lg:py-32 bg-slate-900 text-white overflow-hidden">
           <div className="absolute inset-0 opacity-20">
              {/* Using a generic high-end event image for the background */}
             <img 
@@ -58,7 +58,7 @@ export default function ServiceDetail() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
           </div>
           
-          <div className="container mx-auto px-6 relative z-10 text-center">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ export default function ServiceDetail() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl md:text-2xl font-light mb-10 text-slate-300 max-w-2xl mx-auto"
+              className="text-base sm:text-xl md:text-2xl font-light mb-10 text-slate-300 max-w-2xl mx-auto"
             >
               {data.subtitle}
             </motion.p>
@@ -91,8 +91,8 @@ export default function ServiceDetail() {
         </section>
 
         {/* DESCRIPTION SECTION */}
-        <section className="py-24 border-b border-slate-100">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 border-b border-slate-100">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-4xl mx-auto">
               <div className="flex flex-col md:flex-row gap-12 items-center">
                 <div className="flex-1 text-center md:text-left">
@@ -107,7 +107,7 @@ export default function ServiceDetail() {
                     {data.presentation}
                   </p>
                 </div>
-                <div className="flex-1 w-full h-[400px] overflow-hidden shadow-2xl">
+                <div className="flex-1 w-full h-[320px] sm:h-[400px] overflow-hidden shadow-2xl">
                   <img 
                     src="https://images.unsplash.com/photo-1478147427282-58a87a120781?auto=format&fit=crop&q=80&w=1000" 
                     alt="Event detail" 
@@ -120,8 +120,8 @@ export default function ServiceDetail() {
         </section>
 
         {/* PACKAGES SECTION */}
-        <section className="py-32 bg-slate-50">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-32 bg-slate-50">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center mb-20">
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Le Nostre Proposte</span>
               <h2 className="text-4xl font-serif mb-6">Scegli il tuo Livello di Eccellenza</h2>
@@ -254,8 +254,8 @@ export default function ServiceDetail() {
         </section>
 
         {/* FINAL CTA SECTION */}
-        <section className="py-32 bg-slate-950 text-white text-center">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-32 bg-slate-950 text-white text-center">
+          <div className="container mx-auto px-4 sm:px-6">
             <h2 className="text-4xl md:text-5xl font-serif mb-8 max-w-3xl mx-auto leading-tight">
               Rendiamo il tuo evento {data.title} un capolavoro di eleganza
             </h2>
@@ -265,7 +265,7 @@ export default function ServiceDetail() {
             <Button 
               onClick={scrollToContact}
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-14 py-8 shadow-2xl transition-all hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-12 sm:px-14 py-7 sm:py-8 shadow-2xl transition-all hover:scale-105"
             >
               Contattaci per un Preventivo
             </Button>

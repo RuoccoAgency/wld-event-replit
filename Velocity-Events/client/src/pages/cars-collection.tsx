@@ -79,7 +79,7 @@ export default function CarsCollectionPage() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-32 pb-20">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-serif text-foreground mb-4">
               La Nostra Collezione

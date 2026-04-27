@@ -65,7 +65,7 @@ export default function AboutPage() {
         <section className="relative h-[40vh] md:h-[50vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background z-10" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&q=80')] bg-cover bg-center" />
-        <div className="relative z-20 text-center px-6">
+        <div className="relative z-20 text-center px-4 sm:px-6">
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,14 +86,14 @@ export default function AboutPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-white/60 max-w-2xl mx-auto text-lg"
+            className="text-white/60 max-w-2xl mx-auto text-base sm:text-lg"
           >
             Passione, eleganza e dedizione al servizio dei vostri momenti più importanti.
           </motion.p>
         </div>
       </section>
 
-      <section className="py-24 container mx-auto px-6">
+      <section className="py-16 sm:py-20 lg:py-24 container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -146,8 +146,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-secondary/30 border-y border-border/20">
-        <div className="container mx-auto px-6">
+      <section className="py-16 sm:py-20 bg-secondary/30 border-y border-border/20">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
@@ -166,7 +166,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 container mx-auto px-6">
+      <section className="py-16 sm:py-20 lg:py-24 container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -202,8 +202,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-6">
+      <section className="py-16 sm:py-20 lg:py-24 bg-secondary/20">
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -242,7 +242,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 container mx-auto px-6">
+      <section className="py-16 sm:py-20 lg:py-24 container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

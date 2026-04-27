@@ -49,8 +49,8 @@ export function BookingForm() {
   }
 
   return (
-    <section id="contact" className="py-32 bg-background border-t border-border/20">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-20 sm:py-24 lg:py-32 bg-background border-t border-border/20">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col lg:flex-row gap-16 items-start">
           <motion.div 
             className="flex-1"
@@ -64,10 +64,14 @@ export function BookingForm() {
               Raccontaci il tuo evento, ti aiuteremo a scegliere l’auto perfetta per rendere il tuo giorno speciale davvero indimenticabile.
             </p>
             <div className="space-y-4 text-sm text-foreground/80 font-light">
-              <p className="flex items-center gap-3"><span className="text-primary w-20 uppercase text-xs tracking-widest">Telefono</span> 081 1878 9724</p>
-              <p className="flex items-center gap-3"><span className="text-primary w-20 uppercase text-xs tracking-widest">Email</span> info@luxuryweddingcars.it</p>
+              <p className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                <span className="text-primary sm:w-20 uppercase text-xs tracking-widest">Telefono</span> 081 1878 9724
+              </p>
+              <p className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                <span className="text-primary sm:w-20 uppercase text-xs tracking-widest">Email</span> info@luxuryweddingcars.it
+              </p>
               <div className="flex items-start gap-3">
-                <span className="text-primary w-20 uppercase text-xs tracking-widest mt-1">Sedi</span>
+                <span className="text-primary sm:w-20 uppercase text-xs tracking-widest mt-1">Sedi</span>
                 <div className="flex-1 space-y-2">
                   <p>• Via Innsbruck, 27/C – 39100 Bolzano (BZ)</p>
                   <p>• Piazza J. F. Kennedy, 25 – 80019 Qualiano (NA)</p>

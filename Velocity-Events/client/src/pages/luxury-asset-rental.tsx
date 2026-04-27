@@ -118,7 +118,7 @@ export default function LuxuryAssetRental() {
             <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
           </div>
           
-          <div className="container mx-auto px-6 relative z-10 text-center text-white">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center text-white">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ export default function LuxuryAssetRental() {
               <Button 
                 onClick={scrollToContact}
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-10 py-7 text-sm shadow-2xl transition-all hover:scale-105"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-10 py-6 sm:py-7 text-sm shadow-2xl transition-all hover:scale-105"
               >
                 Richiedi informazioni
               </Button>
@@ -169,8 +169,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* INTRO SECTION */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 text-center max-w-4xl">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 text-center max-w-4xl">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -180,12 +180,12 @@ export default function LuxuryAssetRental() {
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Esclusività Senza Confini</span>
               <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-10">L'eccellenza in ogni dettaglio</h2>
               <div className="h-1 w-20 bg-primary/20 mx-auto mb-10" />
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6 font-light">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 font-light">
                 Il nostro servizio di noleggio beni di lusso è progettato per chi cerca l'eccellenza senza compromessi. 
                 Che si tratti di un evento speciale, una trasferta d'affari o il desiderio di vivere un momento unico, 
                 mettiamo a disposizione i asset più esclusivi del mercato.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed font-light italic">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light italic">
                 Il servizio è accessibile a tutti i nostri clienti, gestito con professionalità estrema attraverso una rete selezionata 
                 di aziende partner strategicamente posizionate nelle Isole Canarie, a Madrid e a Barcellona.
               </p>
@@ -194,8 +194,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* LUXURY CATEGORIES */}
-        <section className="py-24 bg-[#f8f8f8]">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-[#f8f8f8]">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
               <div className="max-w-2xl">
                 <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">La Nostra Selezione</span>
@@ -244,8 +244,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* LOCATION SECTION */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center mb-16">
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Operatività</span>
               <h2 className="text-4xl font-serif text-foreground">I Nostri Hub Esclusivi</h2>
@@ -276,8 +276,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* SERVICE MODEL SECTION */}
-        <section className="py-24 bg-secondary/30 relative">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-secondary/30 relative">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
               <div className="lg:w-1/2">
                 <motion.div
@@ -341,8 +341,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="py-24 bg-white text-center">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white text-center">
+          <div className="container mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

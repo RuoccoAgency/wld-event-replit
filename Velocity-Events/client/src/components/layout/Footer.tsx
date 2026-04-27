@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react";
 export function Footer() {
   return (
     <footer className="bg-secondary border-t border-border/20 py-20">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Column 1: Brand & Info */}
           <div className="md:col-span-3">
@@ -13,7 +13,7 @@ export function Footer() {
                 Wedding<br />Luxury Drive
               </h3>
             </div>
-            <p className="text-muted-foreground text-[11px] leading-relaxed mb-8 max-w-[200px]">
+            <p className="text-muted-foreground text-[11px] leading-relaxed mb-8 max-w-[260px]">
               Eleganza, stile e passione al tuo servizio per rendere indimenticabile il tuo giorno speciale.
             </p>
             <div className="flex gap-4">
@@ -93,7 +93,7 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="mt-16 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground uppercase tracking-widest">
+        <div className="mt-16 pt-8 border-t border-border/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-muted-foreground uppercase tracking-widest text-center md:text-left">
           <p>© 2026 Luxury Wedding Cars. Tutti i diritti riservati.</p>
           <p>P.IVA 00000000000</p>
         </div>

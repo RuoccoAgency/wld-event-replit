@@ -134,7 +134,7 @@ export default function LuxuryCategoryDetail() {
             <div className="absolute inset-0 bg-black/45" />
           </div>
 
-          <div className="container mx-auto px-6 relative z-10 text-center text-white">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center text-white">
             <motion.h1
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
@@ -153,8 +153,8 @@ export default function LuxuryCategoryDetail() {
           </div>
         </section>
 
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <Link
               href="/luxury-rental"
               className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors mb-10"
@@ -199,8 +199,8 @@ export default function LuxuryCategoryDetail() {
         </section>
 
         {featuredCards?.length ? (
-          <section className="py-20 bg-[#fafafa]">
-            <div className="container mx-auto px-6">
+          <section className="py-16 sm:py-20 bg-[#fafafa]">
+            <div className="container mx-auto px-4 sm:px-6">
               <div className="max-w-2xl mb-10">
                 <h2 className="text-3xl md:text-4xl font-serif mb-3">In evidenza</h2>
                 <p className="text-muted-foreground leading-relaxed">

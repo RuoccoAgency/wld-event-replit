@@ -63,14 +63,14 @@ export function Navbar() {
         showGlass ? "glass py-4 shadow-xl" : "bg-transparent py-6"
       )}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between relative">
+      <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between relative">
         {/* LEFT: Logo / Brand */}
         <div className="flex-1 flex justify-start items-center">
           <Link href="/" className="flex items-center gap-3 z-50 group/logo">
             <motion.img 
               src="/logo.png" 
               alt="Wedding Luxury Drive" 
-              className="h-10 md:h-12 lg:h-14 w-auto"
+              className="h-9 sm:h-10 md:h-12 lg:h-14 w-auto"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             />
@@ -171,7 +171,7 @@ export function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 bg-white z-[60] pt-24 px-8 flex flex-col items-start overflow-y-auto"
+              className="fixed inset-0 bg-white z-[60] pt-24 px-5 sm:px-8 flex flex-col items-start overflow-y-auto"
             >
               <div className="w-full space-y-6">
                 {/* MOBILE DROPDOWN (SERVIZI) */}
@@ -189,7 +189,7 @@ export function Navbar() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden bg-slate-50 p-4 space-y-2"
+                        className="overflow-hidden bg-slate-50 p-4 space-y-2 rounded-sm"
                       >
                          <div className="grid grid-cols-1 gap-y-1">
                           {SERVIZI_LIST.map((servizio) => (
