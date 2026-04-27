@@ -80,6 +80,18 @@ const FEATURED_CARDS: Partial<Record<string, FeaturedCard[]>> = {
       description:
         "Il Rolex Daytona Ref.16520 Tiffany e Co. è una versione rarissima del celebre “Zenith Daytona”, prodotta tra la fine degli anni ’80 e ’90. Si distingue per il quadrante doppia firma, dove oltre al logo Rolex compare anche “Tiffany e Co.”, rivenditore ufficiale per un breve periodo. Questi esemplari furono realizzati in quantità estremamente limitate, rendendoli oggi altamente ricercati dai collezionisti più esperti. Questo modello presenta anche il quadrante “Floating” ulteriore dettaglio che rende questo orologio ancor più raro e ricercato.",
     },
+    {
+      title: "Rolex Daytona (quadrante verde e oro)",
+      image: "/images/rolex-daytona-green.png",
+      description:
+        "Rolex Daytona. Questo modello presenta un quadrante verde vivo e dorato con contatori colorati mediante spruzzatura, indici delle ore in applique e lancette in oro 18 ct con visualizzazione Chromalight, una sostanza luminescente ad alta leggibilità. Il quadrante consente al pilota di pianificare accuratamente i tempi del percorso e la tattica di guida.",
+    },
+    {
+      title: "Rolex Submariner Date",
+      image: "/images/rolex-submariner-date.png",
+      description:
+        "La visualizzazione luminescente Chromalight sul quadrante è un’innovazione che garantisce una visibilità maggiore in ambienti con scarsa luminosità, un aspetto essenziale per i subacquei. Le forme semplici degli indici – triangoli, tondi e rettangoli – e le ampie lancette delle ore e dei minuti assicurano una lettura istantanea e affidabile, per evitare qualsiasi rischio di confusione sott’acqua.",
+    },
   ],
 };
 
@@ -197,7 +209,7 @@ export default function LuxuryCategoryDetail() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
                 {featuredCards.map((item) => (
                   <Card key={item.title} className="border-none shadow-sm rounded-none overflow-hidden bg-white">
                     <div className="relative h-72 md:h-96 overflow-hidden">
