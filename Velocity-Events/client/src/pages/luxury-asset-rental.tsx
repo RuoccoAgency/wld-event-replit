@@ -108,7 +108,7 @@ export default function LuxuryAssetRental() {
       
       <main className="w-full">
         {/* HERO SECTION */}
-        <section className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] flex items-center justify-center overflow-hidden w-full">
+        <section className="relative min-h-[calc(100vh-76px)] md:min-h-[calc(100vh-92px)] lg:min-h-[calc(100vh-100px)] flex items-center justify-center overflow-hidden w-full">
           <div className="absolute inset-0 z-0">
             <img 
               src="/images/yacht_hero.png" 
@@ -118,12 +118,12 @@ export default function LuxuryAssetRental() {
             <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
           </div>
           
-          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center text-white">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center text-white pt-8 sm:pt-10 md:pt-12">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-serif mb-6 tracking-tight"
+              className="text-[2.35rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-serif mb-5 sm:mb-6 tracking-tight"
             >
               Noleggio beni di lusso
             </motion.h1>
@@ -131,7 +131,7 @@ export default function LuxuryAssetRental() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl font-light mb-8 max-w-3xl mx-auto text-white/90"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl font-light mb-6 sm:mb-8 max-w-3xl mx-auto text-white/90 leading-relaxed"
             >
               Esperienze esclusive disponibili tramite partner nelle Canarie, Madrid e Barcellona.
             </motion.p>
@@ -139,7 +139,7 @@ export default function LuxuryAssetRental() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-base md:text-lg mb-10 max-w-2xl mx-auto text-white/70 font-light"
+              className="text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto text-white/75 font-light leading-relaxed"
             >
               Sperimenta l'apice della raffinatezza e dell'esclusività. Offriamo ai nostri clienti l'accesso a un portfolio d'élite di beni di prestigio, per trasformare ogni momento in un'esperienza indimenticabile.
             </motion.p>
@@ -151,7 +151,7 @@ export default function LuxuryAssetRental() {
               <Button 
                 onClick={scrollToContact}
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-10 py-6 sm:py-7 text-sm shadow-2xl transition-all hover:scale-105"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.2em] md:tracking-widest px-7 sm:px-10 md:px-12 py-4 sm:py-6 text-[11px] sm:text-sm shadow-2xl transition-all hover:scale-105 w-full sm:w-auto"
               >
                 Richiedi informazioni
               </Button>
@@ -162,9 +162,9 @@ export default function LuxuryAssetRental() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, delay: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
+            className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2"
           >
-            <div className="w-[1px] h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
+            <div className="w-[1px] h-14 sm:h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
           </motion.div>
         </section>
 
@@ -196,12 +196,12 @@ export default function LuxuryAssetRental() {
         {/* LUXURY CATEGORIES */}
         <section className="py-16 sm:py-20 lg:py-24 bg-[#f8f8f8]">
           <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="flex flex-col md:flex-row justify-between md:items-end mb-12 sm:mb-16 gap-5 sm:gap-6">
               <div className="max-w-2xl">
                 <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">La Nostra Selezione</span>
-                <h2 className="text-4xl md:text-5xl font-serif text-foreground">Categorie di Prestigio</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-foreground">Categorie di Prestigio</h2>
               </div>
-              <p className="text-muted-foreground max-w-sm text-sm font-light">
+              <p className="text-muted-foreground max-w-sm text-sm font-light leading-relaxed">
                 Esplora la nostra collezione curata di asset di lusso, selezionati per soddisfare i gusti più esigenti.
               </p>
             </div>
@@ -211,7 +211,7 @@ export default function LuxuryAssetRental() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
             >
               {categories.map((cat, i) => (
                 <motion.div key={i} variants={fadeIn}>

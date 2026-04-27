@@ -36,7 +36,8 @@ const SERVIZI_LIST = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isServiziOpen, setIsServiziOpen] = useState(false);
+  const [isDesktopServiziOpen, setIsDesktopServiziOpen] = useState(false);
+  const [isMobileServiziOpen, setIsMobileServiziOpen] = useState(false);
   const [location] = useLocation();
 
   useEffect(() => {
@@ -53,8 +54,26 @@ export function Navbar() {
   // Close menus on location change
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setIsServiziOpen(false);
+    setIsDesktopServiziOpen(false);
+    setIsMobileServiziOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileServiziOpen(false);
+  };
 
   return (
     <nav
@@ -85,18 +104,18 @@ export function Navbar() {
           {/* SERVIZI DROPDOWN */}
           <div 
             className="relative h-full flex items-center"
-            onMouseEnter={() => setIsServiziOpen(true)}
-            onMouseLeave={() => setIsServiziOpen(false)}
+            onMouseEnter={() => setIsDesktopServiziOpen(true)}
+            onMouseLeave={() => setIsDesktopServiziOpen(false)}
           >
             <button className={cn(
               "flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-primary py-4",
               showGlass ? "text-foreground/80" : "text-white/80"
             )}>
-              Servizi <ChevronDown size={14} className={cn("transition-transform duration-300", isServiziOpen ? "rotate-180" : "")} />
+              Servizi <ChevronDown size={14} className={cn("transition-transform duration-300", isDesktopServiziOpen ? "rotate-180" : "")} />
             </button>
             
             <AnimatePresence>
-              {isServiziOpen && (
+              {isDesktopServiziOpen && (
                 <motion.div 
                   initial={{ opacity: 0, y: 10, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -115,7 +134,7 @@ export function Navbar() {
                         <Link 
                           href={`/servizi/${servizio.slug}`}
                           className="text-[10px] uppercase tracking-wider text-slate-500 hover:text-primary transition-colors py-1 flex items-center group/link"
-                          onClick={() => setIsServiziOpen(false)}
+                          onClick={() => setIsDesktopServiziOpen(false)}
                         >
                           <span className="w-0 group-hover/link:w-2 h-[1px] bg-primary mr-0 group-hover/link:mr-2 transition-all"></span>
                           {servizio.label}
@@ -157,7 +176,15 @@ export function Navbar() {
           {/* MOBILE TOGGLE */}
           <button 
             className={cn("lg:hidden p-2 rounded-full transition-colors", showGlass ? "text-foreground" : "text-white")}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              if (isMobileMenuOpen) {
+                closeMobileMenu();
+                return;
+              }
+              setIsMobileMenuOpen(true);
+            }}
+            aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -171,20 +198,20 @@ export function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 bg-white z-[60] pt-24 px-5 sm:px-8 flex flex-col items-start overflow-y-auto"
+              className="fixed inset-0 bg-white z-[60] pt-24 pb-8 px-5 sm:px-8 flex flex-col items-start overflow-y-auto"
             >
               <div className="w-full space-y-6">
                 {/* MOBILE DROPDOWN (SERVIZI) */}
                 <div className="space-y-4">
                   <button 
-                    onClick={() => setIsServiziOpen(!isServiziOpen)}
+                    onClick={() => setIsMobileServiziOpen(!isMobileServiziOpen)}
                     className="flex items-center justify-between w-full text-lg font-serif text-slate-900 border-b border-slate-100 pb-3"
                   >
                     <span>Servizi</span>
-                    <ChevronDown size={18} className={cn("transition-transform", isServiziOpen ? "rotate-180" : "")} />
+                    <ChevronDown size={18} className={cn("transition-transform", isMobileServiziOpen ? "rotate-180" : "")} />
                   </button>
                   <AnimatePresence>
-                    {isServiziOpen && (
+                    {isMobileServiziOpen && (
                       <motion.div 
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
@@ -197,7 +224,7 @@ export function Navbar() {
                               key={servizio.slug}
                               href={`/servizi/${servizio.slug}`}
                               className="text-xs font-light text-slate-600 hover:text-primary block py-1"
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={closeMobileMenu}
                             >
                               {servizio.label}
                             </Link>
@@ -208,14 +235,14 @@ export function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                <Link href="/collection" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Collezione</Link>
-                <Link href="/events" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">I Nostri Eventi</Link>
-                <Link href="/luxury-rental" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Noleggio Lusso</Link>
-                <Link href="/limousine-rental" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Limousine</Link>
-                <Link href="/become-partner" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Diventa Partner</Link>
-                <Link href="/about" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Chi Siamo</Link>
+                <Link href="/collection" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Collezione</Link>
+                <Link href="/events" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">I Nostri Eventi</Link>
+                <Link href="/luxury-rental" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Noleggio Lusso</Link>
+                <Link href="/limousine-rental" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Limousine</Link>
+                <Link href="/become-partner" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Diventa Partner</Link>
+                <Link href="/about" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Chi Siamo</Link>
                 
-                <a href="/#contact" className="block w-full text-center py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs mt-6 shadow-md">
+                <a href="/#contact" onClick={closeMobileMenu} className="block w-full text-center py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs mt-6 shadow-md">
                   Richiedi Preventivo
                 </a>
               </div>
