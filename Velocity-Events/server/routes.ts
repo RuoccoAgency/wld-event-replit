@@ -178,19 +178,18 @@ export async function registerRoutes(
   app.post("/api/bookings", async (req, res) => {
     const {
       name, email, phone, eventDate, eventType, message,
-      videoCallRequested, preferredDate, preferredTime, vehicle,
+      videoCallRequested, preferredDate, preferredTime,
     } = req.body;
-    const { error } = await supabase.from("booking_requests").insert([{
-      name,
+    const { error } = await supabase.from("richieste_clienti").insert([{
+      nome_cognome: name,
       email,
-      phone,
-      event_date: eventDate,
-      event_type: eventType,
-      message: message || null,
-      video_call_requested: videoCallRequested || false,
-      preferred_date: preferredDate || null,
-      preferred_time: preferredTime || null,
-      vehicle: vehicle || null,
+      telefono: phone || null,
+      data_evento: eventDate || null,
+      tipo_evento: eventType || null,
+      messaggio: message || null,
+      vuole_videochiamata: videoCallRequested || false,
+      data_preferita_call: preferredDate || null,
+      orario_preferito: preferredTime || null,
     }]);
     if (error) {
       console.error("[supabase] booking insert error:", error.message);
@@ -205,17 +204,17 @@ export async function registerRoutes(
       tipologiaServizi, descrizione,
       visuraCameraleUrl, documentoIdentitaUrl, codiceFiscaleUrl,
     } = req.body;
-    const { error } = await supabase.from("partner_applications").insert([{
+    const { error } = await supabase.from("candidature_partner").insert([{
       nome_azienda: nomeAzienda,
-      referente,
-      email,
-      telefono,
-      citta,
-      tipologia_servizi: tipologiaServizi,
-      descrizione: descrizione || null,
-      visura_camerale_url: visuraCameraleUrl || null,
-      documento_identita_url: documentoIdentitaUrl || null,
-      codice_fiscale_url: codiceFiscaleUrl || null,
+      nome_referente: referente,
+      email_aziendale: email,
+      telefono: telefono || null,
+      citta_sede: citta || null,
+      tipologia_servizi: tipologiaServizi || null,
+      descrizione_attivita: descrizione || null,
+      url_visura_camerale: visuraCameraleUrl || null,
+      url_documento_identita: documentoIdentitaUrl || null,
+      url_codice_fiscale: codiceFiscaleUrl || null,
     }]);
     if (error) {
       console.error("[supabase] partner application insert error:", error.message);
