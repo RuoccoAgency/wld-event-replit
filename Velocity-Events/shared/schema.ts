@@ -140,7 +140,47 @@ export const hrPerformance = pgTable("hr_performance", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export type HrUser = typeof hrUsers.$inferSelect;
-export type HrAttendance = typeof hrAttendance.$inferSelect;
-export type HrVacation = typeof hrVacations.$inferSelect;
-export type HrPerformance = typeof hrPerformance.$inferSelect;
+export const richiesteClienti = pgTable("richieste_clienti", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  nomeCognome: text("nome_cognome").notNull(),
+  email: text("email").notNull(),
+  telefono: text("telefono"),
+  dataEvento: date("data_evento"),
+  tipoEvento: text("tipo_evento"),
+  messaggio: text("messaggio"),
+  vuoleVideochiamata: boolean("vuole_videochiamata").default(false),
+  dataPreferitaCall: date("data_preferita_call"),
+  orarioPreferito: text("orario_preferito"),
+});
+
+export const candidaturePartner = pgTable("candidature_partner", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  nomeAzienda: text("nome_azienda").notNull(),
+  nomeReferente: text("nome_referente").notNull(),
+  emailAziendale: text("email_aziendale").notNull(),
+  telefono: text("telefono"),
+  cittaSede: text("citta_sede"),
+  tipologiaServizi: text("tipologia_servizi"),
+  descrizioneAttivita: text("descrizione_attivita"),
+  urlVisuraCamerale: text("url_visura_camerale"),
+  urlDocumentoIdentita: text("url_documento_identita"),
+  urlCodiceFiscale: text("url_codice_fiscale"),
+  stato: text("stato").default("in_attesa"),
+});
+
+export const insertRichiestaSchema = createInsertSchema(richiesteClienti).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertCandidaturaSchema = createInsertSchema(candidaturePartner).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type RichiestaClienti = typeof richiesteClienti.$inferSelect;
+export type InsertRichiesta = z.infer<typeof insertRichiestaSchema>;
+export type CandidaturaPartner = typeof candidaturePartner.$inferSelect;
+export type InsertCandidatura = z.infer<typeof insertCandidaturaSchema>;

@@ -32,6 +32,8 @@ export interface IStorage {
   deleteCarImage(imageId: number): Promise<boolean>;
   reorderCarImages(carId: number, imageIds: number[]): Promise<void>;
   setCarImageCover(carId: number, imageId: number): Promise<void>;
+  createRichiesta(richiesta: schema.InsertRichiesta): Promise<schema.RichiestaClienti>;
+  createCandidatura(candidatura: schema.InsertCandidatura): Promise<schema.CandidaturaPartner>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -138,6 +140,16 @@ export class DatabaseStorage implements IStorage {
   async setCarImageCover(carId: number, imageId: number): Promise<void> {
     await db.update(carImages).set({ isCover: false }).where(eq(carImages.carId, carId));
     await db.update(carImages).set({ isCover: true }).where(and(eq(carImages.id, imageId), eq(carImages.carId, carId)));
+  }
+
+  async createRichiesta(richiesta: schema.InsertRichiesta): Promise<schema.RichiestaClienti> {
+    const [newRichiesta] = await db.insert(schema.richiesteClienti).values(richiesta).returning();
+    return newRichiesta;
+  }
+
+  async createCandidatura(candidatura: schema.InsertCandidatura): Promise<schema.CandidaturaPartner> {
+    const [newCandidatura] = await db.insert(schema.candidaturePartner).values(candidatura).returning();
+    return newCandidatura;
   }
 }
 

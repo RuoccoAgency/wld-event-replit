@@ -172,6 +172,26 @@ export async function registerRoutes(
     }
   });
 
+  app.post("/api/richieste", async (req, res) => {
+    try {
+      const richiesta = await storage.createRichiesta(req.body);
+      res.status(201).json(richiesta);
+    } catch (error: any) {
+      console.error("Error creating richiesta:", error);
+      res.status(500).json({ message: "Failed to create richiesta" });
+    }
+  });
+
+  app.post("/api/candidature", async (req, res) => {
+    try {
+      const candidatura = await storage.createCandidatura(req.body);
+      res.status(201).json(candidatura);
+    } catch (error: any) {
+      console.error("Error creating candidatura:", error);
+      res.status(500).json({ message: "Failed to create candidatura" });
+    }
+  });
+
   registerHrRoutes(app);
 
   return httpServer;
