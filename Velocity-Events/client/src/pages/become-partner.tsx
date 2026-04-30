@@ -24,10 +24,19 @@ const fadeIn = {
 
 async function uploadFile(file: File): Promise<string | null> {
   try {
-    const urlRes = await fetch("/api/uploads/request-url", { method: "POST" });
+    const urlRes = await fetch("/api/uploads/request-url", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: file.name, size: file.size, contentType: file.type }),
+    });
     if (!urlRes.ok) return null;
     const { uploadURL, objectPath } = await urlRes.json();
-    await fetch(uploadURL, { method: "PUT", body: file, headers: { "Content-Type": file.type } });
+    const putRes = await fetch(uploadURL, {
+      method: "PUT",
+      body: file,
+      headers: { "Content-Type": file.type },
+    });
+    if (!putRes.ok) return null;
     return objectPath as string;
   } catch {
     return null;
