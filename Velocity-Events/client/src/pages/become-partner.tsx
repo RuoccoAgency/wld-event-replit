@@ -71,15 +71,23 @@ export default function BecomePartner() {
         files.documento ? uploadFile(files.documento) : Promise.resolve(null),
         files.codice ? uploadFile(files.codice) : Promise.resolve(null),
       ]);
-      const res = await fetch("/api/partner-applications", {
+      const dbPayload = {
+        nomeAzienda: formData.nomeAzienda,
+        nomeReferente: formData.referente,
+        emailAziendale: formData.email,
+        telefono: formData.telefono,
+        cittaSede: formData.citta,
+        tipologiaServizi: formData.tipologiaServizi,
+        descrizioneAttivita: formData.descrizione,
+        urlVisuraCamerale: visuraCameraleUrl,
+        urlDocumentoIdentita: documentoIdentitaUrl,
+        urlCodiceFiscale: codiceFiscaleUrl,
+      };
+
+      const res = await fetch("/api/candidature", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          visuraCameraleUrl,
-          documentoIdentitaUrl,
-          codiceFiscaleUrl,
-        }),
+        body: JSON.stringify(dbPayload),
       });
       if (!res.ok) throw new Error();
       toast({
