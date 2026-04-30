@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { BookingForm } from "@/components/contact/BookingForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "wouter";
 import { 
   Watch, 
   Plane, 
@@ -11,7 +12,6 @@ import {
   Home, 
   ShoppingBag, 
   Gem, 
-  Car,
   MapPin,
   CheckCircle2,
   ArrowRight
@@ -19,46 +19,46 @@ import {
 
 const categories = [
   {
+    slug: "orologi-di-lusso",
     title: "Orologi di lusso",
     description: "Pezzi rari e collezioni esclusive dei marchi più prestigiosi al mondo.",
     image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&q=80&w=800",
     icon: Watch
   },
   {
+    slug: "jet-privati",
     title: "Jet privati",
     description: "Viaggia con il massimo del comfort e della flessibilità, per i tuoi spostamenti veloci e privati.",
     image: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=800",
     icon: Plane
   },
   {
+    slug: "yacht",
     title: "Yacht",
     description: "Scivola sulle onde a bordo di imbarcazioni magnifiche, dotate di ogni comfort immaginabile.",
     image: "/images/yacht.png",
     icon: Anchor
   },
   {
+    slug: "ville-e-appartamenti-di-lusso",
     title: "Ville e appartamenti di lusso",
     description: "Dimore da sogno nelle posizioni più esclusive, curate in ogni minimo dettaglio.",
     image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&q=80&w=800",
     icon: Home
   },
   {
+    slug: "borse-di-lusso",
     title: "Borse di lusso",
     description: "Accessori iconici e modelli da collezione, per completare il tuo stile con eleganza.",
     image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=800",
     icon: ShoppingBag
   },
   {
+    slug: "gioielli",
     title: "Gioielli",
     description: "Creazioni uniche e pietre preziose che catturano la luce e l'ammirazione in ogni occasione.",
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800",
     icon: Gem
-  },
-  {
-    title: "Auto di lusso",
-    description: "Prestazioni mozzafiato e design leggendario per guidare il futuro dell'eleganza.",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800",
-    icon: Car
   }
 ];
 
@@ -108,7 +108,7 @@ export default function LuxuryAssetRental() {
       
       <main className="w-full">
         {/* HERO SECTION */}
-        <section className="relative min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] flex items-center justify-center overflow-hidden w-full">
+        <section className="relative min-h-[calc(100vh-76px)] md:min-h-[calc(100vh-92px)] lg:min-h-[calc(100vh-100px)] flex items-center justify-center overflow-hidden w-full">
           <div className="absolute inset-0 z-0">
             <img 
               src="/images/yacht_hero.png" 
@@ -118,12 +118,12 @@ export default function LuxuryAssetRental() {
             <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
           </div>
           
-          <div className="container mx-auto px-6 relative z-10 text-center text-white">
+          <div className="container mx-auto px-4 sm:px-6 relative z-10 text-center text-white pt-8 sm:pt-10 md:pt-12">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-7xl font-serif mb-6 tracking-tight"
+              className="text-[2.35rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl font-serif mb-5 sm:mb-6 tracking-tight"
             >
               Noleggio beni di lusso
             </motion.h1>
@@ -131,7 +131,7 @@ export default function LuxuryAssetRental() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl font-light mb-8 max-w-3xl mx-auto text-white/90"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl font-light mb-6 sm:mb-8 max-w-3xl mx-auto text-white/90 leading-relaxed"
             >
               Esperienze esclusive disponibili tramite partner nelle Canarie, Madrid e Barcellona.
             </motion.p>
@@ -139,7 +139,7 @@ export default function LuxuryAssetRental() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-base md:text-lg mb-10 max-w-2xl mx-auto text-white/70 font-light"
+              className="text-sm sm:text-base md:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto text-white/75 font-light leading-relaxed"
             >
               Sperimenta l'apice della raffinatezza e dell'esclusività. Offriamo ai nostri clienti l'accesso a un portfolio d'élite di beni di prestigio, per trasformare ogni momento in un'esperienza indimenticabile.
             </motion.p>
@@ -151,7 +151,7 @@ export default function LuxuryAssetRental() {
               <Button 
                 onClick={scrollToContact}
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-10 py-7 text-sm shadow-2xl transition-all hover:scale-105"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-[0.2em] md:tracking-widest px-7 sm:px-10 md:px-12 py-4 sm:py-6 text-[11px] sm:text-sm shadow-2xl transition-all hover:scale-105 w-full sm:w-auto"
               >
                 Richiedi informazioni
               </Button>
@@ -162,15 +162,15 @@ export default function LuxuryAssetRental() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, delay: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
+            className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2"
           >
-            <div className="w-[1px] h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
+            <div className="w-[1px] h-14 sm:h-20 bg-gradient-to-b from-white/50 to-transparent mx-auto" />
           </motion.div>
         </section>
 
         {/* INTRO SECTION */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 text-center max-w-4xl">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 text-center max-w-4xl">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -180,12 +180,12 @@ export default function LuxuryAssetRental() {
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Esclusività Senza Confini</span>
               <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-10">L'eccellenza in ogni dettaglio</h2>
               <div className="h-1 w-20 bg-primary/20 mx-auto mb-10" />
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6 font-light">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 font-light">
                 Il nostro servizio di noleggio beni di lusso è progettato per chi cerca l'eccellenza senza compromessi. 
                 Che si tratti di un evento speciale, una trasferta d'affari o il desiderio di vivere un momento unico, 
                 mettiamo a disposizione i asset più esclusivi del mercato.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed font-light italic">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light italic">
                 Il servizio è accessibile a tutti i nostri clienti, gestito con professionalità estrema attraverso una rete selezionata 
                 di aziende partner strategicamente posizionate nelle Isole Canarie, a Madrid e a Barcellona.
               </p>
@@ -194,14 +194,14 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* LUXURY CATEGORIES */}
-        <section className="py-24 bg-[#f8f8f8]">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-[#f8f8f8]">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="flex flex-col md:flex-row justify-between md:items-end mb-12 sm:mb-16 gap-5 sm:gap-6">
               <div className="max-w-2xl">
                 <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">La Nostra Selezione</span>
-                <h2 className="text-4xl md:text-5xl font-serif text-foreground">Categorie di Prestigio</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-foreground">Categorie di Prestigio</h2>
               </div>
-              <p className="text-muted-foreground max-w-sm text-sm font-light">
+              <p className="text-muted-foreground max-w-sm text-sm font-light leading-relaxed">
                 Esplora la nostra collezione curata di asset di lusso, selezionati per soddisfare i gusti più esigenti.
               </p>
             </div>
@@ -211,30 +211,32 @@ export default function LuxuryAssetRental() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
             >
               {categories.map((cat, i) => (
                 <motion.div key={i} variants={fadeIn}>
-                  <Card className="group border-none overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 rounded-none h-full flex flex-col">
-                    <div className="relative h-64 overflow-hidden">
-                      <img 
-                        src={cat.image} 
-                        alt={cat.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
-                      <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-3 rounded-full text-white">
-                        <cat.icon size={20} />
+                  <Link href={`/luxury-rental/${cat.slug}`} className="block h-full">
+                    <Card className="group border-none overflow-hidden bg-white shadow-sm hover:shadow-2xl transition-all duration-500 rounded-none h-full flex flex-col">
+                      <div className="relative h-64 overflow-hidden">
+                        <img 
+                          src={cat.image} 
+                          alt={cat.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
+                        <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md p-3 rounded-full text-white">
+                          <cat.icon size={20} />
+                        </div>
                       </div>
-                    </div>
-                    <CardContent className="p-8 flex-grow flex flex-col">
-                      <h3 className="text-xl font-serif mb-4 group-hover:text-primary transition-colors">{cat.title}</h3>
-                      <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6 flex-grow">{cat.description}</p>
-                      <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-[10px] opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
-                        Scopri di più <ArrowRight size={12} />
-                      </div>
-                    </CardContent>
-                  </Card>
+                      <CardContent className="p-8 flex-grow flex flex-col">
+                        <h3 className="text-xl font-serif mb-4 group-hover:text-primary transition-colors">{cat.title}</h3>
+                        <p className="text-muted-foreground text-sm font-light leading-relaxed mb-6 flex-grow">{cat.description}</p>
+                        <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-[10px] opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
+                          Scopri di più <ArrowRight size={12} />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>
@@ -242,8 +244,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* LOCATION SECTION */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="text-center mb-16">
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Operatività</span>
               <h2 className="text-4xl font-serif text-foreground">I Nostri Hub Esclusivi</h2>
@@ -274,8 +276,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* SERVICE MODEL SECTION */}
-        <section className="py-24 bg-secondary/30 relative">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-secondary/30 relative">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="flex flex-col lg:flex-row gap-16 items-center">
               <div className="lg:w-1/2">
                 <motion.div
@@ -339,8 +341,8 @@ export default function LuxuryAssetRental() {
         </section>
 
         {/* FINAL CTA */}
-        <section className="py-24 bg-white text-center">
-          <div className="container mx-auto px-6">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white text-center">
+          <div className="container mx-auto px-4 sm:px-6">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

@@ -106,9 +106,9 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
   return (
     <div className="min-h-screen bg-white text-slate-950 uppercase-none">
       {/* 1. PREMIUM SPLIT HERO - BRAND THEME */}
-      <section className="relative h-auto lg:h-[calc(100vh-80px)] min-h-[700px] flex flex-col lg:flex-row items-center overflow-hidden bg-white">
+      <section className="relative h-auto lg:h-[calc(100vh-80px)] min-h-[560px] sm:min-h-[620px] lg:min-h-[700px] flex flex-col lg:flex-row items-center overflow-hidden bg-white">
         {/* Left Half: Dark Perspective (Brand-Infused Dark Green) */}
-        <div className="w-full lg:w-3/5 h-[400px] lg:h-full relative flex items-center justify-center p-8 bg-[#050805]">
+        <div className="w-full lg:w-3/5 h-[340px] sm:h-[400px] lg:h-full relative flex items-center justify-center p-5 sm:p-8 bg-[#050805]">
           <motion.div 
             initial={{ scale: 1.1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -138,12 +138,12 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
         </div>
 
         {/* Right Half: Elegant Context (White) with Overlapping Card */}
-        <div className="w-full lg:w-2/5 h-auto lg:h-full flex items-center justify-center lg:justify-start z-30 p-6 lg:p-0 lg:-ml-32">
+        <div className="w-full lg:w-2/5 h-auto lg:h-full flex items-center justify-center lg:justify-start z-30 p-5 sm:p-6 lg:p-0 lg:-ml-32">
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-white p-8 lg:p-16 border border-slate-100 shadow-[0_45px_100px_-20px_rgba(0,0,0,0.12)] relative max-w-xl w-full flex flex-col justify-center"
+            className="bg-white p-6 sm:p-8 lg:p-16 border border-slate-100 shadow-[0_45px_100px_-20px_rgba(0,0,0,0.12)] relative max-w-xl w-full flex flex-col justify-center"
           >
             {/* THE SIGNATURE BORDER ACCENT (Offset frame matching reference) */}
             <div className="absolute -top-4 -left-4 w-1/3 h-[1px] bg-[#8CBFAF]" />
@@ -160,7 +160,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                 </span>
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-sans font-black text-[#050805] leading-[1] uppercase tracking-[-0.04em] mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-sans font-black text-[#050805] leading-[1] uppercase tracking-[-0.04em] mb-2">
                 <span className="block text-[#8CBFAF]/20 text-[0.4em] tracking-[0.2em] mb-2">{car.brand}</span>
                 {car.model}
               </h1>
@@ -173,14 +173,14 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
               <div className="pt-4 flex flex-wrap gap-4">
                 <Button 
                   onClick={() => document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="rounded-none bg-[#8CBFAF] hover:bg-[#5C8F80] text-white px-10 py-7 uppercase tracking-[0.2em] text-[10px] font-black transition-all shadow-lg hover:translate-y-[-2px] active:translate-y-0"
+                  className="rounded-none bg-[#8CBFAF] hover:bg-[#5C8F80] text-white px-8 sm:px-10 py-6 sm:py-7 uppercase tracking-[0.2em] text-[10px] font-black transition-all shadow-lg hover:translate-y-[-2px] active:translate-y-0 w-full sm:w-auto justify-center"
                 >
                   PRENOTA ORA
                 </Button>
                 <Button 
                   variant="ghost"
                   onClick={() => window.open('https://wa.me/3908118789724', '_blank')}
-                  className="text-slate-400 hover:text-[#8CBFAF] uppercase tracking-[0.2em] text-[10px] font-bold"
+                  className="text-slate-400 hover:text-[#8CBFAF] uppercase tracking-[0.2em] text-[10px] font-bold w-full sm:w-auto justify-center"
                 >
                   WhatsApp <ArrowRight className="ml-2 w-3 h-3" />
                 </Button>
@@ -189,7 +189,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
 
             {/* Signature Compact Navigation / Scroll Indicator */}
             <div 
-              className="absolute -bottom-8 right-8 bg-[#8CBFAF] w-16 h-16 flex items-center justify-center text-white cursor-pointer hover:bg-[#5C8F80] transition-all z-40 shadow-xl"
+              className="absolute -bottom-6 sm:-bottom-8 right-6 sm:right-8 bg-[#8CBFAF] w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center text-white cursor-pointer hover:bg-[#5C8F80] transition-all z-40 shadow-xl"
               onClick={() => document.getElementById('vehicle-details')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <motion.div
@@ -205,7 +205,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
 
       {/* 2. VEHICLE DETAILS SECTION */}
       <section id="vehicle-details" className="py-24 bg-white border-b border-slate-100">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="mb-16">
             <span className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Performance & Style</span>
             <h2 className="text-4xl font-serif text-slate-900 mb-2">Dettagli Veicolo</h2>
@@ -237,7 +237,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
 
       {/* 3. OVERVIEW / GALLERY SECTION */}
       <section className="py-24 bg-slate-50 overflow-hidden">
-        <div className="container mx-auto px-6 mb-12">
+        <div className="container mx-auto px-4 sm:px-6 mb-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <span className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Visual Overview</span>
@@ -260,7 +260,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
           </div>
         </div>
 
-        <div className="px-6 md:px-0">
+        <div className="px-4 sm:px-6 md:px-0">
           <div className="embla" ref={emblaRef}>
             <div className="embla__container flex gap-6">
               {galleryImages.map((src, idx) => (
@@ -288,10 +288,10 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
       </section>
 
       {/* 4. WHATSAPP / CONTACT SECTION */}
-      <section id="contact-form" className="py-32 bg-white relative">
+      <section id="contact-form" className="py-20 sm:py-24 lg:py-32 bg-white relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
         
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col lg:flex-row gap-20">
             {/* WhatsApp Block */}
             <div className="lg:w-2/5">
@@ -299,13 +299,13 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="p-10 bg-slate-950 text-white rounded-sm shadow-2xl relative overflow-hidden"
+                className="p-7 sm:p-10 bg-slate-950 text-white rounded-sm shadow-2xl relative overflow-hidden"
               >
                 <div className="relative z-10">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-8">
                     <MessageCircle size={32} className="text-green-500" />
                   </div>
-                  <h3 className="text-3xl font-serif mb-6">Parla con noi su WhatsApp</h3>
+                  <h3 className="text-2xl sm:text-3xl font-serif mb-6">Parla con noi su WhatsApp</h3>
                   <p className="text-slate-400 font-light mb-10 leading-relaxed">
                     Hai bisogno di una risposta immediata? Il nostro team Concierge è disponibile h24 per assisterti nella scelta e nella prenotazione.
                   </p>
@@ -333,13 +333,13 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
             <div className="flex-1">
               <div className="mb-10">
                 <span className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Request Availability</span>
-                <h2 className="text-4xl font-serif text-slate-900 mb-4">Verifica la disponibilità ora</h2>
+                <h2 className="text-3xl sm:text-4xl font-serif text-slate-900 mb-4">Verifica la disponibilità ora</h2>
                 <p className="text-slate-500 font-light">Compila il modulo per ricevere informazioni dettagliate e disponibilità per {car.title}.</p>
               </div>
 
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                     <FormField
                       control={form.control}
                       name="firstName"
@@ -347,7 +347,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                         <FormItem>
                           <FormLabel className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Nome</FormLabel>
                           <FormControl>
-                            <Input placeholder="Es: Mario" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-lg transition-all" />
+                            <Input placeholder="Es: Mario" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-base sm:text-lg transition-all" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -360,7 +360,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                         <FormItem>
                           <FormLabel className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Cognome</FormLabel>
                           <FormControl>
-                            <Input placeholder="Es: Rossi" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-lg transition-all" />
+                            <Input placeholder="Es: Rossi" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-base sm:text-lg transition-all" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -368,7 +368,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                     <FormField
                       control={form.control}
                       name="email"
@@ -376,7 +376,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                         <FormItem>
                           <FormLabel className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Email Aziendale o Personale</FormLabel>
                           <FormControl>
-                            <Input placeholder="mario.rossi@email.com" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-lg transition-all" />
+                            <Input placeholder="mario.rossi@email.com" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-base sm:text-lg transition-all" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -389,7 +389,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                         <FormItem>
                           <FormLabel className="text-[10px] uppercase tracking-widest font-bold text-slate-400">Recapito Telefonico</FormLabel>
                           <FormControl>
-                            <Input placeholder="+39 333 444 555" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-lg transition-all" />
+                            <Input placeholder="+39 333 444 555" {...field} className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 h-auto text-base sm:text-lg transition-all" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -407,7 +407,7 @@ export function CarDetailView({ car }: { car: CarWithImages }) {
                           <Textarea 
                             placeholder={`Vorrei richiedere un preventivo per il noleggio di ${car.title} per un matrimonio...`} 
                             {...field} 
-                            className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 min-h-[100px] text-lg transition-all"
+                            className="rounded-none border-0 border-b border-slate-200 focus:border-primary focus:ring-0 bg-transparent px-0 py-4 min-h-[100px] text-base sm:text-lg transition-all"
                           />
                         </FormControl>
                         <FormMessage />

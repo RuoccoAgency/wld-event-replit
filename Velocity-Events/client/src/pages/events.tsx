@@ -94,7 +94,7 @@ export default function EventsPage() {
         <section className="relative h-[40vh] md:h-[50vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-background z-10" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80')] bg-cover bg-center" />
-        <div className="relative z-20 text-center px-6">
+        <div className="relative z-20 text-center px-4 sm:px-6">
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -115,7 +115,7 @@ export default function EventsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-white/60 max-w-2xl mx-auto text-lg"
+            className="text-white/60 max-w-2xl mx-auto text-base sm:text-lg"
           >
             Offriamo servizi di trasporto e accoglienza di lusso per matrimoni, eventi aziendali, cerimonie e transfer VIP.
             Ogni dettaglio è curato con precisione per garantire eleganza, puntualità e un impatto memorabile.
@@ -123,7 +123,7 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section className="py-20 container mx-auto px-6">
+      <section className="py-16 sm:py-20 container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

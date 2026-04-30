@@ -40,9 +40,9 @@ function WeddingTimeline() {
   ];
 
   return (
-    <section className="py-24 bg-secondary/30 border-t border-border/20 overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-secondary/30 border-t border-border/20 overflow-hidden">
       <motion.div
-        className="container mx-auto px-6 text-center"
+        className="container mx-auto px-4 sm:px-6 text-center"
         variants={timelineContainer}
         initial="hidden"
         whileInView="visible"

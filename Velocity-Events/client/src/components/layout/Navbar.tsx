@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 
 const SERVIZI_LIST = [
   { label: "Nascita", slug: "nascita" },
@@ -34,10 +35,16 @@ const SERVIZI_LIST = [
 ];
 
 export function Navbar() {
+  const [isClient, setIsClient] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isServiziOpen, setIsServiziOpen] = useState(false);
+  const [isDesktopServiziOpen, setIsDesktopServiziOpen] = useState(false);
+  const [isMobileServiziOpen, setIsMobileServiziOpen] = useState(false);
   const [location] = useLocation();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,24 +60,147 @@ export function Navbar() {
   // Close menus on location change
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setIsServiziOpen(false);
+    setIsDesktopServiziOpen(false);
+    setIsMobileServiziOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileServiziOpen(false);
+  };
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMobileMenu();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isMobileMenuOpen]);
+
+  const renderMobileMenu = () => {
+    if (!isClient) return null;
+
+    return createPortal(
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[250]"
+          >
+            <motion.button
+              type="button"
+              aria-label="Chiudi menu mobile"
+              onClick={closeMobileMenu}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/35 backdrop-blur-[1px]"
+            />
+
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 24, stiffness: 210 }}
+              className="absolute inset-y-0 right-0 w-full sm:max-w-md bg-white shadow-2xl pt-24 pb-8 px-5 sm:px-8 overflow-y-auto"
+            >
+              <button
+                onClick={closeMobileMenu}
+                aria-label="Chiudi menu mobile"
+                className="absolute top-6 right-5 sm:right-8 p-2 rounded-full text-slate-900 hover:bg-slate-100 transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              <div className="w-full space-y-6">
+                <div className="space-y-4">
+                  <button
+                    onClick={() => setIsMobileServiziOpen(!isMobileServiziOpen)}
+                    className="flex items-center justify-between w-full text-lg font-serif text-slate-900 border-b border-slate-100 pb-3"
+                  >
+                    <span>Servizi</span>
+                    <ChevronDown size={18} className={cn("transition-transform", isMobileServiziOpen ? "rotate-180" : "")} />
+                  </button>
+                  <AnimatePresence>
+                    {isMobileServiziOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden bg-slate-50 p-4 space-y-2 rounded-sm"
+                      >
+                        <div className="grid grid-cols-1 gap-y-1">
+                          {SERVIZI_LIST.map((servizio) => (
+                            <Link
+                              key={servizio.slug}
+                              href={`/servizi/${servizio.slug}`}
+                              className="text-xs font-light text-slate-600 hover:text-primary block py-1"
+                              onClick={closeMobileMenu}
+                            >
+                              {servizio.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <Link href="/collection" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Collezione</Link>
+                <Link href="/events" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">I Nostri Eventi</Link>
+                <Link href="/luxury-rental" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Noleggio Lusso</Link>
+                <Link href="/limousine-rental" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Limousine</Link>
+                <Link href="/become-partner" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Diventa Partner</Link>
+                <Link href="/about" onClick={closeMobileMenu} className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Chi Siamo</Link>
+
+                <a href="/#contact" onClick={closeMobileMenu} className="block w-full text-center py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs mt-6 shadow-md">
+                  Richiedi Preventivo
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>,
+      document.body
+    );
+  };
+
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
-        showGlass ? "glass py-4 shadow-xl" : "bg-transparent py-6"
-      )}
-    >
-      <div className="container mx-auto px-6 flex items-center justify-between relative">
+    <>
+      <nav
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b border-transparent",
+          showGlass ? "glass py-4 shadow-xl" : "bg-transparent py-6"
+        )}
+      >
+        <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between relative">
         {/* LEFT: Logo / Brand */}
         <div className="flex-1 flex justify-start items-center">
           <Link href="/" className="flex items-center gap-3 z-50 group/logo">
             <motion.img 
               src="/logo.png" 
               alt="Wedding Luxury Drive" 
-              className="h-10 md:h-12 lg:h-14 w-auto"
+              className="h-9 sm:h-10 md:h-12 lg:h-14 w-auto"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             />
@@ -85,18 +215,18 @@ export function Navbar() {
           {/* SERVIZI DROPDOWN */}
           <div 
             className="relative h-full flex items-center"
-            onMouseEnter={() => setIsServiziOpen(true)}
-            onMouseLeave={() => setIsServiziOpen(false)}
+            onMouseEnter={() => setIsDesktopServiziOpen(true)}
+            onMouseLeave={() => setIsDesktopServiziOpen(false)}
           >
             <button className={cn(
               "flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] transition-all hover:text-primary py-4",
               showGlass ? "text-foreground/80" : "text-white/80"
             )}>
-              Servizi <ChevronDown size={14} className={cn("transition-transform duration-300", isServiziOpen ? "rotate-180" : "")} />
+              Servizi <ChevronDown size={14} className={cn("transition-transform duration-300", isDesktopServiziOpen ? "rotate-180" : "")} />
             </button>
             
             <AnimatePresence>
-              {isServiziOpen && (
+              {isDesktopServiziOpen && (
                 <motion.div 
                   initial={{ opacity: 0, y: 10, scale: 0.98 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -115,7 +245,7 @@ export function Navbar() {
                         <Link 
                           href={`/servizi/${servizio.slug}`}
                           className="text-[10px] uppercase tracking-wider text-slate-500 hover:text-primary transition-colors py-1 flex items-center group/link"
-                          onClick={() => setIsServiziOpen(false)}
+                          onClick={() => setIsDesktopServiziOpen(false)}
                         >
                           <span className="w-0 group-hover/link:w-2 h-[1px] bg-primary mr-0 group-hover/link:mr-2 transition-all"></span>
                           {servizio.label}
@@ -157,72 +287,23 @@ export function Navbar() {
           {/* MOBILE TOGGLE */}
           <button 
             className={cn("lg:hidden p-2 rounded-full transition-colors", showGlass ? "text-foreground" : "text-white")}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => {
+              if (isMobileMenuOpen) {
+                closeMobileMenu();
+                return;
+              }
+              setIsMobileMenuOpen(true);
+            }}
+            aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* MOBILE MENU */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, x: "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 bg-white z-[60] pt-24 px-8 flex flex-col items-start overflow-y-auto"
-            >
-              <div className="w-full space-y-6">
-                {/* MOBILE DROPDOWN (SERVIZI) */}
-                <div className="space-y-4">
-                  <button 
-                    onClick={() => setIsServiziOpen(!isServiziOpen)}
-                    className="flex items-center justify-between w-full text-lg font-serif text-slate-900 border-b border-slate-100 pb-3"
-                  >
-                    <span>Servizi</span>
-                    <ChevronDown size={18} className={cn("transition-transform", isServiziOpen ? "rotate-180" : "")} />
-                  </button>
-                  <AnimatePresence>
-                    {isServiziOpen && (
-                      <motion.div 
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden bg-slate-50 p-4 space-y-2"
-                      >
-                         <div className="grid grid-cols-1 gap-y-1">
-                          {SERVIZI_LIST.map((servizio) => (
-                            <Link 
-                              key={servizio.slug}
-                              href={`/servizi/${servizio.slug}`}
-                              className="text-xs font-light text-slate-600 hover:text-primary block py-1"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              {servizio.label}
-                            </Link>
-                          ))}
-                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-
-                <Link href="/collection" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Collezione</Link>
-                <Link href="/events" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">I Nostri Eventi</Link>
-                <Link href="/luxury-rental" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Noleggio Lusso</Link>
-                <Link href="/limousine-rental" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Limousine</Link>
-                <Link href="/become-partner" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Diventa Partner</Link>
-                <Link href="/about" className="block text-lg font-serif text-slate-900 border-b border-slate-100 pb-3">Chi Siamo</Link>
-                
-                <a href="/#contact" className="block w-full text-center py-4 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs mt-6 shadow-md">
-                  Richiedi Preventivo
-                </a>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </nav>
+        </div>
+      </nav>
+      {renderMobileMenu()}
+    </>
   );
 }

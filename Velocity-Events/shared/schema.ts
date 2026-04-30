@@ -1,5 +1,5 @@
 import { sql, relations, SQL } from "drizzle-orm";
-import { pgTable, text, varchar, integer, boolean, timestamp, pgEnum, serial, date } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, boolean, timestamp, pgEnum, serial, date, uuid, time } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -141,8 +141,8 @@ export const hrPerformance = pgTable("hr_performance", {
 });
 
 export const richiesteClienti = pgTable("richieste_clienti", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   nomeCognome: text("nome_cognome").notNull(),
   email: text("email").notNull(),
   telefono: text("telefono"),
@@ -151,12 +151,12 @@ export const richiesteClienti = pgTable("richieste_clienti", {
   messaggio: text("messaggio"),
   vuoleVideochiamata: boolean("vuole_videochiamata").default(false),
   dataPreferitaCall: date("data_preferita_call"),
-  orarioPreferito: text("orario_preferito"),
+  orarioPreferito: time("orario_preferito"),
 });
 
 export const candidaturePartner = pgTable("candidature_partner", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   nomeAzienda: text("nome_azienda").notNull(),
   nomeReferente: text("nome_referente").notNull(),
   emailAziendale: text("email_aziendale").notNull(),
