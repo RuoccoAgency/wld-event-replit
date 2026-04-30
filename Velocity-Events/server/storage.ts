@@ -1,6 +1,7 @@
 import { eq, desc, asc, ilike, and, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
+import { supabase } from "./supabase";
 import * as schema from "@shared/schema";
 import {
   type User, type InsertUser,
@@ -143,13 +144,53 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createRichiesta(richiesta: schema.InsertRichiesta): Promise<schema.RichiestaClienti> {
-    const [newRichiesta] = await db.insert(schema.richiesteClienti).values(richiesta).returning();
-    return newRichiesta;
+    const { data, error } = await supabase
+      .from("richieste_clienti")
+      .insert([{
+        nome_cognome: richiesta.nomeCognome,
+        email: richiesta.email,
+        telefono: richiesta.telefono,
+        data_evento: richiesta.dataEvento,
+        tipo_evento: richiesta.tipoEvento,
+        messaggio: richiesta.messaggio,
+        vuole_videochiamata: richiesta.vuoleVideochiamata,
+        data_preferita_call: richiesta.dataPreferitaCall,
+        orario_preferito: richiesta.orarioPreferito,
+      }])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      throw new Error(error.message);
+    }
+    return data as schema.RichiestaClienti;
   }
 
   async createCandidatura(candidatura: schema.InsertCandidatura): Promise<schema.CandidaturaPartner> {
-    const [newCandidatura] = await db.insert(schema.candidaturePartner).values(candidatura).returning();
-    return newCandidatura;
+    const { data, error } = await supabase
+      .from("candidature_partner")
+      .insert([{
+        nome_azienda: candidatura.nomeAzienda,
+        nome_referente: candidatura.nomeReferente,
+        email_aziendale: candidatura.emailAziendale,
+        telefono: candidatura.telefono,
+        citta_sede: candidatura.cittaSede,
+        tipologia_servizi: candidatura.tipologiaServizi,
+        descrizione_attivita: candidatura.descrizioneAttivita,
+        url_visura_camerale: candidatura.urlVisuraCamerale,
+        url_documento_identita: candidatura.urlDocumentoIdentita,
+        url_codice_fiscale: candidatura.urlCodiceFiscale,
+        stato: candidatura.stato,
+      }])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      throw new Error(error.message);
+    }
+    return data as schema.CandidaturaPartner;
   }
 }
 
