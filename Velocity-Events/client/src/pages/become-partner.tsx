@@ -22,21 +22,72 @@ const fadeIn = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
+async function uploadFile(file: File): Promise<string | null> {
+  try {
+    const urlRes = await fetch("/api/uploads/request-url", { method: "POST" });
+    if (!urlRes.ok) return null;
+    const { uploadURL, objectPath } = await urlRes.json();
+    await fetch(uploadURL, { method: "PUT", body: file, headers: { "Content-Type": file.type } });
+    return objectPath as string;
+  } catch {
+    return null;
+  }
+}
+
 export default function BecomePartner() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    nomeAzienda: "", referente: "", email: "", telefono: "",
+    citta: "", tipologiaServizi: "", descrizione: "",
+  });
+  const [files, setFiles] = useState<{ visura?: File; documento?: File; codice?: File }>({});
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (field: keyof typeof formData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+
+  const handleFileChange = (key: "visura" | "documento" | "codice") =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) setFiles((prev) => ({ ...prev, [key]: file }));
+    };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const [visuraCameraleUrl, documentoIdentitaUrl, codiceFiscaleUrl] = await Promise.all([
+        files.visura ? uploadFile(files.visura) : Promise.resolve(null),
+        files.documento ? uploadFile(files.documento) : Promise.resolve(null),
+        files.codice ? uploadFile(files.codice) : Promise.resolve(null),
+      ]);
+      const res = await fetch("/api/partner-applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          visuraCameraleUrl,
+          documentoIdentitaUrl,
+          codiceFiscaleUrl,
+        }),
+      });
+      if (!res.ok) throw new Error();
       toast({
         title: "Candidatura inviata",
         description: "Grazie per la tua richiesta. Il nostro team ti contatterà al più presto.",
       });
-    }, 1500);
+      setFormData({ nomeAzienda: "", referente: "", email: "", telefono: "", citta: "", tipologiaServizi: "", descrizione: "" });
+      setFiles({});
+    } catch {
+      toast({
+        title: "Errore",
+        description: "Impossibile inviare la candidatura. Riprova più tardi.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const scrollToForm = () => {
@@ -198,35 +249,35 @@ export default function BecomePartner() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Nome Azienda</label>
-                    <Input placeholder="Es: Luxury Rentals SRL" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
+                    <Input value={formData.nomeAzienda} onChange={handleChange("nomeAzienda")} placeholder="Es: Luxury Rentals SRL" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Nome e Cognome Referente</label>
-                    <Input placeholder="Luigi Rossi" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
+                    <Input value={formData.referente} onChange={handleChange("referente")} placeholder="Luigi Rossi" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Email Aziendale</label>
-                    <Input type="email" placeholder="info@azienda.it" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
+                    <Input type="email" value={formData.email} onChange={handleChange("email")} placeholder="info@azienda.it" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Numero di Telefono</label>
-                    <Input type="tel" placeholder="+39 ..." required className="rounded-none border-slate-200 focus-visible:ring-primary" />
+                    <Input type="tel" value={formData.telefono} onChange={handleChange("telefono")} placeholder="+39 ..." required className="rounded-none border-slate-200 focus-visible:ring-primary" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Città / Sede Operativa</label>
-                  <Input placeholder="Es: Madrid, Spagna" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
+                  <Input value={formData.citta} onChange={handleChange("citta")} placeholder="Es: Madrid, Spagna" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
                 </div>
                 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Tipologia di Servizi Offerti</label>
-                  <Input placeholder="Es: Noleggio Jet Privati e Yacht" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
+                  <Input value={formData.tipologiaServizi} onChange={handleChange("tipologiaServizi")} placeholder="Es: Noleggio Jet Privati e Yacht" required className="rounded-none border-slate-200 focus-visible:ring-primary" />
                 </div>
                 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Descrizione Attività</label>
-                  <Textarea placeholder="Descrivi brevemente la tua esperienza e la flotta/asset a disposizione..." className="rounded-none border-slate-200 focus-visible:ring-primary min-h-[120px]" />
+                  <Textarea value={formData.descrizione} onChange={handleChange("descrizione")} placeholder="Descrivi brevemente la tua esperienza e la flotta/asset a disposizione..." className="rounded-none border-slate-200 focus-visible:ring-primary min-h-[120px]" />
                 </div>
                 
                 {/* UPLOAD FIELDS */}
@@ -234,17 +285,19 @@ export default function BecomePartner() {
                   <h3 className="font-serif text-lg">Caricamento Documenti (Richiesto)</h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {[
-                      "Visura Camerale",
-                      "Documento d’Identità",
-                      "Codice Fiscale"
-                    ].map((doc, i) => (
-                      <div key={i} className="relative group">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">{doc}</label>
+                    {([
+                      { label: "Visura Camerale",      key: "visura"    },
+                      { label: "Documento d’Identità", key: "documento" },
+                      { label: "Codice Fiscale",       key: "codice"    },
+                    ] as const).map(({ label, key }) => (
+                      <div key={key} className="relative group">
+                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">{label}</label>
                         <div className="border-2 border-dashed border-slate-200 p-6 flex flex-col items-center justify-center text-center cursor-pointer group-hover:border-primary/50 transition-colors">
                           <Upload size={16} className="text-slate-300 group-hover:text-primary mb-2" />
-                          <span className="text-[10px] text-slate-400 group-hover:text-slate-600">Carica file</span>
-                          <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" />
+                          <span className="text-[10px] text-slate-400 group-hover:text-slate-600">
+                            {files[key] ? files[key]!.name : "Carica file"}
+                          </span>
+                          <input type="file" onChange={handleFileChange(key)} className="absolute inset-0 opacity-0 cursor-pointer" />
                         </div>
                       </div>
                     ))}

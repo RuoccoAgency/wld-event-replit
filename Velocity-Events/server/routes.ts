@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { registerObjectStorageRoutes } from "./replit_integrations/object_storage";
 import { insertCarSchema } from "@shared/schema";
 import { registerHrRoutes } from "./hr-routes";
+import { supabase } from "./supabase";
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin2025";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@wldeventi.it";
@@ -170,6 +171,57 @@ export async function registerRoutes(
       console.error("Error setting cover:", error);
       res.status(500).json({ message: "Failed to set cover" });
     }
+  });
+
+  // --- Form submissions → Supabase ---
+
+  app.post("/api/bookings", async (req, res) => {
+    const {
+      name, email, phone, eventDate, eventType, message,
+      videoCallRequested, preferredDate, preferredTime, vehicle,
+    } = req.body;
+    const { error } = await supabase.from("booking_requests").insert([{
+      name,
+      email,
+      phone,
+      event_date: eventDate,
+      event_type: eventType,
+      message: message || null,
+      video_call_requested: videoCallRequested || false,
+      preferred_date: preferredDate || null,
+      preferred_time: preferredTime || null,
+      vehicle: vehicle || null,
+    }]);
+    if (error) {
+      console.error("[supabase] booking insert error:", error.message);
+      return res.status(500).json({ message: "Errore nel salvataggio della richiesta" });
+    }
+    res.json({ success: true });
+  });
+
+  app.post("/api/partner-applications", async (req, res) => {
+    const {
+      nomeAzienda, referente, email, telefono, citta,
+      tipologiaServizi, descrizione,
+      visuraCameraleUrl, documentoIdentitaUrl, codiceFiscaleUrl,
+    } = req.body;
+    const { error } = await supabase.from("partner_applications").insert([{
+      nome_azienda: nomeAzienda,
+      referente,
+      email,
+      telefono,
+      citta,
+      tipologia_servizi: tipologiaServizi,
+      descrizione: descrizione || null,
+      visura_camerale_url: visuraCameraleUrl || null,
+      documento_identita_url: documentoIdentitaUrl || null,
+      codice_fiscale_url: codiceFiscaleUrl || null,
+    }]);
+    if (error) {
+      console.error("[supabase] partner application insert error:", error.message);
+      return res.status(500).json({ message: "Errore nel salvataggio della candidatura" });
+    }
+    res.json({ success: true });
   });
 
   registerHrRoutes(app);

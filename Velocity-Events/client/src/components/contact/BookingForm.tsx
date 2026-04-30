@@ -39,13 +39,36 @@ export function BookingForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast({
-      title: "Richiesta Inviata",
-      description: "Grazie! Ti contatteremo al più presto per confermare la disponibilità.",
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          eventDate: values.date,
+          eventType: values.eventType,
+          message: values.message,
+          videoCallRequested: values.videoCallRequested,
+          preferredDate: values.preferredDate,
+          preferredTime: values.preferredTime,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      toast({
+        title: "Richiesta Inviata",
+        description: "Grazie! Ti contatteremo al più presto per confermare la disponibilità.",
+      });
+      form.reset();
+    } catch {
+      toast({
+        title: "Errore",
+        description: "Impossibile inviare la richiesta. Riprova più tardi.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
